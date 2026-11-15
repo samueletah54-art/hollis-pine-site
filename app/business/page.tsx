@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Photo from "@/components/Photo";
+import { hasImage } from "@/lib/images";
 import Reveal from "@/components/Reveal";
 import QuoteForm from "@/components/QuoteForm";
 import JsonLd from "@/components/JsonLd";
@@ -51,7 +52,7 @@ export default function Business() {
         </div>
       </section>
 
-      <section className="mt-14 md:mt-20"><Photo src="/images/commercial-lobby.webp" alt="A 20-foot decorated tree in a hotel lobby atrium, marble floor, guests walking by" sizes="100vw" priority className="w-full aspect-[16/9] max-h-[75vh]" /></section>
+      {hasImage("/images/commercial-lobby.webp") && <section className="mt-14 md:mt-20"><Photo hideIfMissing src="/images/commercial-lobby.webp" alt="A 20-foot decorated tree in a hotel lobby atrium, marble floor, guests walking by" sizes="100vw" priority className="w-full aspect-[16/9] max-h-[75vh]" /></section>}
 
       <section className="mx-auto max-w-[88rem] px-5 md:px-10 pt-24" aria-labelledby="uses">
         <div className="grid md:grid-cols-12 gap-10">
@@ -106,14 +107,16 @@ export default function Business() {
         </div>
       </section>
 
+      {["commercial-mall","commercial-install","commercial-lobby"].some((n) => hasImage(`/images/${n}.webp`)) && (
       <section className="mx-auto max-w-[88rem] px-5 md:px-10 pt-28" aria-labelledby="gallery">
         <h2 id="gallery" className="label text-bark mb-6">Recent projects</h2>
         <div className="grid grid-cols-2 md:grid-cols-12 gap-4">
-          <Photo plate src="/images/commercial-mall.webp" alt="A 25-foot tree in a shopping mall concourse, families gathering" sizes="(min-width:768px) 58vw, 100vw" className="col-span-2 md:col-span-7 aspect-[16/10]" />
-          <Photo plate src="/images/commercial-install.webp" alt="A crew in hi-vis vests raising a 15-foot tree on a restaurant patio at night" sizes="(min-width:768px) 40vw, 50vw" className="col-span-1 md:col-span-5 aspect-[4/5] md:aspect-auto md:mt-14" />
-          <Photo plate src="/images/commercial-lobby.webp" alt="A 20-foot tree in a hotel lobby atrium" sizes="(min-width:768px) 33vw, 50vw" className="col-span-1 md:col-span-4 aspect-[4/5]" />
+          <Photo plate hideIfMissing src="/images/commercial-mall.webp" alt="A 25-foot tree in a shopping mall concourse, families gathering" sizes="(min-width:768px) 58vw, 100vw" className="col-span-2 md:col-span-7 aspect-[16/10]" />
+          <Photo plate hideIfMissing src="/images/commercial-install.webp" alt="A crew in hi-vis vests raising a 15-foot tree on a restaurant patio at night" sizes="(min-width:768px) 40vw, 50vw" className="col-span-1 md:col-span-5 aspect-[4/5] md:aspect-auto md:mt-14" />
+          <Photo plate hideIfMissing src="/images/commercial-lobby.webp" alt="A 20-foot tree in a hotel lobby atrium" sizes="(min-width:768px) 33vw, 50vw" className="col-span-1 md:col-span-4 aspect-[4/5]" />
         </div>
       </section>
+      )}
 
       <section className="mx-auto max-w-[88rem] px-5 md:px-10 pt-28" aria-labelledby="faq">
         <div className="grid md:grid-cols-12 gap-10">

@@ -38,7 +38,7 @@ export default function Care() {
           <p>Then decide what matters. If it's smell, buy a Balsam or Grand fir. If it's holding heavy ornaments, Fraser, Noble or blue spruce. If you forget the water, Scotch pine. If someone sneezes at pine, Nordmann. You can filter the shop by each of those.</p>
           <p>If you are buying a tree somewhere else, the check is simple: lift it a few inches and drop the butt on the ground. Green needles should stay on. A few brown ones from the inside are fine. A shower of green means a dry tree.</p>
 
-          <Photo src="/images/care-trimming-trunk.webp" alt="Gloved hands sawing a half inch off the base of a fir trunk" sizes="(min-width:768px) 60vw, 100vw" plate className="aspect-[16/9] my-10" />
+          <Photo hideIfMissing src="/images/care-trimming-trunk.webp" alt="Gloved hands sawing a half inch off the base of a fir trunk" sizes="(min-width:768px) 60vw, 100vw" plate className="aspect-[16/9] my-10" />
 
           <h2 id="unbox" className="scroll-mt-24">The first four hours</h2>
           <p>When the box arrives, open it right away. The tree will have been in the dark for a day or two and wants air. Cut the net off, but leave the branches alone. They'll drop on their own over the next day.</p>

@@ -63,11 +63,14 @@ export default function Delivery() {
         <p>Trees of 9 ft and taller arrive on our own truck or by freight, on a date we agree with you, with a crew to set them up. <Link href="/business">Ask for a quote.</Link></p>
       </DocPage>
       <section className="mx-auto max-w-[88rem] px-5 md:px-10 mt-24 grid md:grid-cols-12 gap-x-12 gap-y-8 items-center" aria-labelledby="box">
-        <div className="md:col-span-4 md:col-start-4 md:order-2">
+        <div className="md:col-span-5 md:col-start-7 md:order-2">
           <h2 id="box" className="serif text-5xl">What arrives at your door.</h2>
           <p className="mt-5 text-lg">A tree in a net, wrapped at the base, with the trunk kept wet. Open it the same day, cut a half inch off the base, and stand it in water.</p>
         </div>
-        <Photo src="/images/delivered-netted-tree.webp" alt="A netted fir tree standing on a porch beside a front door with a wreath" sizes="(min-width:768px) 30vw, 90vw" plate className="md:col-span-3 md:order-1 aspect-[3/4] max-w-sm" />
+        <div className="md:col-span-5 md:order-1 grid grid-cols-2 gap-5 max-w-xl">
+          <Photo src="/images/delivered-netted-tree.webp" alt="A netted fir tree standing on a porch beside a front door with a wreath" sizes="(min-width:768px) 20vw, 45vw" plate className="aspect-[3/4]" />
+          <Photo src="/images/delivered-netted-tree-snow.webp" alt="A netted fir tree on a snowy step in front of a tan front door with a wreath" sizes="(min-width:768px) 20vw, 45vw" plate className="aspect-[3/4] mt-8" />
+        </div>
       </section>
       <div className="mt-24"><Banner src="/images/delivery-van-lane.webp" alt="A white delivery van on a snowy country lane between fir trees, early morning" caption="Out for delivery on a snowy lane" /></div>
     </>

@@ -22,7 +22,7 @@ npx vercel --prod            # deploy
 - `lib/delivery.ts`: Monday–Wednesday live shipping windows and ZIP estimates.
 - `app/api/checkout`: Stripe Checkout. With no `STRIPE_SECRET_KEY` it runs as a demo and takes no payment; the checkout page says so. `sk_test_` keys run in test mode.
 - `app/api/quote`, `/contact`, `/newsletter`: email through Resend (`lib/mail.ts`). Set `RESEND_API_KEY`, `QUOTE_TO_EMAIL`, `QUOTE_FROM_EMAIL` (and `RESEND_AUDIENCE_ID` for newsletter signups). Customers get a receipt email. Without a key, messages only appear in the server log. A small rate limit (`lib/ratelimit.ts`) protects the forms.
-- Images: drop `<name>.webp` into `public/images/` and rebuild. Missing files show a quiet paper slot and are never requested.
+- Images: drop `<name>.webp` into `public/images/` and rebuild. Product slots without a photo show a quiet paper block. Large photo bands and photo sections without a file are left out of the page entirely, so nothing looks broken.
 
 ## Design system
 - Palette: spruce `#1f3a2d` / `#12281d`, bark `#5a4130`, cream paper `#f4ecda`. Cranberry `#a32638` is for sale and urgency only (order-by strip, "few left", errors).

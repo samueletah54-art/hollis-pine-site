@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { Product } from "@/data/products";
 import { categoryLabel, heightBuckets, inBucket, priceFrom, roomLabels, type HeightBucket } from "@/lib/catalog";
 import { earliestArrival } from "@/lib/delivery";
+import { hasImage } from "@/lib/images";
 import ProductTile from "./ProductTile";
 
 const priceBands = [
@@ -78,7 +79,8 @@ export default function ShopClient({ products }: { products: Product[] }) {
     });
     const price = (p: Product) => priceFrom(p) ?? Number.MAX_SAFE_INTEGER;
     const top = (p: Product) => Math.max(0, ...p.sizes.map((s) => s.heightMax ?? 0));
-    const order = (p: Product) => (p.featured ? 0 : 1);
+    // Trees that have a real photo come first, then the rest in featured order.
+    const order = (p: Product) => (hasImage(p.images[0].src) ? 0 : 2) + (p.featured ? 0 : 1);
     list.sort((a, b) => {
       if (sort === "price-asc") return price(a) - price(b);
       if (sort === "price-desc") return (priceFrom(b) ?? -1) - (priceFrom(a) ?? -1);

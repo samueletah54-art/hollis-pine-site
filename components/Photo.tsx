@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useState } from "react";
 import manifest from "@/lib/image-manifest.json";
-import Art, { artFor } from "./Art";
 import TreeMark from "./TreeMark";
 
 // A tiny blurred cream-and-bark placeholder shown while the real photo loads.
@@ -22,6 +21,8 @@ type Props = {
   imgClassName?: string;
   zoom?: boolean;
   plate?: boolean;
+  /** Render nothing at all when the photo file has not been added yet (for large decorative photos). */
+  hideIfMissing?: boolean;
 };
 
 /**
@@ -29,23 +30,20 @@ type Props = {
  * If the file hasn't been added yet, the slot shows a quiet paper block with a small spruce mark,
  * and the site makes no request for the missing file.
  */
-export default function Photo({ src, alt, sizes, priority, className = "", imgClassName = "", zoom, plate }: Props) {
+export default function Photo({ src, alt, sizes, priority, className = "", imgClassName = "", zoom, plate, hideIfMissing }: Props) {
   const present = (manifest as string[]).includes(src);
-  const name = src.replace("/images/", "").replace(/\.webp$/, "");
-  const drawn = !!artFor(name);
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  if (hideIfMissing && !present) return null;
   const pos = className.includes("absolute") ? "" : "relative";
 
   const inner = (
     <div className={`${plate ? "relative h-full w-full" : `${pos} ${className}`} overflow-hidden bg-paper-deep`}>
-      {(!present || failed) && (drawn ? (
-        <Art name={name} label={alt || "Drawing"} />
-      ) : (
+      {(!present || failed) && (
         <div className="absolute inset-0 flex items-center justify-center text-bark/25" role="img" aria-label={alt}>
           <TreeMark className="w-1/6 max-w-14 min-w-6" />
         </div>
-      ))}
+      )}
       {present && !failed && (
         <Image
           src={src}

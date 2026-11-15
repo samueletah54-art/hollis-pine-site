@@ -4,6 +4,7 @@ import Banner from "@/components/Banner";
 import Divider from "@/components/Divider";
 import FarmMap from "@/components/FarmMap";
 import Photo from "@/components/Photo";
+import { hasImage } from "@/lib/images";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -55,10 +56,10 @@ export default function About() {
       </section>
 
       <section className="mx-auto max-w-[88rem] px-5 md:px-10 pt-24">
-        <div className="grid grid-cols-2 md:grid-cols-12 gap-5">
-          <Photo src="/images/packing-barn.webp" alt="Netted fir trees laid out on a wooden table inside a barn, window light" sizes="(min-width:768px) 50vw, 100vw" plate className="col-span-2 md:col-span-7 aspect-[16/9]" />
-          <Photo src="/images/worker-carrying-tree.webp" alt="A worker in a canvas coat carrying a freshly cut fir across a frosty field, seen from behind" sizes="(min-width:768px) 40vw, 50vw" plate className="col-span-2 md:col-span-5 aspect-[16/9] md:mt-10" />
-        </div>
+        {(hasImage("/images/packing-barn.webp") || hasImage("/images/worker-carrying-tree.webp")) && <div className="grid grid-cols-2 md:grid-cols-12 gap-5">
+          <Photo hideIfMissing src="/images/packing-barn.webp" alt="Netted fir trees laid out on a wooden table inside a barn, window light" sizes="(min-width:768px) 50vw, 100vw" plate className="col-span-2 md:col-span-7 aspect-[16/9]" />
+          <Photo hideIfMissing src="/images/worker-carrying-tree.webp" alt="A worker in a canvas coat carrying a freshly cut fir across a frosty field, seen from behind" sizes="(min-width:768px) 40vw, 50vw" plate className="col-span-2 md:col-span-5 aspect-[16/9] md:mt-10" />
+        </div>}
         <Divider className="mt-16" />
         <p className="serif-text text-2xl mt-8">Want to talk to a person? <Link href="/contact" className="underline underline-offset-[6px] decoration-tan decoration-[3px]">Here is how.</Link></p>
       </section>

@@ -5,6 +5,7 @@ import DrawOnView from "@/components/DrawOnView";
 import Divider from "@/components/Divider";
 import FarmMap from "@/components/FarmMap";
 import Newsletter from "@/components/Newsletter";
+import { hasImage } from "@/lib/images";
 import Note from "@/components/Note";
 import Photo from "@/components/Photo";
 import ProductTile from "@/components/ProductTile";
@@ -24,8 +25,9 @@ const steps = [
 ];
 
 export default function Home() {
-  const rowA = get(["fraser-fir", "balsam-fir", "noble-fir", "scotch-pine"]);
-  const rowB = get(["classic-full-prelit", "slim-pencil-prelit", "flocked-frosted-tree", "colorado-blue-spruce"]);
+  const rowA = get(["fraser-fir", "balsam-fir", "nordmann-fir", "colorado-blue-spruce"]);
+  const rowB = get(["classic-full-prelit", "slim-pencil-prelit", "flocked-frosted-tree", "half-tree-wall"]);
+  const rowBSmall = rowB.slice(1).filter((p) => hasImage(p.images[0].src));
 
   return (
     <>
@@ -77,9 +79,11 @@ export default function Home() {
 
         <h2 className="serif text-5xl mb-10 max-w-[18ch]">Artificial trees, if you'd rather not water.</h2>
         <Reveal><ProductTile p={rowB[0]} feature flip /></Reveal>
-        <ul className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-10 border-t-[3px] border-double border-bark/50 pt-10 mt-12">
-          {rowB.slice(1).map((p) => (<li key={p.slug}><Reveal><ProductTile p={p} /></Reveal></li>))}
-        </ul>
+        {rowBSmall.length > 0 && (
+          <ul className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-10 border-t-[3px] border-double border-bark/50 pt-10 mt-12">
+            {rowBSmall.map((p) => (<li key={p.slug}><Reveal><ProductTile p={p} /></Reveal></li>))}
+          </ul>
+        )}
         <p className="mt-10"><Link href="/shop" className="underline underline-offset-[6px] decoration-tan decoration-[3px] font-medium">All 30 products</Link></p>
       </section>
 
@@ -121,10 +125,10 @@ export default function Home() {
       {/* BUSINESS */}
       <section className="bg-fir text-paper on-dark">
         <div className="mx-auto max-w-[88rem] px-5 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-10 items-center">
-          <Reveal className="md:col-span-5 md:order-2">
-            <Photo src="/images/commercial-lobby.webp" alt="A twenty-foot decorated tree in a hotel lobby, marble floor, evening light" sizes="(min-width:768px) 40vw, 100vw" plate className="aspect-[4/5] !bg-paper" />
-          </Reveal>
-          <Reveal className="md:col-span-7 md:order-1 md:pr-8">
+          {hasImage("/images/commercial-lobby.webp") && <Reveal className="md:col-span-5 md:order-2">
+            <Photo hideIfMissing src="/images/commercial-lobby.webp" alt="A twenty-foot decorated tree in a hotel lobby, marble floor, evening light" sizes="(min-width:768px) 40vw, 100vw" plate className="aspect-[4/5] !bg-paper" />
+          </Reveal>}
+          <Reveal className={`${hasImage("/images/commercial-lobby.webp") ? "md:col-span-7" : "md:col-span-9"} md:order-1 md:pr-8`}>
             <h2 className="serif text-6xl">Big trees for hotels, shops and town squares, set up and taken down for you.</h2>
             <p className="mt-6 text-lg text-paper/90 max-w-[48ch]">Nine to thirty feet. Live or artificial. We deliver, set it in a water-fed stand, anchor it and light it. After the holidays we take it down and haul it away.</p>
             <ul className="mt-8 max-w-xl divide-y divide-paper/25 border-y-[3px] border-double border-paper/40">
