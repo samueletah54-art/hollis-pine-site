@@ -86,7 +86,7 @@ export default function Home() {
       </section>
 
       <section className="mt-24 md:mt-32">
-        <Banner src="/images/farm-dawn-frost.webp" alt="Rows of young fir trees on a hillside farm at dawn, white with frost" caption="The farm at dawn, after a hard frost" note="Cold nights make a tighter tree." />
+        <Banner src="/images/farm-dawn-frost.webp" alt="A fir tree in a farm field at dawn, its needles white with frost, more trees and hills behind" caption="The farm at dawn, after a hard frost" note="Cold nights make a tighter tree." />
       </section>
 
       {/* HOW IT GETS TO YOU */}
