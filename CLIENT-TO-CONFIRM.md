@@ -6,6 +6,8 @@ Where to change each item is in brackets.
 
 ## 1. Business identity (placeholders, replace all)
 
+Set these in the Vercel dashboard as `NEXT_PUBLIC_BUSINESS_NAME`, `NEXT_PUBLIC_PHONE`, `NEXT_PUBLIC_EMAIL`, `NEXT_PUBLIC_ADDRESS`, `NEXT_PUBLIC_HOURS`. No code change needed. Also set `QUOTE_TO_EMAIL`, `QUOTE_FROM_EMAIL` and `RESEND_API_KEY` so forms reach a person.
+
 - [ ] Trading name "Hollis & Pine Tree Co." [`data/business.ts`, logo in `components/Header.tsx`, `app/layout.tsx`]
 - [ ] Street address (currently "1 Orchard Lane, Your Town, ST 00000") [`data/business.ts`]
 - [ ] Phone number (currently a fake 555 number) [`data/business.ts`]
