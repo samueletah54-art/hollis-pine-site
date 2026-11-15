@@ -29,24 +29,22 @@ export default function Home() {
 
   return (
     <>
-      {/* MASTHEAD */}
-      <section className="mx-auto max-w-[88rem] px-5 md:px-10 pt-12 md:pt-20">
-        <div className="grid md:grid-cols-12 gap-x-10 gap-y-8 items-end">
-          <div className="md:col-span-8">
+      {/* HERO: a real photo of a tree arriving, with the promise next to it */}
+      <section className="mx-auto max-w-[88rem] px-5 md:px-10 pt-10 md:pt-16">
+        <div className="grid md:grid-cols-12 gap-x-12 gap-y-10 items-center">
+          <div className="md:col-span-7">
             <h1 className="serif text-8xl">Real trees, cut the week they ship.</h1>
-          </div>
-          <div className="md:col-span-4 md:pb-3">
-            <p className="text-lg">We cut each tree after you order it, wrap it wet, and send it to your door. Fraser, Balsam and Noble firs. Pre-lit artificial trees. Big trees for lobbies and shops.</p>
-            <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
+            <p className="mt-7 text-lg max-w-[46ch]">We cut each tree after you order it, wrap it wet, and send it to your door. Fraser, Balsam and Noble firs. Pre-lit artificial trees. Big trees for lobbies and shops.</p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
               <Link href="/shop" className="btn btn-primary">See the trees</Link>
               <Link href="/business" className="underline underline-offset-[6px] decoration-tan decoration-[3px] font-medium">Buying for a business?</Link>
             </div>
           </div>
+          <div className="md:col-span-5 relative">
+            <Photo src="/images/delivered-netted-tree-lit.webp" alt="A netted fir tree standing on a porch in front of a door with a wreath, warm light from inside" sizes="(min-width:768px) 40vw, 100vw" priority plate className="aspect-[4/5]" />
+            <Note className="mt-4 md:absolute md:-bottom-5 md:left-6 md:mt-0 md:bg-paper md:px-3 md:py-1">Netted, wet at the trunk, ready to cut and stand.</Note>
+          </div>
         </div>
-      </section>
-
-      <section className="mt-10 md:mt-14">
-        <Banner src="/images/hero-lit-tree.webp" alt="A lit Fraser fir in the corner of a cream-walled room, evening light from a window" caption="A Fraser fir, seven feet, lit and decorated" note="Same tree you'll find in the shop." priority />
       </section>
 
       {/* FACTS */}

@@ -7,7 +7,7 @@ Every image the site needs. Put the files in `public/images/` with **exactly** t
 - WebP, 1600 px wide. Products: **4:5** (1600 × 2000). Banners: **16:9** (1600 × 900).
 - Keep each file under 300 KB (quality 75–80). The site shows a blurred placeholder while it loads.
 
-**Already supplied (5):** `fraser-fir`, `nordmann-fir`, `classic-full-prelit`, `farm-dawn-frost`, `delivered-netted-tree`. The prompts below still apply to the other photos so they match these.
+**Already supplied (9):** `fraser-fir`, `nordmann-fir`, `classic-full-prelit`, `colorado-blue-spruce`, `balsam-fir`, `norway-spruce`, `farm-dawn-frost`, `delivered-netted-tree`, `delivered-netted-tree-lit`. The prompts below still apply to the other photos so they match these.
 
 ## One style for every image
 

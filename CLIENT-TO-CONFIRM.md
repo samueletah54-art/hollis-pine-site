@@ -76,7 +76,7 @@ None of these have been verified. The site says them in a plain voice, but they 
 
 ## 9. Images and illustrations
 
-- [ ] **Photo rights.** Five photos were supplied for the site: `fraser-fir`, `nordmann-fir`, `classic-full-prelit`, `farm-dawn-frost`, `delivered-netted-tree`. Confirm each one is the client's own, or properly licensed for commercial use, before the site stays public. The tree on `classic-full-prelit` has no lights on, while the page describes a pre-lit tree. `nordmann-fir` and `fraser-fir` should show those species. `farm-dawn-frost` is a small file stretched wide, so it will look soft on big screens.
+- [ ] **Photo rights.** Nine photos were supplied for the site: `fraser-fir`, `nordmann-fir`, `classic-full-prelit`, `farm-dawn-frost`, `delivered-netted-tree`, `colorado-blue-spruce`, `balsam-fir`, `norway-spruce`, `delivered-netted-tree-lit` (the home hero). The tree in `norway-spruce` stands in a room with a European wall socket, which does not suit a U.S. shop. A tenth photo was a duplicate and was not used. Species in the photos are unverified: check that each one shows the right tree. Confirm each one is the client's own, or properly licensed for commercial use, before the site stays public. The tree on `classic-full-prelit` has no lights on, while the page describes a pre-lit tree. `nordmann-fir` and `fraser-fir` should show those species. `farm-dawn-frost` is a small file stretched wide, so it will look soft on big screens.
 
 - [ ] Photographs must be of the real products and farm. Do not publish generated images of "our farm" as if they were real.
 - [ ] The hand-drawn farm map (`components/FarmMap.tsx`) is **invented**. Redraw it to match the real farm, or remove it.
