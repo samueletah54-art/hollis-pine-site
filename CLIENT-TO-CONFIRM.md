@@ -43,6 +43,11 @@ None of these have been verified. The site says them in a plain voice, but they 
 - [ ] What the carrier does if nobody is home; that a live tree is fine outside for a day in cold weather; that we can hold a shipment if asked [Delivery page, FAQ]
 - [ ] Sales tax: how it is collected (Stripe Tax needs setting up; `STRIPE_AUTOMATIC_TAX=1`)
 
+## 4b. Black Friday offer (invented defaults, confirm)
+
+- [ ] **15% off live and artificial trees, Nov 27 to Nov 30, Eastern time**: the amount, the dates, and that extras and commercial quotes are excluded [`lib/promo.ts`, or the `NEXT_PUBLIC_PROMO_*` variables]
+- [ ] Offer wording in the Terms page (no stacking, may end early if stock runs out)
+
 ## 5. Returns and refunds
 
 - [ ] Live trees: replace or refund if damaged; photos within 48 hours; no return for change of mind

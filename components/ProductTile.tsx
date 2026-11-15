@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Product } from "@/data/products";
 import { heightRange, money, priceFrom, urlFor } from "@/lib/catalog";
 import Note from "./Note";
+import Price from "./Price";
 import Photo from "./Photo";
 
 const tagFor = (p: Product) => (p.category === "commercial" ? "Commercial" : p.prelit && p.category === "artificial" ? "Pre-lit" : p.category === "live" ? "Fresh cut" : p.badges[0]);
@@ -23,7 +24,7 @@ export default function ProductTile({ p, feature = false, flip = false, priority
           <p className="serif-text italic text-lg mt-3 text-ink/85">{p.tagline}</p>
           <p className="mt-4 max-w-[46ch]">{p.description}</p>
           {p.note && <Note className="mt-4">{p.note}</Note>}
-          <p className="mt-5 num text-lg">{from !== null ? <>From <b className="font-semibold">{money(from)}</b></> : "Ask for a quote"}{low && <span className="ml-3 text-cranberry text-sm font-semibold">Only a few left</span>}</p>
+          <p className="mt-5 num text-lg">{from !== null ? <>From <Price value={from} category={p.category} className="font-semibold" /></> : "Ask for a quote"}{low && <span className="ml-3 text-cranberry text-sm font-semibold">Only a few left</span>}</p>
           <Link href={urlFor(p)} className="btn btn-ghost mt-5">See this tree</Link>
         </div>
       </article>
@@ -39,7 +40,7 @@ export default function ProductTile({ p, feature = false, flip = false, priority
         </div>
         <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-4 border-t-[3px] border-double border-bark/50 pt-2">
           <h3 className="serif-text text-xl leading-tight">{p.name}</h3>
-          <p className="num text-sm">{from !== null ? <><span className="text-muted mr-1">from</span>{money(from)}</> : <span className="text-muted">Quote</span>}</p>
+          <p className="text-sm">{from !== null ? <Price value={from} category={p.category} from /> : <span className="text-muted">Quote</span>}</p>
         </div>
         <p className="text-sm text-muted mt-0.5">{h ?? p.sizes.map((s) => s.label).join(", ")}{low && <span className="ml-2 text-cranberry font-semibold">Few left</span>}</p>
       </Link>

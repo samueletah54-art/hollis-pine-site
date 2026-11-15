@@ -7,6 +7,7 @@ import FarmMap from "@/components/FarmMap";
 import Newsletter from "@/components/Newsletter";
 import { hasImage } from "@/lib/images";
 import Note from "@/components/Note";
+import PromoStamp from "@/components/PromoStamp";
 import Photo from "@/components/Photo";
 import ProductTile from "@/components/ProductTile";
 import Reveal from "@/components/Reveal";
@@ -43,6 +44,7 @@ export default function Home() {
             </div>
           </div>
           <div className="md:col-span-5 relative">
+            <PromoStamp />
             <Photo src="/images/delivered-netted-tree-lit.webp" alt="A netted fir tree standing on a porch in front of a door with a wreath, warm light from inside" sizes="(min-width:768px) 40vw, 100vw" priority plate className="aspect-[4/5]" />
             <Note className="mt-4 md:absolute md:-bottom-5 md:left-6 md:mt-0 md:bg-paper md:px-3 md:py-1">Netted, wet at the trunk, ready to cut and stand.</Note>
           </div>

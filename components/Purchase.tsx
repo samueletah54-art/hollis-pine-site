@@ -5,7 +5,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { Product } from "@/data/products";
 import { money } from "@/lib/catalog";
 import { estimate, fmt, pastOrderBy } from "@/lib/delivery";
+import { PROMO, salePrice } from "@/lib/promo";
 import { useCart } from "./CartProvider";
+import Price from "./Price";
+import { usePromo } from "./usePromo";
 import QtyStepper from "./QtyStepper";
 
 export default function Purchase({ p }: { p: Product }) {
@@ -30,6 +33,8 @@ export default function Purchase({ p }: { p: Product }) {
   }, []);
 
   const size = p.sizes.find((s) => s.id === sizeId)!;
+  const promo = usePromo();
+  const unitNow = promo.state === "live" ? salePrice(size.price ?? 0, p.category) : (size.price ?? 0);
   const live = p.category === "live" || (p.category === "addon" && p.addonKind === "wreath") || (p.category === "addon" && p.addonKind === "garland");
 
   const est = useMemo(() => (checked ? estimate(checked, p.shipsFrom, live) : null), [checked, p.shipsFrom, live]);
@@ -55,7 +60,8 @@ export default function Purchase({ p }: { p: Product }) {
   return (
     <>
     <div ref={panel}>
-      <p className="serif text-5xl num leading-none">{money(size.price!)}</p>
+      <p className="serif text-5xl leading-none"><Price value={size.price!} category={p.category} /></p>
+      {unitNow < size.price! && <p className="mt-2 text-sm font-semibold text-cranberry">{PROMO.name}: {promo.percent}% off through {promo.endLabel}</p>}
       <p className="text-sm text-muted mt-2">{size.dims ?? " "}</p>
       {p.category !== "addon" && size.heightMax && <p className="text-sm mt-1">Needs a ceiling of at least <b className="num">{Math.ceil(size.heightMax + 1)} ft</b>. <Link href="/sizes" className="underline underline-offset-4 decoration-tan decoration-2">How to measure</Link></p>}
 
@@ -66,7 +72,7 @@ export default function Purchase({ p }: { p: Product }) {
             <button key={s.id} type="button" role="radio" aria-checked={s.id === sizeId} onClick={() => setSizeId(s.id)}
               className={`px-4 py-2 border text-left ${s.id === sizeId ? "bg-spruce text-paper border-spruce" : "border-bark/50 hover:border-spruce"}`}>
               <span className="block">{s.label}</span>
-              <span className="num text-xs opacity-75">{money(s.price!)}</span>
+              <span className="text-xs opacity-80"><Price value={s.price!} category={p.category} /></span>
             </button>
           ))}
         </div>
@@ -90,7 +96,7 @@ export default function Purchase({ p }: { p: Product }) {
           className="btn btn-primary flex-1 min-w-48"
           onClick={() => { add({ slug: p.slug, sizeId, option: optId, qty }); setAdded(true); setTimeout(() => setAdded(false), 1800); }}
         >
-          {added ? "Added" : `Add to cart, ${money(size.price! * qty)}`}
+          {added ? "Added" : `Add to cart, ${money(unitNow * qty)}`}
         </button>
       </div>
       {p.stock === "low" && <p className="text-sm text-cranberry font-semibold mt-3">Only a few left this season.</p>}
@@ -121,7 +127,7 @@ export default function Purchase({ p }: { p: Product }) {
     >
       <p className="leading-tight min-w-0">
         <span className="serif-text text-lg block truncate">{p.name}</span>
-        <span className="text-sm text-muted num">{size.label}, {money(size.price! * qty)}</span>
+        <span className="text-sm text-muted num">{size.label}, {money(unitNow * qty)}</span>
       </p>
       <button className="btn btn-primary shrink-0" onClick={() => { add({ slug: p.slug, sizeId, option: optId, qty }); }}>Add to cart</button>
     </div>

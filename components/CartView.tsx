@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCart } from "./CartProvider";
 import QtyStepper from "./QtyStepper";
 import { money } from "@/lib/catalog";
-import { FREE_SHIPPING_ARTIFICIAL } from "@/lib/pricing";
+import { FREE_SHIPPING_ARTIFICIAL, savings as savingsOf } from "@/lib/pricing";
 
 export default function CartView() {
   const { priced, subtotal, shipping, setQty, remove, ready } = useCart();
@@ -29,7 +29,7 @@ export default function CartView() {
               <button onClick={() => remove(x.line.slug, x.line.sizeId, x.line.option)} className="text-sm underline underline-offset-4 decoration-tan mt-2">Remove</button>
             </div>
             <QtyStepper value={x.line.qty} onChange={(q) => setQty(x.line.slug, x.line.sizeId, x.line.option, q)} label={x.name} />
-            <p className="num text-right font-medium col-span-2 sm:col-span-1">{money(x.total)}</p>
+            <p className="num text-right font-medium col-span-2 sm:col-span-1">{x.originalUnit > x.unit && <s className="block text-sm text-muted font-normal">{money(x.originalUnit * x.line.qty)}</s>}{money(x.total)}</p>
           </li>
         ))}
       </ul>
@@ -37,6 +37,7 @@ export default function CartView() {
         <h2 className="label text-bark">Summary</h2>
         <dl className="mt-4 space-y-2 num">
           <div className="flex justify-between"><dt>Subtotal</dt><dd>{money(subtotal)}</dd></div>
+          {savingsOf(priced) > 0 && <div className="flex justify-between text-cranberry font-semibold"><dt>Black Friday savings</dt><dd>−{money(savingsOf(priced))}</dd></div>}
           <div className="flex justify-between"><dt>Shipping</dt><dd>{shipping === 0 ? "Free" : money(shipping)}</dd></div>
           <div className="flex justify-between text-muted text-sm"><dt>Sales tax</dt><dd>At checkout</dd></div>
           <div className="flex justify-between border-t-[3px] border-double border-bark/60 pt-3 mt-3 serif-text text-xl"><dt>Total before tax</dt><dd>{money(subtotal + shipping)}</dd></div>

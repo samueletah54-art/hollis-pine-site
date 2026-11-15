@@ -5,7 +5,7 @@ import { CartProvider } from "@/components/CartProvider";
 import CartDrawer from "@/components/CartDrawer";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import OrderBar from "@/components/OrderBar";
+import PromoBar from "@/components/PromoBar";
 import JsonLd from "@/components/JsonLd";
 import { SITE } from "@/lib/site";
 
@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", name: SITE.name, url: SITE.url, telephone: SITE.phone, email: SITE.email, areaServed: "US" }} />
         <CartProvider>
           <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-paper focus:px-4 focus:py-2 focus:border focus:border-ink">Skip to content</a>
-          <OrderBar />
+          <PromoBar />
           <Header />
           <main id="main">{children}</main>
           <Footer />

@@ -17,6 +17,9 @@ export default function Terms() {
       <h2>Orders and prices</h2>
       <p>Prices are in U.S. dollars, per item, and do not include shipping or sales tax. Both are added at checkout. We may cancel an order if a price is wrong or a tree is no longer available, and we will refund you in full.</p>
 
+      <h2>Offers</h2>
+      <p>Offers such as the Black Friday discount apply to the items and dates stated on the site. The sale price is applied automatically at checkout. Offers cannot be combined, and we may end one early if stock runs out.</p>
+
       <h2>Live trees are natural products</h2>
       <p>Trees vary in shape, colour and fullness. Height is approximate, and a tree may be an inch or two either side of the size you chose. Photos show a typical tree.</p>
 

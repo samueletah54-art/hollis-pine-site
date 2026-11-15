@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "./CartProvider";
 import { money } from "@/lib/catalog";
+import { savings as savingsOf } from "@/lib/pricing";
 import { pastOrderBy } from "@/lib/delivery";
 
 export default function CheckoutView() {
@@ -63,6 +64,7 @@ export default function CheckoutView() {
         </ul>
         <dl className="mt-4 num space-y-1 border-t-[3px] border-double border-bark/60 pt-4">
           <div className="flex justify-between"><dt>Subtotal</dt><dd>{money(subtotal)}</dd></div>
+          {savingsOf(priced) > 0 && <div className="flex justify-between text-cranberry font-semibold"><dt>Black Friday savings (already taken off)</dt><dd>−{money(savingsOf(priced))}</dd></div>}
           <div className="flex justify-between"><dt>Shipping</dt><dd>{shipping === 0 ? "Free" : money(shipping)}</dd></div>
           <div className="flex justify-between text-sm text-muted"><dt>Sales tax</dt><dd>On the next screen</dd></div>
         </dl>
