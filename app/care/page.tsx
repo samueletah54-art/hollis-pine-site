@@ -16,11 +16,10 @@ const lasts = all.filter((p) => p.category === "live" && p.facts && p.slug !== "
 export default function Care() {
   return (
     <div className="mx-auto max-w-[88rem] px-5 md:px-10 pt-14 md:pt-20">
-      <header className="grid md:grid-cols-12 gap-6 border-b border-ink pb-10">
-        <p className="label text-berry md:col-span-3">The care guide</p>
-        <div className="md:col-span-9">
+      <header className="grid md:grid-cols-12 gap-6 border-b-[3px] border-double border-bark/60 pb-10">
+        <div className="md:col-span-10">
           <h1 className="serif text-5xl md:text-8xl leading-[.92]">Keep it green through New Year.</h1>
-          <p className="mt-6 text-xl max-w-[48ch] text-ink/85">Thirty-five years of growing trees comes down to a few habits. Most of them involve water.</p>
+          <p className="mt-6 text-xl max-w-[48ch] text-ink/85">A few habits keep a live tree green until New Year. Most of them involve water.</p>
         </div>
       </header>
 
@@ -28,18 +27,18 @@ export default function Care() {
         <aside className="md:col-span-3 hidden md:block">
           <nav aria-label="On this page" className="sticky top-28">
             <ol className="space-y-2 border-l rule pl-4">
-              {toc.map(([id, l]) => (<li key={id}><a href={`#${id}`} className="hover:underline underline-offset-4 decoration-berry">{l}</a></li>))}
+              {toc.map(([id, l]) => (<li key={id}><a href={`#${id}`} className="hover:underline underline-offset-4 decoration-tan">{l}</a></li>))}
             </ol>
           </nav>
         </aside>
 
         <div className="md:col-span-8 lg:col-span-7 prose-care">
           <h2 id="pick" className="scroll-mt-24 !mt-0">Picking a tree</h2>
-          <p className="drop">Start with the room, not the tree. Measure the ceiling and subtract one foot for the stand and one more for the topper. That's your height. Then measure the floor: a tree is roughly half as wide as it is tall, so a seven-footer wants a circle about forty inches across, plus room to walk around it.</p>
+          <p className="drop">Start with the room, not the tree. Measure the ceiling and subtract one foot. That leaves room for the stand and a topper. Then measure the floor. A tree is about half as wide as it is tall, so a seven-footer needs a circle about 40 inches across, plus room to walk round it. The <a href="/sizes">size guide</a> has a chart.</p>
           <p>Then decide what matters. If it's smell, buy a Balsam or Grand fir. If it's holding heavy ornaments, Fraser, Noble or blue spruce. If you forget the water, Scotch pine. If someone sneezes at pine, Nordmann. You can filter the shop by each of those.</p>
           <p>If you are buying a tree somewhere else, the check is simple: lift it a few inches and drop the butt on the ground. Green needles should stay on. A few brown ones from the inside are fine. A shower of green means a dry tree.</p>
 
-          <Photo src="/images/cutting.jpg" alt="Gloved hands sawing the base of a Noble fir on a frosty morning" sizes="(min-width:768px) 60vw, 100vw" className="aspect-[3/2] my-10" />
+          <Photo src="/images/care-trimming-trunk.webp" alt="Gloved hands sawing a half inch off the base of a fir trunk" sizes="(min-width:768px) 60vw, 100vw" plate className="aspect-[16/9] my-10" />
 
           <h2 id="unbox" className="scroll-mt-24">The first four hours</h2>
           <p>When the box arrives, open it right away. The tree will have been in the dark for a day or two and wants air. Cut the net off, but leave the branches alone. They'll drop on their own over the next day.</p>
@@ -64,7 +63,7 @@ export default function Care() {
           <div className="overflow-x-auto my-6">
             <table className="w-full text-left min-w-[28rem] num">
               <caption className="sr-only">Stand size by tree height</caption>
-              <thead><tr className="border-b border-ink label text-muted"><th scope="col" className="py-3 pr-4">Tree height</th><th scope="col" className="pr-4">Typical trunk</th><th scope="col">Stand holds at least</th></tr></thead>
+              <thead><tr className="border-b-[3px] border-double border-bark/60 label text-muted"><th scope="col" className="py-3 pr-4">Tree height</th><th scope="col" className="pr-4">Typical trunk</th><th scope="col">Stand holds at least</th></tr></thead>
               <tbody>
                 {[["5–6 ft", "2–3 in", "3 qt"], ["6–7 ft", "3–4 in", "4 qt (1 gal)"], ["7–8 ft", "4–5 in", "5 qt"], ["8–9 ft", "5–6 in", "6 qt"], ["12–20 ft", "8–10 in", "3 gal"]].map((r) => (<tr key={r[0]} className="border-b rule"><th scope="row" className="py-3 pr-4 font-normal">{r[0]}</th><td className="pr-4">{r[1]}</td><td>{r[2]}</td></tr>))}
               </tbody>
@@ -77,7 +76,7 @@ export default function Care() {
           <div className="overflow-x-auto my-6">
             <table className="w-full text-left min-w-[28rem]">
               <caption className="sr-only">Needle retention by species</caption>
-              <thead><tr className="border-b border-ink label text-muted"><th scope="col" className="py-3 pr-4">Species</th><th scope="col">Needle retention</th></tr></thead>
+              <thead><tr className="border-b-[3px] border-double border-bark/60 label text-muted"><th scope="col" className="py-3 pr-4">Species</th><th scope="col">Needle retention</th></tr></thead>
               <tbody>
                 {lasts.map((p) => (<tr key={p.slug} className="border-b rule"><th scope="row" className="py-3 pr-4 font-normal"><Link href={`/trees/${p.slug}`}>{p.name}</Link></th><td>{p.facts!.needleRetention}</td></tr>))}
               </tbody>

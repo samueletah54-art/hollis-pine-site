@@ -89,11 +89,30 @@ export default function ShopClient({ products }: { products: Product[] }) {
     return list;
   }, [products, types, species, heights, prices, rooms, scent, flocked, prelit, pet, arrive, sort]);
 
+  const groups = useMemo(() => {
+    const out: Product[][] = [];
+    for (let i = 0; i < shown.length; i += 4) out.push(shown.slice(i, i + 4));
+    return out;
+  }, [shown]);
+
+  const chips: { key: string; label: string; remove: () => void }[] = [
+    ...types.map((t) => ({ key: `t-${t}`, label: categoryLabel[t as keyof typeof categoryLabel] ?? t, remove: () => toggle("type", types, t) })),
+    ...species.map((s) => ({ key: `s-${s}`, label: s, remove: () => toggle("species", species, s) })),
+    ...heights.map((h) => ({ key: `h-${h}`, label: heightBuckets.find((x) => x.id === h)?.label ?? h, remove: () => toggle("height", heights, h) })),
+    ...prices.map((id) => ({ key: `p-${id}`, label: priceBands.find((b) => b.id === id)?.label ?? id, remove: () => toggle("price", prices, id) })),
+    ...rooms.map((r) => ({ key: `r-${r}`, label: r.charAt(0).toUpperCase() + r.slice(1), remove: () => toggle("room", rooms, r) })),
+    ...scent.map((c) => ({ key: `c-${c}`, label: c === "strong" ? "Strong scent" : "Little or no scent", remove: () => toggle("scent", scent, c) })),
+    ...(prelit ? [{ key: "prelit", label: "Pre-lit", remove: () => set("prelit", []) }] : []),
+    ...(flocked ? [{ key: "flocked", label: "Flocked", remove: () => set("flocked", []) }] : []),
+    ...(pet ? [{ key: "pet", label: "Pet-friendlier", remove: () => set("pet", []) }] : []),
+    ...(arrive ? [{ key: "arrive", label: `Arrives by ${arrive}`, remove: () => set("arrive", []) }] : []),
+  ];
+
   const activeCount = types.length + species.length + heights.length + prices.length + rooms.length + scent.length + (flocked ? 1 : 0) + (prelit ? 1 : 0) + (pet ? 1 : 0) + (arrive ? 1 : 0);
 
   const Check = ({ id, checked, onChange, children }: { id: string; checked: boolean; onChange: () => void; children: React.ReactNode }) => (
     <label htmlFor={id} className="flex items-start gap-3 py-1 cursor-pointer text-[.95rem]">
-      <input id={id} type="checkbox" checked={checked} onChange={onChange} className="mt-[.35rem] size-4 accent-[#8c2f2b]" />
+      <input id={id} type="checkbox" checked={checked} onChange={onChange} className="mt-[.35rem] size-4 accent-[#1f3a2d]" />
       <span>{children}</span>
     </label>
   );
@@ -137,7 +156,7 @@ export default function ShopClient({ products }: { products: Product[] }) {
         <p className="text-xs text-muted mt-2">Live trees ship Mon–Wed. We'll hide anything that can't make it.</p>
       </Group>
       {activeCount > 0 && (
-        <button className="mt-2 underline underline-offset-4 decoration-berry" onClick={() => router.replace(path, { scroll: false })}>Clear all filters ({activeCount})</button>
+        <button className="mt-2 underline underline-offset-4 decoration-tan" onClick={() => router.replace(path, { scroll: false })}>Clear all filters ({activeCount})</button>
       )}
     </div>
   );
@@ -153,6 +172,7 @@ export default function ShopClient({ products }: { products: Product[] }) {
       </aside>
 
       <section aria-label="Products">
+        <h2 className="sr-only">Products</h2>
         <div className="flex flex-wrap items-baseline justify-between gap-4 border-b rule pb-3 mb-8">
           <p className="num" role="status" aria-live="polite">{shown.length} {shown.length === 1 ? "product" : "products"}</p>
           <div className="flex items-baseline gap-3">
@@ -163,6 +183,18 @@ export default function ShopClient({ products }: { products: Product[] }) {
           </div>
         </div>
 
+        {chips.length > 0 && (
+          <ul className="flex flex-wrap gap-2 mb-8" aria-label="Active filters">
+            {chips.map((c) => (
+              <li key={c.key}>
+                <button onClick={c.remove} aria-label={`Remove filter: ${c.label}`} className="border-2 border-spruce text-spruce px-3 py-1 text-sm font-medium hover:bg-spruce hover:text-paper">
+                  {c.label} <span aria-hidden="true">×</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+
         {shown.length === 0 ? (
           <div className="py-16 max-w-md">
             <p className="serif text-4xl">Nothing matches that.</p>
@@ -170,9 +202,18 @@ export default function ShopClient({ products }: { products: Product[] }) {
             <button className="btn btn-ghost mt-6" onClick={() => router.replace(path, { scroll: false })}>Clear filters</button>
           </div>
         ) : (
-          <ul className="grid grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-10">
-            {shown.map((p, i) => (<li key={p.slug} className={i % 5 === 1 ? "xl:mt-10" : ""}><ProductTile p={p} priority={i < 3} /></li>))}
-          </ul>
+          <div className="space-y-14">
+            {groups.map((g, gi) => (
+              <section key={g[0].slug} aria-label={`${g[0].name} and ${g.length - 1} more`}>
+                <div className="mb-10"><ProductTile p={g[0]} feature priority={gi === 0} /></div>
+                {g.length > 1 && (
+                  <ul className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-10 border-t-[3px] border-double border-bark/50 pt-10">
+                    {g.slice(1).map((p) => (<li key={p.slug}><ProductTile p={p} /></li>))}
+                  </ul>
+                )}
+              </section>
+            ))}
+          </div>
         )}
       </section>
     </div>

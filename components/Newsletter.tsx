@@ -18,13 +18,13 @@ export default function Newsletter({ dark = false }: { dark?: boolean }) {
       }}
     >
       <div className="flex-1">
-        <label htmlFor="nl-email" className="label block mb-1">One email a month, mostly about trees</label>
+        <label htmlFor="nl-email" className="label block mb-1">A short email once a month. Order dates and care tips, nothing else.</label>
         <input id="nl-email" name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="field" disabled={state === "done"} />
       </div>
-      <button className={`btn ${dark ? "btn-brass" : "btn-ghost"}`} disabled={state === "sending" || state === "done"}>
+      <button className={`btn ${dark ? "btn-straw" : "btn-ghost"}`} disabled={state === "sending" || state === "done"}>
         {state === "done" ? "Got it. Thanks." : state === "sending" ? "Sending…" : "Sign up"}
       </button>
-      {state === "error" && <p role="alert" className="text-sm text-berry">That didn't go through. Try again in a minute.</p>}
+      {state === "error" && <p role="alert" className={`text-sm ${dark ? "text-straw" : "text-cranberry"}`}>That didn't go through. Try again in a minute.</p>}
     </form>
   );
 }

@@ -74,15 +74,15 @@ export default function QuoteForm() {
         <legend className="label mb-2">What do you need us to do?</legend>
         <div className="flex flex-wrap gap-x-8 gap-y-2">
           {[["delivery", "Delivery only"], ["install", "Delivery + install"], ["install-takedown", "Install + takedown"]].map(([v, l]) => (
-            <label key={v} className="flex items-center gap-2"><input type="radio" name="service" value={v} defaultChecked={v === "install-takedown"} className="accent-[#b08a3e]" />{l}</label>
+            <label key={v} className="flex items-center gap-2"><input type="radio" name="service" value={v} defaultChecked={v === "install-takedown"} className="accent-[#dcc48f]" />{l}</label>
           ))}
         </div>
       </fieldset>
       <div className="sm:col-span-2"><L id="notes">Notes</L><textarea id="notes" name="notes" rows={3} className="field resize-y" placeholder="Loading dock, lift access, ceiling height, anything that matters." /></div>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <div className="sm:col-span-2 flex flex-wrap items-center gap-6">
-        <button className="btn btn-brass" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send quote request"}</button>
-        {state === "error" && <p role="alert" className="text-brass">{err}</p>}
+        <button className="btn btn-straw" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send quote request"}</button>
+        {state === "error" && <p role="alert" className="text-straw">{err}</p>}
         <p className="text-sm text-paper/65">We reply within one business day.</p>
       </div>
     </form>

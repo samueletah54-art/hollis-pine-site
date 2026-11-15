@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
 import CartDrawer from "@/components/CartDrawer";
@@ -8,18 +9,31 @@ import OrderBar from "@/components/OrderBar";
 import JsonLd from "@/components/JsonLd";
 import { SITE } from "@/lib/site";
 
+const fraunces = localFont({
+  src: [
+    { path: "./fonts/fraunces-latin-opsz-normal.woff2", style: "normal" },
+    { path: "./fonts/fraunces-latin-opsz-italic.woff2", style: "italic" },
+  ],
+  weight: "100 900",
+  variable: "--font-fraunces",
+  display: "swap",
+  adjustFontFallback: "Times New Roman",
+});
+const instrument = localFont({ src: "./fonts/instrument-sans-latin-wght-normal.woff2", weight: "400 700", variable: "--font-instrument", display: "swap", adjustFontFallback: "Arial" });
+const caveat = localFont({ src: "./fonts/caveat-latin-wght-normal.woff2", weight: "400 700", variable: "--font-caveat", display: "swap", preload: false });
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: { default: "Hollis & Pine Tree Co. | Fresh-cut Christmas trees shipped across the U.S.", template: "%s | Hollis & Pine Tree Co." },
-  description: "Family-grown Fraser, Balsam and Noble firs, cut to order and shipped fresh. Pre-lit artificial trees and commercial trees for lobbies, malls and storefronts.",
+  title: { default: "Hollis & Pine Tree Co. | Fresh-cut Christmas trees shipped across the U.S.", template: "%s | Hollis & Pine" },
+  description: "Fraser, Balsam and Noble firs cut to order and shipped fresh to your door. Pre-lit artificial trees, and big trees for hotels, shops and town squares.",
   openGraph: { type: "website", siteName: SITE.name, locale: "en_US" },
   alternates: { canonical: "/" },
 };
-export const viewport: Viewport = { themeColor: "#f4eee3", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#f4ecda", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${fraunces.variable} ${instrument.variable} ${caveat.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
