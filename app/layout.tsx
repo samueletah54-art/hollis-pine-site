@@ -1,13 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { CartProvider } from "@/components/CartProvider";
-import CartDrawer from "@/components/CartDrawer";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import PromoBar from "@/components/PromoBar";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import JsonLd from "@/components/JsonLd";
 import { SITE } from "@/lib/site";
 
 const fraunces = localFont({
@@ -22,6 +15,18 @@ const fraunces = localFont({
 });
 const instrument = localFont({ src: "./fonts/instrument-sans-latin-wght-normal.woff2", weight: "400 700", variable: "--font-instrument", display: "swap", adjustFontFallback: "Arial" });
 
+const garamond = localFont({
+  src: [
+    { path: "./fonts/eb-garamond-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/eb-garamond-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/eb-garamond-latin-500-normal.woff2", weight: "500", style: "normal" },
+  ],
+  variable: "--font-garamond",
+  display: "swap",
+  adjustFontFallback: "Times New Roman",
+});
+const inter = localFont({ src: "./fonts/inter-latin-wght-normal.woff2", weight: "100 900", variable: "--font-inter", display: "swap", adjustFontFallback: "Arial" });
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: { default: "Hollis & Pine Tree Co. | Fresh-cut Christmas trees shipped across the U.S.", template: "%s | Hollis & Pine" },
@@ -33,21 +38,12 @@ export const viewport: Viewport = { themeColor: "#0e1712", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${instrument.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${instrument.variable} ${garamond.variable} ${inter.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
-        <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", name: SITE.name, url: SITE.url, telephone: SITE.phone, email: SITE.email, areaServed: "US" }} />
-        <CartProvider>
-          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-paper focus:px-4 focus:py-2 focus:border focus:border-ink">Skip to content</a>
-          <PromoBar />
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-          <CartDrawer />
-          <WhatsAppButton />
-        </CartProvider>
+        {children}
       </body>
     </html>
   );

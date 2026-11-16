@@ -88,3 +88,15 @@ None of these have been verified. The site says them in a plain voice, but they 
 
 - [ ] Stripe is in **demo mode**. Checkout says so on the page until `STRIPE_SECRET_KEY` is set. With a `sk_test_` key it runs in test mode and says so.
 - [ ] Switch to a live key only after the client confirms prices, tax and shipping.
+
+## 11. London pages (`/london`)
+
+Built from the reference screenshots in `design-reference/`. Everything below is a placeholder or a claim taken from the reference sites, and must be confirmed or replaced before the page is public.
+
+- [ ] **Prices** in `data/uk.ts` (£75, £95, £125, £65, VAT included) are placeholders.
+- [ ] **Claims copied from the reference copy:** "free delivery across London", "next-day delivery", "optional stand", "post-Christmas collection and removal", delivery and collection by email. Keep only what the business really offers.
+- [ ] **Sustainability section** (`app/(uk)/london/page.tsx`): "grown on managed farms where new trees are planted", route planning, January collection. Confirm each statement is true. There is no trees-planted counter and no Trustpilot or press logos, because the numbers and the reviews would have to be real.
+- [ ] **Contact details**: set `NEXT_PUBLIC_UK_PHONE`, `NEXT_PUBLIC_UK_PHONE_HREF`, `NEXT_PUBLIC_UK_EMAIL`, `NEXT_PUBLIC_UK_ADDRESS` (separate lines with `|`). Today they are placeholders (020 0000 0000, london@hollisandpine.example).
+- [ ] **Areas** list in `data/uk.ts`: keep only the areas the business can reach.
+- [ ] **Booking form** emails the shop through `/api/contact` (needs `RESEND_API_KEY`) and takes no payment. Add a UK payment flow if wanted.
+- [ ] **Photos** reuse the US photos. The Nordmann and Norway spruce photos should show those species, and ideally be London-delivered trees. Do not copy photos from the reference screenshots.

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SiteChrome from "@/components/SiteChrome";
 
 export const metadata: Metadata = { title: "Page not found", robots: { index: false } };
 
 export default function NotFound() {
   return (
+    <SiteChrome>
     <div className="mx-auto max-w-[88rem] px-5 md:px-10 pt-20 pb-10 ">
       <div className="max-w-3xl">
         <p className="label text-bark mb-4">Error 404</p>
@@ -18,5 +20,6 @@ export default function NotFound() {
       </div>
 
     </div>
+    </SiteChrome>
   );
 }
