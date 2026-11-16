@@ -3,6 +3,8 @@ import Link from "next/link";
 import Photo from "@/components/Photo";
 import DlTreeCard from "@/components/delivery/DlTreeCard";
 import DlBookingForm from "@/components/delivery/DlBookingForm";
+import DlStickyCta from "@/components/delivery/DlStickyCta";
+import Reveal from "@/components/Reveal";
 import { bySlug } from "@/lib/catalog";
 import { BIZ } from "@/data/business";
 import type { Product } from "@/data/products";
@@ -22,6 +24,20 @@ const benefits = [
   <>Optional water-reservoir stand, so it's ready to go up when it arrives</>,
   <>Delivered to the 48 contiguous states</>,
   <>Pre-lit artificial trees too</>,
+];
+
+const facts = [
+  ["Cut to order", "The week it ships"],
+  ["Ships Mon to Wed", "Never held over a weekend"],
+  ["48 states", "Lower 48 delivery"],
+  ["From $24", "Live tree shipping"],
+];
+
+const faqs: [string, string][] = [
+  ["Do I need to cut the trunk when it arrives?", "Yes. Saw a half inch straight across the base, even though we cut it before shipping. Then stand it in water within four hours. After that, the sap seals the cut."],
+  ["How much water does a tree need?", "A six-foot tree drinks about a quart a day, and more in the first two days. Check the stand every morning, and never let the water fall below the cut."],
+  ["How tall a tree can I fit?", "Take your ceiling height and subtract one foot. The size guide shows how to measure."],
+  ["How long will a live tree last indoors?", "Between three and six weeks, depending on the species and the temperature of the room."],
 ];
 
 const options = [
@@ -47,8 +63,20 @@ export default function TreeDelivery() {
           <p className="text-[.8125rem] tracking-[.22em] uppercase text-[var(--dl-gold)]">A tree to your door</p>
           <h1 className="serif-dl mt-4 max-w-[16ch] text-[2.75rem] leading-[1.05] md:text-[4.75rem]">Fresh-cut Christmas trees, delivered to your door</h1>
           <p className="mt-5 max-w-[42ch] text-lg md:text-xl text-white/90">Real trees cut the week they ship, to the 48 contiguous states.</p>
-          <a href="#trees" className="dl-btn dl-btn-gold mt-8">Choose your tree <span aria-hidden>→</span></a>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#trees" className="dl-btn dl-btn-gold">Choose your tree <span aria-hidden>→</span></a>
+            <a href="#shipping" className="dl-btn border-white/70 text-white hover:bg-white/15">How shipping works</a>
+          </div>
         </div>
+      </section>
+
+      {/* FACTS */}
+      <section aria-label="At a glance" className="bg-[var(--dl-deep)] text-[#f6f3ec]">
+        <ul className="dl-wrap grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-1 py-4 md:py-5 text-[.9375rem]">
+          {facts.map((f) => (
+            <li key={f[0]} className="py-2 md:py-0 md:text-center"><b className="block text-[var(--dl-gold)] font-semibold">{f[0]}</b><span className="text-[#f6f3ec]/85">{f[1]}</span></li>
+          ))}
+        </ul>
       </section>
 
       {/* BENEFITS */}
@@ -76,7 +104,7 @@ export default function TreeDelivery() {
       {/* OPTIONS */}
       <section className="dl-section">
         <div className="dl-wrap">
-          <h2 className="serif-dl text-center text-[2rem] md:text-[3rem] leading-[1.1]">How your tree arrives</h2>
+          <Reveal animate><h2 className="serif-dl text-center text-[2rem] md:text-[3rem] leading-[1.1]">How your tree arrives</h2></Reveal>
           <ul className="mt-10 md:mt-14 grid gap-8 md:grid-cols-3">
             {options.map((o) => (
               <li key={o.title}>
@@ -96,9 +124,9 @@ export default function TreeDelivery() {
         <div className="dl-wrap">
           <h2 className="serif-dl text-[2rem] md:text-[3rem] leading-[1.1]">Choose your tree</h2>
           <p className="mt-3 text-[var(--dl-muted)]">Prices are in US dollars. <Link href="/shop" className="underline underline-offset-4">See every tree in the shop</Link>.</p>
-          <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <Reveal animate><ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {featured.map((p) => <DlTreeCard key={p.slug} p={p} />)}
-          </ul>
+          </ul></Reveal>
         </div>
       </section>
 
@@ -131,6 +159,25 @@ export default function TreeDelivery() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section id="faq" className="dl-section">
+        <div className="dl-wrap max-w-[52rem]">
+          <h2 className="serif-dl text-[2rem] md:text-[3rem] leading-[1.1]">Good to know</h2>
+          <div className="mt-8 border-t border-[#1d2820]/20">
+            {faqs.map(([q, a]) => (
+              <details key={q} className="group border-b border-[#1d2820]/20">
+                <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 text-[1.125rem] font-medium">
+                  {q}
+                  <span aria-hidden className="text-2xl leading-none text-[var(--dl-green)] transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="pb-5 text-[var(--dl-muted)] max-w-[60ch]">{a}</p>
+              </details>
+            ))}
+          </div>
+          <p className="mt-6"><Link href="/faq" className="underline underline-offset-4 decoration-2 decoration-[var(--dl-gold)]">More questions and care tips</Link></p>
+        </div>
+      </section>
+
       {/* SHIPPING */}
       <section id="shipping" className="dl-section bg-white">
         <div className="dl-wrap">
@@ -143,6 +190,7 @@ export default function TreeDelivery() {
           <Link href="/delivery" className="dl-btn dl-btn-green mt-10">Shipping details</Link>
         </div>
       </section>
+      <DlStickyCta />
     </>
   );
 }

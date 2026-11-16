@@ -159,3 +159,6 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
 /* the shared Price component uses the dark-theme tokens; on the light page use readable ones */
 .dl .text-sale { color: #a32638; }
 .dl .text-muted { color: var(--dl-muted); }
+.dl .dl-btn { border-width: 2px; }
+.dl details > summary::-webkit-details-marker { display: none; }
+.dl [data-reveal] { transition-duration: .6s; }

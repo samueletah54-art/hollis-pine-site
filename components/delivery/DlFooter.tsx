@@ -17,7 +17,7 @@ export default function DlFooter() {
           <li><a className="inline-flex min-h-11 items-center underline underline-offset-4" href="/delivery">Shipping details</a></li>
         </ul>
       </div>
-      <p className="dl-wrap pb-8 text-[.8125rem] text-[#f6f3ec]/70">© {new Date().getFullYear()} Hollis &amp; Pine Tree Co.</p>
+      <p className="dl-wrap pb-24 md:pb-8 text-[.8125rem] text-[#f6f3ec]/70">© {new Date().getFullYear()} Hollis &amp; Pine Tree Co.</p>
     </footer>
   );
 }

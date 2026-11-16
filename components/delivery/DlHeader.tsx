@@ -8,6 +8,7 @@ const nav = [
   { href: "#how", label: "How it works" },
   { href: "#shipping", label: "Where we ship" },
   { href: "#order", label: "Order" },
+  { href: "/shop", label: "Full shop" },
 ];
 
 export default function DlHeader() {
