@@ -23,7 +23,7 @@ export default function Shop() {
         </div>
       </header>
       <Divider className="mb-10" />
-      <Suspense fallback={<p className="py-16 text-muted">Loading the trees…</p>}>
+      <Suspense fallback={<div className="min-h-[150vh]" aria-busy="true"><p className="py-16 text-muted">Loading the trees…</p></div>}>
         <ShopClient products={all} />
       </Suspense>
     </div>
