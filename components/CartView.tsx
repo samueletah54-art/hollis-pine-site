@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCart } from "./CartProvider";
 import QtyStepper from "./QtyStepper";
+import CartUpsell from "./CartUpsell";
 import { money } from "@/lib/catalog";
 import { FREE_SHIPPING_ARTIFICIAL, savings as savingsOf } from "@/lib/pricing";
 
@@ -20,7 +21,8 @@ export default function CartView() {
   const needs = Math.max(0, FREE_SHIPPING_ARTIFICIAL - subtotal);
   return (
     <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 mt-8">
-      <ul className="lg:col-span-8 divide-y rule border-b rule">
+      <div className="lg:col-span-8">
+      <ul className="divide-y rule border-b rule">
         {priced.map((x) => (
           <li key={`${x.line.slug}-${x.line.sizeId}-${x.line.option ?? ""}`} className="py-6 grid grid-cols-[1fr_auto] sm:grid-cols-[1fr_auto_6rem] gap-x-6 gap-y-3 items-center">
             <div>
@@ -33,6 +35,8 @@ export default function CartView() {
           </li>
         ))}
       </ul>
+      <CartUpsell />
+      </div>
       <aside className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start border border-ink p-6" aria-label="Order summary">
         <h2 className="label text-bark">Summary</h2>
         <dl className="mt-4 space-y-2 num">

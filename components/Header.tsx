@@ -7,6 +7,7 @@ import { useCart } from "./CartProvider";
 
 const nav = [
   { href: "/shop", label: "Shop trees" },
+  { href: "/guide", label: "Find your tree" },
   { href: "/delivery", label: "How it works" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },

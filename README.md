@@ -14,6 +14,12 @@ npx vercel --prod            # deploy
 - `CLIENT-TO-CONFIRM.md`: every claim, address and policy that must be confirmed before the site goes public.
 - `IMAGE-PROMPTS.md`: the 52 images the site needs, with file names, ratios and prompts, and the order to make them in.
 
+## Routes
+- `app/(site)/…`: the shop (home, shop, trees, extras, cart, checkout, guide, care, delivery, business, legal). Has the dark header, footer, cart drawer and promo bar (`components/SiteChrome.tsx`).
+- `app/(delivery)/tree-delivery`: an alternate, light "home delivery" landing page with its own header and footer (`components/delivery/`). Prices and rules come from the same catalogue and `lib/pricing.ts`. Not linked from the main nav yet.
+- `/guide`: five-question "Find your tree" quiz (`components/TreeQuiz.tsx`). `/accessibility`: accessibility statement.
+- The shop has a search box (`?q=`). The cart suggests a stand and small add-ons (`components/CartUpsell.tsx`).
+
 ## Where things live
 - `data/products.ts`: the catalogue (30 products). `data/copy.ts`: product wording and the image slot for each product (`/images/<slug>.webp`).
 - `data/business.ts`: address, phone, email, hours, order-by date. Override any of them with the `NEXT_PUBLIC_*` variables in `.env.example`, no code change needed.
@@ -27,7 +33,7 @@ npx vercel --prod            # deploy
 ## Design system
 - Palette: spruce `#1f3a2d` / `#12281d`, bark `#5a4130`, cream paper `#f4ecda`. Cranberry `#a32638` is for sale and urgency only (order-by strip, "few left", errors).
 - Type scale: seven sizes in `app/globals.css` (small, body, lead, h4, h3, h2, h1) plus one display size. Labels are real small caps. Prices use tabular numbers.
-- Small details: `Note` (handwriting), `Divider`, `TreeMark` (the logo mark). There are no illustrations. Every picture is a real photo.
+- Small details: `Divider`. There are no illustrations and no handwriting. Every picture is a real photo.
 
 ## Go live checklist
 1. Deploy: import the repo in Vercel (Add New, Project) or run `npx vercel --prod`.

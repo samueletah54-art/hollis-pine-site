@@ -8,6 +8,7 @@ import DlTimeline from "@/components/delivery/DlTimeline";
 import DlHeightPicker from "@/components/delivery/DlHeightPicker";
 import DlOrderBy from "@/components/delivery/DlOrderBy";
 import Reveal from "@/components/Reveal";
+import JsonLd from "@/components/JsonLd";
 import { bySlug } from "@/lib/catalog";
 import { BIZ } from "@/data/business";
 import type { Product } from "@/data/products";
@@ -37,6 +38,7 @@ export default function TreeDelivery() {
   const [fraser, ...rest] = featured;
   return (
     <>
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) }} />
       {/* HERO */}
       <section className="relative isolate min-h-[34rem] md:min-h-[42rem] flex items-end text-white">
         <Photo src="/images/delivered-netted-tree-lit.webp" alt="A freshly delivered Christmas tree with warm lights" sizes="100vw" priority motion className="absolute inset-0 -z-10" />

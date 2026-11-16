@@ -28,6 +28,7 @@ export default function Footer() {
               <li><Link href="/shop?type=addon" className="hover:underline">Stands and wreaths</Link></li>
               <li><Link href="/business" className="hover:underline">For business</Link></li>
               <li><Link href="/sizes" className="hover:underline">Size guide</Link></li>
+              <li><Link href="/guide" className="hover:underline">Find your tree</Link></li>
             </ul>
             <ul className="space-y-2">
               <li className="label text-straw mb-3">Help</li>

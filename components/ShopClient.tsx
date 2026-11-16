@@ -38,6 +38,7 @@ export default function ShopClient({ products }: { products: Product[] }) {
   const pet = sp.get("pet") === "1";
   const arrive = sp.get("arrive") ?? "";
   const sort = sp.get("sort") ?? "featured";
+  const q = (sp.get("q") ?? "").trim();
 
   const set = useCallback(
     (key: string, values: string[]) => {
@@ -55,7 +56,9 @@ export default function ShopClient({ products }: { products: Product[] }) {
 
   const shown = useMemo(() => {
     const arriveBy = arrive ? new Date(arrive + "T23:59:59") : null;
+    const needle = q.toLowerCase();
     const list = products.filter((p) => {
+      if (needle && !`${p.name} ${p.species ?? ""} ${p.tagline} ${p.category}`.toLowerCase().includes(needle)) return false;
       if (types.length && !types.includes(p.category)) return false;
       if (species.length && !(p.species && species.includes(p.species))) return false;
       if (heights.length && !p.sizes.some((s) => heights.some((h) => inBucket(s, h)))) return false;
@@ -89,7 +92,7 @@ export default function ShopClient({ products }: { products: Product[] }) {
       return order(a) - order(b);
     });
     return list;
-  }, [products, types, species, heights, prices, rooms, scent, flocked, prelit, pet, arrive, sort]);
+  }, [products, q, types, species, heights, prices, rooms, scent, flocked, prelit, pet, arrive, sort]);
 
   const groups = useMemo(() => {
     const out: Product[][] = [];
@@ -98,6 +101,7 @@ export default function ShopClient({ products }: { products: Product[] }) {
   }, [shown]);
 
   const chips: { key: string; label: string; remove: () => void }[] = [
+    ...(q ? [{ key: "q", label: `Search: ${q}`, remove: () => set("q", []) }] : []),
     ...types.map((t) => ({ key: `t-${t}`, label: categoryLabel[t as keyof typeof categoryLabel] ?? t, remove: () => toggle("type", types, t) })),
     ...species.map((s) => ({ key: `s-${s}`, label: s, remove: () => toggle("species", species, s) })),
     ...heights.map((h) => ({ key: `h-${h}`, label: heightBuckets.find((x) => x.id === h)?.label ?? h, remove: () => toggle("height", heights, h) })),
@@ -110,7 +114,7 @@ export default function ShopClient({ products }: { products: Product[] }) {
     ...(arrive ? [{ key: "arrive", label: `Arrives by ${arrive}`, remove: () => set("arrive", []) }] : []),
   ];
 
-  const activeCount = types.length + species.length + heights.length + prices.length + rooms.length + scent.length + (flocked ? 1 : 0) + (prelit ? 1 : 0) + (pet ? 1 : 0) + (arrive ? 1 : 0);
+  const activeCount = types.length + species.length + heights.length + prices.length + rooms.length + scent.length + (flocked ? 1 : 0) + (prelit ? 1 : 0) + (pet ? 1 : 0) + (arrive ? 1 : 0) + (q ? 1 : 0);
 
   const Check = ({ id, checked, onChange, children }: { id: string; checked: boolean; onChange: () => void; children: React.ReactNode }) => (
     <label htmlFor={id} className="flex items-start gap-3 py-1 cursor-pointer text-[.95rem]">
@@ -175,6 +179,13 @@ export default function ShopClient({ products }: { products: Product[] }) {
 
       <section aria-label="Products">
         <h2 className="sr-only">Products</h2>
+        <form role="search" className="mb-6 flex gap-3 items-end" onSubmit={(e) => { e.preventDefault(); const v = String(new FormData(e.currentTarget).get("q") ?? "").trim(); set("q", v ? [v] : []); }}>
+          <div className="flex-1 max-w-md">
+            <label htmlFor="shop-q" className="label text-muted block">Search the shop</label>
+            <input id="shop-q" name="q" type="search" key={q} defaultValue={q} placeholder="Fraser, wreath, stand…" className="field" />
+          </div>
+          <button className="btn btn-ghost !py-2.5">Search</button>
+        </form>
         <div className="flex flex-wrap items-baseline justify-between gap-4 border-b rule pb-3 mb-8">
           <p className="num" role="status" aria-live="polite">{shown.length} {shown.length === 1 ? "product" : "products"}</p>
           <div className="flex items-baseline gap-3">
