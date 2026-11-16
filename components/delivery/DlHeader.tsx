@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useState } from "react";
 
 const nav = [
+  { href: "#week", label: "Your tree's week" },
+  { href: "#height", label: "Ceiling guide" },
   { href: "#trees", label: "Trees" },
-  { href: "#how", label: "How it works" },
-  { href: "#shipping", label: "Where we ship" },
   { href: "#order", label: "Order" },
   { href: "/shop", label: "Full shop" },
 ];
@@ -14,7 +14,7 @@ const nav = [
 export default function DlHeader() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 bg-[var(--dl-cream)] border-b border-[#1d2820]/15">
+    <header className="sticky top-0 z-40 bg-[var(--dl-cream)] border-b border-[#2b2118]/15">
       <div className="dl-wrap flex items-center justify-between h-16 md:h-20">
         <Link href="/tree-delivery" className="serif-dl text-2xl md:text-[1.75rem] text-[var(--dl-green)] min-h-11 inline-flex items-center" aria-label="Hollis & Pine Tree Co., home">
           Hollis <i>&amp;</i> Pine
@@ -37,10 +37,10 @@ export default function DlHeader() {
         </button>
       </div>
       {open && (
-        <nav id="dl-mobile-nav" aria-label="Mobile" className="md:hidden border-t border-[#1d2820]/15 bg-[var(--dl-cream)]">
+        <nav id="dl-mobile-nav" aria-label="Mobile" className="md:hidden border-t border-[#2b2118]/15 bg-[var(--dl-cream)]">
           <ul className="dl-wrap py-2">
             {nav.map((n) => (
-              <li key={n.href}><a href={n.href} onClick={() => setOpen(false)} className="flex min-h-12 items-center text-lg font-medium border-b border-[#1d2820]/10">{n.label}</a></li>
+              <li key={n.href}><a href={n.href} onClick={() => setOpen(false)} className="flex min-h-12 items-center text-lg font-medium border-b border-[#2b2118]/10">{n.label}</a></li>
             ))}
           </ul>
         </nav>

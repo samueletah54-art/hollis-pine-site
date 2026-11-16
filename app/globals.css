@@ -128,37 +128,43 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
 .motion-photo { animation: hero-push 26s ease-in-out infinite alternate, hero-lights 5.5s ease-in-out infinite; will-change: transform, filter; }
 @media (prefers-reduced-motion: reduce) { .motion-photo { animation: none; will-change: auto; } }
 
-/* ---------- Alternate home-delivery page (app/(delivery)). Light, cream and forest green, EB Garamond + Inter. ---------- */
+/* ---------- Alternate home-delivery page (app/(delivery)). Uses the shop's own fonts (Fraunces + Instrument Sans) on a warm paper palette. ---------- */
 .dl {
-  --dl-green: #26412f; --dl-deep: #223a2e; --dl-cream: #f6f3ec; --dl-card: #efebe2; --dl-mint: #dfeadd;
-  --dl-gold: #c9a54a; --dl-gold-dark: #8a6b1f; --dl-ink: #1d2820; --dl-muted: #4a5a4f;
+  --dl-green: #1f3a2d; --dl-deep: #12281d; --dl-cream: #f4ecda; --dl-card: #e8ddc5;
+  --dl-gold: #dcc48f; --dl-bark: #5a4130; --dl-cran: #a32638; --dl-ink: #2b2118; --dl-muted: #665747;
   background: var(--dl-cream); color: var(--dl-ink); color-scheme: light;
-  font-family: var(--font-inter), system-ui, sans-serif; font-size: 1rem; line-height: 1.65;
+  font-family: var(--font-instrument), system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.65;
 }
-.dl .serif-dl { font-family: var(--font-garamond), Georgia, serif; font-weight: 400; letter-spacing: -0.005em; }
-.dl :focus-visible { outline: 3px solid var(--dl-gold); outline-offset: 3px; }
+.dl .serif-dl { font-family: var(--font-fraunces), Georgia, serif; font-variation-settings: "opsz" 96; font-weight: 400; letter-spacing: -0.015em; }
+.dl .num { font-variant-numeric: tabular-nums lining-nums; }
+.dl :focus-visible { outline: 3px solid var(--dl-green); outline-offset: 3px; }
+.dl .on-dark :focus-visible, .dl .dl-dark :focus-visible { outline-color: var(--dl-gold); }
 .dl .dl-wrap { max-width: 1200px; margin-inline: auto; padding-inline: 1.25rem; }
 @media (min-width: 768px) { .dl .dl-wrap { padding-inline: 2rem; } }
 .dl .dl-section { padding-block: 4rem; }
 @media (min-width: 768px) { .dl .dl-section { padding-block: 6rem; } }
+.dl .dl-eyebrow { font-variant-caps: all-small-caps; font-feature-settings: "smcp","c2sc"; letter-spacing: .12em; font-size: 1.0625rem; font-weight: 600; }
 .dl .dl-btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 3rem; padding: .75rem 1.75rem;
-  font-weight: 600; font-size: .9375rem; letter-spacing: .14em; text-transform: uppercase; text-align: center;
-  transition: background .2s, color .2s, border-color .2s; cursor: pointer; border: 2px solid transparent;
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 3rem; padding: .75rem 1.6rem;
+  font-weight: 600; font-size: .9375rem; letter-spacing: .02em; text-align: center; border: 2px solid transparent;
+  transition: background .2s, color .2s, border-color .2s; cursor: pointer;
 }
-.dl .dl-btn-gold { background: var(--dl-gold); color: #1d2820; }
-.dl .dl-btn-gold:hover { background: #d8b65a; }
-.dl .dl-btn-green { background: var(--dl-green); color: #fff; }
-.dl .dl-btn-green:hover { background: #1c3123; }
+.dl .dl-btn-gold { background: var(--dl-gold); border-color: var(--dl-gold); color: var(--dl-deep); }
+.dl .dl-btn-gold:hover { background: var(--dl-cream); border-color: var(--dl-cream); }
+.dl .dl-btn-green { background: var(--dl-green); border-color: var(--dl-green); color: var(--dl-cream); }
+.dl .dl-btn-green:hover { background: var(--dl-deep); border-color: var(--dl-deep); }
+.dl .dl-btn-ghost { border-color: var(--dl-green); color: var(--dl-green); }
+.dl .dl-btn-ghost:hover { background: var(--dl-green); color: var(--dl-cream); }
 .dl .dl-btn[disabled] { opacity: .6; cursor: not-allowed; }
-.dl .dl-field { width: 100%; min-height: 3rem; background: #fff; border: 1px solid #1d2820; padding: .65rem .85rem; font: inherit; color: var(--dl-ink); border-radius: 0; }
-.dl .dl-field:focus { outline: 3px solid var(--dl-gold); outline-offset: 1px; }
-.dl .dl-label { display: block; font-size: .8125rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .4rem; }
+.dl .dl-field { width: 100%; min-height: 3rem; background: transparent; border: 0; border-bottom: 2px solid color-mix(in srgb, var(--dl-bark) 70%, transparent); padding: .55rem 0; font: inherit; color: inherit; border-radius: 0; }
+.dl .dl-field:focus { outline: none; border-color: var(--dl-green); box-shadow: 0 2px 0 var(--dl-green); }
+.dl select.dl-field { appearance: none; background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: calc(100% - 14px) 55%, calc(100% - 9px) 55%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 1.6rem; }
+.dl .dl-dark .dl-field { border-color: color-mix(in srgb, var(--dl-cream) 65%, transparent); }
+.dl .dl-dark .dl-field:focus { border-color: var(--dl-gold); box-shadow: 0 2px 0 var(--dl-gold); }
+.dl .dl-label { display: block; font-variant-caps: all-small-caps; font-feature-settings: "smcp","c2sc"; letter-spacing: .1em; font-size: 1rem; font-weight: 600; margin-bottom: .1rem; }
 .dl .dl-check { width: 1.5rem; height: 1.5rem; accent-color: var(--dl-green); flex: none; margin-top: .15rem; }
-@media (min-width: 768px) { .dl .dl-diagonal { clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%); } }
-/* the shared Price component uses the dark-theme tokens; on the light page use readable ones */
-.dl .text-sale { color: #a32638; }
+.dl .dl-plate { background: var(--dl-cream); padding: 6px; border: 1px solid color-mix(in srgb, var(--dl-bark) 55%, transparent); }
+.dl .dl-range { width: 100%; height: 2rem; accent-color: var(--dl-green); cursor: pointer; }
+.dl .text-sale { color: var(--dl-cran); }
 .dl .text-muted { color: var(--dl-muted); }
-.dl .dl-btn { border-width: 2px; }
 .dl details > summary::-webkit-details-marker { display: none; }
-.dl [data-reveal] { transition-duration: .6s; }

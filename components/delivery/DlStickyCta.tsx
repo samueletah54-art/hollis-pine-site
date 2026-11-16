@@ -18,7 +18,7 @@ export default function DlStickyCta() {
     return () => { window.removeEventListener("scroll", on); window.removeEventListener("resize", on); };
   }, []);
   return (
-    <div aria-hidden={!show} className={`md:hidden fixed inset-x-0 bottom-0 z-30 bg-[var(--dl-cream)] border-t border-[#1d2820]/20 px-5 py-3 transition-transform duration-300 ${show ? "translate-y-0" : "translate-y-full"}`}>
+    <div aria-hidden={!show} className={`md:hidden fixed inset-x-0 bottom-0 z-30 bg-[var(--dl-cream)] border-t border-[#2b2118]/20 px-5 py-3 transition-transform duration-300 ${show ? "translate-y-0" : "translate-y-full"}`}>
       <a href="#order" tabIndex={show ? 0 : -1} className="dl-btn dl-btn-green w-full">Order a Christmas tree</a>
     </div>
   );
