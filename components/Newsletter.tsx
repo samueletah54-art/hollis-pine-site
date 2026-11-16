@@ -24,7 +24,7 @@ export default function Newsletter({ dark = false }: { dark?: boolean }) {
       <button className={`btn ${dark ? "btn-straw" : "btn-ghost"}`} disabled={state === "sending" || state === "done"}>
         {state === "done" ? "Got it. Thanks." : state === "sending" ? "Sending…" : "Sign up"}
       </button>
-      {state === "error" && <p role="alert" className={`text-sm ${dark ? "text-straw" : "text-cranberry"}`}>That didn't go through. Try again in a minute.</p>}
+      {state === "error" && <p role="alert" className={`text-sm ${dark ? "text-straw" : "text-sale"}`}>That didn't go through. Try again in a minute.</p>}
     </form>
   );
 }

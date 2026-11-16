@@ -41,7 +41,7 @@ export default function OrderRequestForm() {
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <div className="sm:col-span-2 flex flex-wrap items-center gap-6">
         <button className="btn btn-primary" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send my order request"}</button>
-        {state === "error" && <p role="alert" className="text-cranberry">That didn't send. Please call or email us instead.</p>}
+        {state === "error" && <p role="alert" className="text-sale">That didn't send. Please call or email us instead.</p>}
       </div>
     </form>
   );

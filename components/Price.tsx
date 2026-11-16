@@ -16,7 +16,7 @@ export default function Price({ value, category, className = "", from = false }:
       {on ? (
         <>
           <s className="text-muted mr-1.5" aria-label={`was ${money(value)}`}>{money(value)}</s>
-          <b className="font-semibold text-cranberry">{money(sale)}</b>
+          <b className="font-semibold text-sale">{money(sale)}</b>
           <span className="sr-only"> with the {PROMO.name} offer</span>
         </>
       ) : money(value)}

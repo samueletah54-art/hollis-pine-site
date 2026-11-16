@@ -61,7 +61,7 @@ export default function Purchase({ p }: { p: Product }) {
     <>
     <div ref={panel}>
       <p className="serif text-5xl leading-none"><Price value={size.price!} category={p.category} /></p>
-      {unitNow < size.price! && <p className="mt-2 text-sm font-semibold text-cranberry">{PROMO.name}: {promo.percent}% off {promo.singleDay ? "today only" : `through ${promo.endLabel}`}</p>}
+      {unitNow < size.price! && <p className="mt-2 text-sm font-semibold text-sale">{PROMO.name}: {promo.percent}% off {promo.singleDay ? "today only" : `through ${promo.endLabel}`}</p>}
       <p className="text-sm text-muted mt-2">{size.dims ?? " "}</p>
       {p.category !== "addon" && size.heightMax && <p className="text-sm mt-1">Needs a ceiling of at least <b className="num">{Math.ceil(size.heightMax + 1)} ft</b>. <Link href="/sizes" className="underline underline-offset-4 decoration-gold decoration-2">How to measure</Link></p>}
 
@@ -99,7 +99,7 @@ export default function Purchase({ p }: { p: Product }) {
           {added ? "Added" : `Add to cart, ${money(unitNow * qty)}`}
         </button>
       </div>
-      {p.stock === "low" && <p className="text-sm text-cranberry font-semibold mt-3">Only a few left this season.</p>}
+      {p.stock === "low" && <p className="text-sm text-sale font-semibold mt-3">Only a few left this season.</p>}
 
       <form className="mt-10 border-t rule pt-6" onSubmit={(e) => { e.preventDefault(); if (zipOk) setChecked(zip); }}>
         <label htmlFor="zip" className="label text-muted">When would it get to me?</label>
@@ -112,10 +112,10 @@ export default function Purchase({ p }: { p: Product }) {
             <>
               <p>Ships <b>{fmt(est.ships)}</b> from {p.shipsFrom}. Arrives <b>{fmt(est.arriveFrom)}</b>{est.arriveFrom.getTime() !== est.arriveTo.getTime() ? <> to <b>{fmt(est.arriveTo)}</b></> : null}.</p>
               {live && <p className="text-muted text-sm mt-1">Live items only ship Monday to Wednesday.</p>}
-              {pastOrderBy() && <p className="text-cranberry text-sm font-semibold mt-1">Our December 12 order-by date has passed. Call us and we'll tell you if we can still make it.</p>}
+              {pastOrderBy() && <p className="text-sale text-sm font-semibold mt-1">Our December 12 order-by date has passed. Call us and we'll tell you if we can still make it.</p>}
             </>
           )}
-          {checked && !est && <p className="text-cranberry">That doesn't look like a U.S. ZIP code.</p>}
+          {checked && !est && <p className="text-sale">That doesn't look like a U.S. ZIP code.</p>}
         </div>
       </form>
     </div>

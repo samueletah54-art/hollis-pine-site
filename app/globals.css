@@ -5,18 +5,21 @@
   (order-by dates, low stock, errors). Do not use it as a decoration colour.
 */
 @theme {
-  --color-paper: #f4ecda;
-  --color-paper-deep: #e8ddc5;
-  --color-ink: #2b2118;
-  --color-spruce: #1f3a2d;
-  --color-forest: #1f3a2d;
-  --color-fir: #12281d;
-  --color-bark: #5a4130;
-  --color-tan: #86671f;   /* antique gold: text-safe on cream */
-  --color-gold: #c9a55c;  /* soft gold: underlines, rules, stamps */
+  /* Dark theme: night spruce background, cream text, gold accent. Cranberry is for sale and urgency only. */
+  --color-paper: #0e1712;       /* page background */
+  --color-paper-deep: #16231b;  /* raised surfaces, empty photo slots */
+  --color-ink: #efe6d2;         /* body text */
+  --color-cream: #f4ecda;       /* light text on coloured bars */
+  --color-spruce: #d8b76a;      /* accent: buttons, links, focus (gold) */
+  --color-forest: #d8b76a;
+  --color-fir: #070d0a;         /* footer and deep panels */
+  --color-bark: #b8a67e;        /* labels and rules */
+  --color-tan: #d8b76a;         /* gold text */
+  --color-gold: #c9a55c;        /* underlines, rules */
   --color-straw: #dcc48f;
-  --color-muted: #665747;
-  --color-cranberry: #a32638;
+  --color-muted: #a9a08a;
+  --color-cranberry: #a32638;   /* sale bar background */
+  --color-sale: #ff8d98;        /* sale and urgency text on dark */
 
   --breakpoint-xs: 30rem;
 
@@ -39,6 +42,7 @@
 html {
   background: var(--color-paper);
   color: var(--color-ink);
+  color-scheme: dark;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
@@ -50,8 +54,8 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--color-paper);
-  /* heavy uncoated paper: a faint fibre texture */
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .26  0 0 0 0 .16  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
+  /* a faint grain so the dark is not flat */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .9  0 0 0 0 .85  0 0 0 0 .7  0 0 0 .035 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
 }
 main { flex: 1; }
 .grid > * { min-width: 0; }
@@ -60,7 +64,6 @@ main { flex: 1; }
 /* type */
 .serif { font-family: var(--font-fraunces), Georgia, serif; font-variation-settings: "opsz" 96; letter-spacing: -0.015em; }
 .serif-text { font-family: var(--font-fraunces), Georgia, serif; font-variation-settings: "opsz" 24; letter-spacing: 0; }
-.hand { font-family: var(--font-caveat), "Segoe Script", cursive; font-weight: 500; line-height: 1.05; }
 .num { font-variant-numeric: tabular-nums lining-nums; }
 /* real small caps: lowercase letters set as capitals at small-cap size */
 .label {
@@ -85,7 +88,7 @@ main { flex: 1; }
 .btn-ghost { color: var(--color-spruce); }
 .btn-ghost:hover { background: var(--color-spruce); color: var(--color-paper); }
 .btn-straw { background: var(--color-straw); border-color: var(--color-straw); color: var(--color-fir); }
-.btn-straw:hover { background: var(--color-paper); border-color: var(--color-paper); }
+.btn-straw:hover { background: var(--color-cream); border-color: var(--color-cream); }
 .btn[disabled] { opacity: .55; cursor: not-allowed; }
 
 .field {
@@ -94,7 +97,7 @@ main { flex: 1; }
 }
 .field:focus { outline: none; border-color: var(--color-spruce); box-shadow: 0 2px 0 var(--color-spruce); }
 select.field { appearance: none; background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: calc(100% - 14px) 55%, calc(100% - 9px) 55%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 1.6rem; }
-.on-dark .field { border-color: color-mix(in srgb, var(--color-paper) 65%, transparent); }
+.on-dark .field { border-color: color-mix(in srgb, var(--color-cream) 65%, transparent); }
 .on-dark .field:focus { border-color: var(--color-straw); box-shadow: 0 2px 0 var(--color-straw); }
 
 /* a printed plate: photo with a thin keyline and a cream margin */
@@ -118,3 +121,9 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
 .prose-care a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; text-decoration-color: var(--color-tan); }
 .prose-care a:hover { text-decoration-color: var(--color-spruce); }
 .drop::first-letter { font-family: var(--font-fraunces), Georgia, serif; float: left; font-size: 4.4rem; line-height: .8; padding: .35rem .6rem 0 0; color: var(--color-spruce); }
+
+/* Hero photo: a slow push-in, a light drift, and the lights breathing. Off for people who ask for less motion. */
+@keyframes hero-push { from { transform: scale(1.02) translate3d(0, 0, 0); } to { transform: scale(1.09) translate3d(-1.2%, -1%, 0); } }
+@keyframes hero-lights { 0%, 100% { filter: brightness(1) saturate(1); } 50% { filter: brightness(1.09) saturate(1.1); } }
+.motion-photo { animation: hero-push 26s ease-in-out infinite alternate, hero-lights 5.5s ease-in-out infinite; will-change: transform, filter; }
+@media (prefers-reduced-motion: reduce) { .motion-photo { animation: none; will-change: auto; } }

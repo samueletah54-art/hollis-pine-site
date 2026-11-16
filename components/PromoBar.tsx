@@ -8,7 +8,7 @@ import { usePromo } from "./usePromo";
 export default function PromoBar() {
   const p = usePromo();
   return (
-    <div className="bg-cranberry text-paper">
+    <div className="bg-cranberry text-cream">
       <p className="mx-auto max-w-[88rem] px-5 md:px-10 py-2 text-sm leading-snug">
         {p.state === "live" ? (
           <>

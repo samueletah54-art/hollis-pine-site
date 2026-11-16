@@ -29,7 +29,7 @@ export default function Delivery() {
             <caption className="sr-only">Order cut-off dates</caption>
             <thead><tr className="border-b-[3px] border-double border-bark/60 label text-bark"><th scope="col" className="py-3 pr-4">If you want it</th><th scope="col">Order by</th></tr></thead>
             <tbody>
-              <tr className="border-b rule"><th scope="row" className="py-3 pr-4 font-normal">Before Christmas</th><td className="text-cranberry font-semibold">{BIZ.orderBy}</td></tr>
+              <tr className="border-b rule"><th scope="row" className="py-3 pr-4 font-normal">Before Christmas</th><td className="text-sale font-semibold">{BIZ.orderBy}</td></tr>
               <tr className="border-b rule"><th scope="row" className="py-3 pr-4 font-normal">A specific week</th><td>Add a note at checkout. We aim for it.</td></tr>
               <tr className="border-b rule"><th scope="row" className="py-3 pr-4 font-normal">Commercial trees, 20 ft or more</th><td>Early November. Call us.</td></tr>
             </tbody>

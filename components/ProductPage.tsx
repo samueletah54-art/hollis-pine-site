@@ -4,7 +4,6 @@ import { reviews } from "@/data/reviews";
 import { SHOW_SAMPLE_REVIEWS } from "@/lib/flags";
 import Banner from "./Banner";
 import Divider from "./Divider";
-import Note from "./Note";
 import { heightRange, money, priceFrom, related, urlFor } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
 import Gallery from "./Gallery";
@@ -63,7 +62,6 @@ export default function ProductPage({ p }: { p: Product }) {
           <div className="flex flex-wrap gap-2 mb-4">{p.badges.map((b) => (<span key={b} className="label border border-ink/60 px-2 py-1">{b}</span>))}</div>
           <h1 className="serif text-5xl md:text-6xl leading-[.95]">{p.name}</h1>
           <p className="serif-text italic text-xl mt-4 text-ink/85">{p.tagline}</p>
-          {p.note && <Note className="mt-3">{p.note}</Note>}
           <p className="text-sm text-muted mt-3">Ships from {p.shipsFrom}{heightRange(p) ? `, ${heightRange(p)}` : ""}{revs.length ? `. ${avg.toFixed(1)} of 5 from ${revs.length} ${revs.length === 1 ? "review" : "reviews"}` : ""}</p>
           <div className="mt-8 border-t-[3px] border-double border-bark/60 pt-8"><Purchase p={p} /></div>
         </div>

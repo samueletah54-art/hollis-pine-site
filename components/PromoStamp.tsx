@@ -9,8 +9,8 @@ export default function PromoStamp() {
   const p = usePromo();
   if (p.state === "off") return null;
   return (
-    <Link href="/shop?type=live" className="absolute -top-4 -left-2 md:-left-8 z-10 -rotate-6 bg-cranberry text-paper px-5 py-3 border-2 border-paper outline outline-2 outline-cranberry text-center hover:rotate-0 transition-transform">
-      <span className="label block text-paper/90">{PROMO.name}</span>
+    <Link href="/shop?type=live" className="absolute -top-4 -left-2 md:-left-8 z-10 -rotate-6 bg-cranberry text-cream px-5 py-3 border-2 border-cream outline outline-2 outline-cranberry text-center hover:rotate-0 transition-transform">
+      <span className="label block text-cream/90">{PROMO.name}</span>
       <span className="serif text-4xl block leading-none num">{p.percent}% off</span>
       <span className="text-xs block mt-1">{p.state === "live" ? (p.singleDay ? "today only" : `through ${p.endLabel}`) : p.singleDay ? `${p.startLabel} only` : `from ${p.startLabel}`}</span>
     </Link>

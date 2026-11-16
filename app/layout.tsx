@@ -21,7 +21,6 @@ const fraunces = localFont({
   adjustFontFallback: "Times New Roman",
 });
 const instrument = localFont({ src: "./fonts/instrument-sans-latin-wght-normal.woff2", weight: "400 700", variable: "--font-instrument", display: "swap", adjustFontFallback: "Arial" });
-const caveat = localFont({ src: "./fonts/caveat-latin-wght-normal.woff2", weight: "400 700", variable: "--font-caveat", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -30,11 +29,11 @@ export const metadata: Metadata = {
   openGraph: { type: "website", siteName: SITE.name, locale: "en_US" },
   alternates: { canonical: "/" },
 };
-export const viewport: Viewport = { themeColor: "#f4ecda", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#0e1712", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${instrument.variable} ${caveat.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${instrument.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>

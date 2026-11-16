@@ -132,12 +132,12 @@ export default function Business() {
         </div>
       </section>
 
-      <section id="quote" className="bg-fir text-paper on-dark mt-28 scroll-mt-16">
+      <section id="quote" className="bg-fir text-cream on-dark mt-28 scroll-mt-16">
         <div className="mx-auto max-w-[88rem] px-5 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
             <h2 className="serif text-5xl md:text-6xl leading-[.95]">Tell us about the space.</h2>
-            <p className="mt-5 text-paper/80 max-w-[34ch]">Pricing depends on the height, the building, and how much of the work you want us to do. Prefer to talk? <a className="underline underline-offset-4" href="tel:+15550100142">(555) 010-0142</a>.</p>
-            <p className="mt-6 text-sm text-paper/65">Looking for a tree for your home? <Link href="/shop" className="underline underline-offset-4">Shop here</Link>.</p>
+            <p className="mt-5 text-cream/80 max-w-[34ch]">Pricing depends on the height, the building, and how much of the work you want us to do. Prefer to talk? <a className="underline underline-offset-4" href="tel:+15550100142">(555) 010-0142</a>.</p>
+            <p className="mt-6 text-sm text-cream/65">Looking for a tree for your home? <Link href="/shop" className="underline underline-offset-4">Shop here</Link>.</p>
           </div>
           <div className="md:col-span-8"><Suspense fallback={null}><QuoteForm /></Suspense></div>
         </div>

@@ -114,7 +114,7 @@ export default function ShopClient({ products }: { products: Product[] }) {
 
   const Check = ({ id, checked, onChange, children }: { id: string; checked: boolean; onChange: () => void; children: React.ReactNode }) => (
     <label htmlFor={id} className="flex items-start gap-3 py-1 cursor-pointer text-[.95rem]">
-      <input id={id} type="checkbox" checked={checked} onChange={onChange} className="mt-[.35rem] size-4 accent-[#1f3a2d]" />
+      <input id={id} type="checkbox" checked={checked} onChange={onChange} className="mt-[.35rem] size-4 accent-[#d8b76a]" />
       <span>{children}</span>
     </label>
   );

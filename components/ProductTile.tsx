@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Product } from "@/data/products";
 import { heightRange, money, priceFrom, urlFor } from "@/lib/catalog";
-import Note from "./Note";
 import Price from "./Price";
 import Photo from "./Photo";
 
@@ -23,8 +22,7 @@ export default function ProductTile({ p, feature = false, flip = false, priority
           <h3 className="serif text-4xl mt-2"><Link href={urlFor(p)} className="hover:underline decoration-gold decoration-[3px] underline-offset-[6px]">{p.name}</Link></h3>
           <p className="serif-text italic text-lg mt-3 text-ink/85">{p.tagline}</p>
           <p className="mt-4 max-w-[46ch]">{p.description}</p>
-          {p.note && <Note className="mt-4">{p.note}</Note>}
-          <p className="mt-5 num text-lg">{from !== null ? <>From <Price value={from} category={p.category} className="font-semibold" /></> : "Ask for a quote"}{low && <span className="ml-3 text-cranberry text-sm font-semibold">Only a few left</span>}</p>
+          <p className="mt-5 num text-lg">{from !== null ? <>From <Price value={from} category={p.category} className="font-semibold" /></> : "Ask for a quote"}{low && <span className="ml-3 text-sale text-sm font-semibold">Only a few left</span>}</p>
           <Link href={urlFor(p)} className="btn btn-ghost mt-5">See this tree</Link>
         </div>
       </article>
@@ -42,9 +40,8 @@ export default function ProductTile({ p, feature = false, flip = false, priority
           <h3 className="serif-text text-xl leading-tight">{p.name}</h3>
           <p className="text-sm">{from !== null ? <Price value={from} category={p.category} from /> : <span className="text-muted">Quote</span>}</p>
         </div>
-        <p className="text-sm text-muted mt-0.5">{h ?? p.sizes.map((s) => s.label).join(", ")}{low && <span className="ml-2 text-cranberry font-semibold">Few left</span>}</p>
+        <p className="text-sm text-muted mt-0.5">{h ?? p.sizes.map((s) => s.label).join(", ")}{low && <span className="ml-2 text-sale font-semibold">Few left</span>}</p>
       </Link>
-      {p.note && <Note className="mt-2 !text-lg" tilt={-1.5}>{p.note}</Note>}
     </article>
   );
 }

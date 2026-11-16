@@ -83,7 +83,7 @@ export default function CartDrawer() {
           <div className="px-6 py-5 border-t-[3px] border-double border-bark/60 bg-paper">
             <dl className="text-sm space-y-1 num">
               <div className="flex justify-between"><dt>Subtotal</dt><dd>{money(subtotal)}</dd></div>
-              {savingsOf(priced) > 0 && <div className="flex justify-between text-cranberry font-semibold"><dt>Black Friday savings</dt><dd>−{money(savingsOf(priced))}</dd></div>}
+              {savingsOf(priced) > 0 && <div className="flex justify-between text-sale font-semibold"><dt>Black Friday savings</dt><dd>−{money(savingsOf(priced))}</dd></div>}
               <div className="flex justify-between"><dt>Shipping (estimate)</dt><dd>{shipping === 0 ? "Free" : money(shipping)}</dd></div>
             </dl>
             {priced.some((x) => x.category === "artificial") && needsForFree > 0 && (

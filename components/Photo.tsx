@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useState } from "react";
 import manifest from "@/lib/image-manifest.json";
-import TreeMark from "./TreeMark";
 
 // A tiny blurred cream-and-bark placeholder shown while the real photo loads.
 const BLUR =
@@ -23,6 +22,8 @@ type Props = {
   plate?: boolean;
   /** Render nothing at all when the photo file has not been added yet (for large decorative photos). */
   hideIfMissing?: boolean;
+  /** Slow push-in and breathing light (see .motion-photo in globals.css). For the one or two best photos. */
+  motion?: boolean;
 };
 
 /**
@@ -30,7 +31,7 @@ type Props = {
  * If the file hasn't been added yet, the slot shows a quiet paper block with a small spruce mark,
  * and the site makes no request for the missing file.
  */
-export default function Photo({ src, alt, sizes, priority, className = "", imgClassName = "", zoom, plate, hideIfMissing }: Props) {
+export default function Photo({ src, alt, sizes, priority, className = "", imgClassName = "", zoom, plate, hideIfMissing, motion }: Props) {
   const present = (manifest as string[]).includes(src);
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -40,9 +41,7 @@ export default function Photo({ src, alt, sizes, priority, className = "", imgCl
   const inner = (
     <div className={`${plate ? "relative h-full w-full" : `${pos} ${className}`} overflow-hidden bg-paper-deep`}>
       {(!present || failed) && (
-        <div className="absolute inset-0 flex items-center justify-center text-bark/25" role="img" aria-label={alt}>
-          <TreeMark className="w-1/6 max-w-14 min-w-6" />
-        </div>
+        <div className="absolute inset-0" role="img" aria-label={alt} />
       )}
       {present && !failed && (
         <Image
@@ -55,7 +54,7 @@ export default function Photo({ src, alt, sizes, priority, className = "", imgCl
           blurDataURL={BLUR}
           onError={() => setFailed(true)}
           onLoad={() => setLoaded(true)}
-          className={`object-cover transition-[opacity,transform] duration-700 ease-out ${loaded || priority ? "opacity-100" : "opacity-0"} ${zoom ? "group-hover:scale-[1.03]" : ""} ${imgClassName}`}
+          className={`object-cover transition-[opacity,transform] duration-700 ease-out ${loaded || priority ? "opacity-100" : "opacity-0"} ${zoom ? "group-hover:scale-[1.03]" : ""} ${motion ? "motion-photo" : ""} ${imgClassName}`}
         />
       )}
     </div>

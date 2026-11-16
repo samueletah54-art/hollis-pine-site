@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "./CartProvider";
-import TreeMark from "./TreeMark";
 
 const nav = [
   { href: "/shop", label: "Shop trees" },
@@ -32,7 +31,6 @@ export default function Header() {
     <header className="bg-paper sticky top-0 z-40 border-b-4 border-double border-bark/60">
       <div className="mx-auto max-w-[88rem] px-5 md:px-10 h-16 md:h-[4.5rem] flex items-center justify-between gap-6">
         <Link href="/" className="flex items-center gap-3 text-spruce" aria-label="Hollis & Pine Tree Company, home">
-          <TreeMark className="w-6 h-8 md:w-7 md:h-9" />
           <span className="leading-none">
             <span className="serif text-xl md:text-2xl block">Hollis <i>&amp;</i> Pine</span>
             <span className="label text-bark block mt-1 text-sm">Tree Company</span>

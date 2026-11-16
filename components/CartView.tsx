@@ -37,7 +37,7 @@ export default function CartView() {
         <h2 className="label text-bark">Summary</h2>
         <dl className="mt-4 space-y-2 num">
           <div className="flex justify-between"><dt>Subtotal</dt><dd>{money(subtotal)}</dd></div>
-          {savingsOf(priced) > 0 && <div className="flex justify-between text-cranberry font-semibold"><dt>Black Friday savings</dt><dd>−{money(savingsOf(priced))}</dd></div>}
+          {savingsOf(priced) > 0 && <div className="flex justify-between text-sale font-semibold"><dt>Black Friday savings</dt><dd>−{money(savingsOf(priced))}</dd></div>}
           <div className="flex justify-between"><dt>Shipping</dt><dd>{shipping === 0 ? "Free" : money(shipping)}</dd></div>
           <div className="flex justify-between text-muted text-sm"><dt>Sales tax</dt><dd>At checkout</dd></div>
           <div className="flex justify-between border-t-[3px] border-double border-bark/60 pt-3 mt-3 serif-text text-xl"><dt>Total before tax</dt><dd>{money(subtotal + shipping)}</dd></div>

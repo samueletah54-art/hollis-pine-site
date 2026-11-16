@@ -12,7 +12,6 @@ type Copy = {
   tagline: string;
   description: string;
   facts?: Facts;
-  note?: string;
   needles?: string; // alt text for the close-up
 };
 
@@ -31,7 +30,6 @@ const copy: Record<string, Copy> = {
     description:
       "Fraser is the tree most people picture. The branches are stiff and turn up a little, so glass ornaments stay where you hang them. The needles are soft, dark green on top and silver underneath. Keep the stand full and it holds them for five weeks.",
     facts: live("Holds needles about 5 weeks", "5 to 6 weeks, watered daily", "Medium. Clean and sweet.", "Very strong", "Dense pyramid", "Heavy ornaments, tall rooms"),
-    note: "Our family's pick this year. Easy to hang things on.",
     needles: "Close-up of Fraser fir needles, dark green with silver undersides, on a frosty branch",
   },
   "balsam-fir": {
@@ -39,7 +37,6 @@ const copy: Record<string, Copy> = {
     description:
       "Balsam has the strongest scent of the classic firs. The crown is narrow and a little uneven, which looks right in an older house. The needles are short and glossy. It drinks a lot, so check the stand every morning.",
     facts: live("Holds needles about 4 weeks", "4 to 5 weeks, watered daily", "Strong. Resin and sweet.", "Medium", "Narrow spire", "Scent, smaller living rooms"),
-    note: "Buy it for the smell. Water it every morning.",
     needles: "Close-up of short glossy Balsam fir needles on a branch",
   },
   "noble-fir": {
@@ -89,7 +86,6 @@ const copy: Record<string, Copy> = {
     description:
       "Scotch pine is the toughest tree we sell. If the stand runs dry for a day, it still holds its needles. The branches are stiff and thick, with long bright needles. It looks a little old-fashioned, in a good way.",
     facts: live("Best of any tree we sell, 6 weeks or more", "6 weeks, even with a missed day", "Medium. Classic pine.", "Very strong", "Dense, rounded", "People who forget to water, long seasons"),
-    note: "Forget to water? Buy this one.",
     needles: "Close-up of long bright Scotch pine needles in pairs",
   },
   "colorado-blue-spruce": {
@@ -233,7 +229,6 @@ export function applyCopy(p: Product): Product {
     tagline: c.tagline,
     description: c.description,
     facts: c.facts ?? p.facts,
-    note: c.note,
     images: [{ src: `/images/${p.slug}.webp`, alt }],
     needlesImage: c.needles ? { src: `/images/needles-${p.slug}.webp`, alt: c.needles } : undefined,
   };

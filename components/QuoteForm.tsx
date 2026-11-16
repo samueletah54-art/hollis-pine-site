@@ -15,9 +15,9 @@ export default function QuoteForm() {
 
   if (state === "done") {
     return (
-      <div role="status" className="border border-paper/40 p-8">
+      <div role="status" className="border border-cream/40 p-8">
         <p className="serif text-4xl">Got it.</p>
-        <p className="mt-3 text-paper/85 max-w-[40ch]">A person will email you within one business day with pricing and a date for a site visit if you need one.</p>
+        <p className="mt-3 text-cream/85 max-w-[40ch]">A person will email you within one business day with pricing and a date for a site visit if you need one.</p>
       </div>
     );
   }
@@ -83,7 +83,7 @@ export default function QuoteForm() {
       <div className="sm:col-span-2 flex flex-wrap items-center gap-6">
         <button className="btn btn-straw" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send quote request"}</button>
         {state === "error" && <p role="alert" className="text-straw">{err}</p>}
-        <p className="text-sm text-paper/65">We reply within one business day.</p>
+        <p className="text-sm text-cream/65">We reply within one business day.</p>
       </div>
     </form>
   );

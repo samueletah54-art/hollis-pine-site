@@ -2,21 +2,20 @@ import Link from "next/link";
 import { BIZ } from "@/data/business";
 import Divider from "./Divider";
 import Newsletter from "./Newsletter";
-import TreeMark from "./TreeMark";
 
 export default function Footer() {
   return (
-    <footer className="bg-fir text-paper mt-28 on-dark">
+    <footer className="bg-fir text-cream mt-28 on-dark">
       <div className="mx-auto max-w-[88rem] px-5 md:px-10 pt-16 pb-10">
         <div className="grid md:grid-cols-12 gap-x-12 gap-y-12">
           <div className="md:col-span-4">
-            <p className="serif text-3xl flex items-center gap-3"><TreeMark className="w-6 h-8 text-straw" />Hollis <i>&amp;</i> Pine</p>
-            <address className="not-italic mt-6 text-paper/85 text-sm leading-relaxed">
+            <p className="serif text-3xl">Hollis <i>&amp;</i> Pine</p>
+            <address className="not-italic mt-6 text-cream/85 text-sm leading-relaxed">
               {BIZ.address.map((l) => (<span key={l} className="block">{l}</span>))}
               <a href={`tel:${BIZ.phoneHref}`} className="block mt-3 underline underline-offset-4">{BIZ.phone}</a>
               <a href={`mailto:${BIZ.email}`} className="block underline underline-offset-4">{BIZ.email}</a>
             </address>
-            <dl className="mt-5 text-sm text-paper/85 space-y-1">
+            <dl className="mt-5 text-sm text-cream/85 space-y-1">
               {BIZ.hours.map(([k, v]) => (<div key={k}><dt className="label text-straw inline">{k}: </dt><dd className="inline">{v}</dd></div>))}
             </dl>
           </div>
@@ -44,7 +43,7 @@ export default function Footer() {
         </div>
 
         <Divider dark className="mt-14 mb-6" />
-        <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-sm text-paper/75">
+        <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-sm text-cream/75">
           <p>© {new Date().getFullYear()} {BIZ.name}. We ship to the 48 contiguous states.</p>
           <p className="flex gap-5"><Link href="/privacy" className="underline underline-offset-4">Privacy</Link><Link href="/terms" className="underline underline-offset-4">Terms</Link></p>
         </div>

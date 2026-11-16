@@ -21,7 +21,7 @@ export default function ContactForm() {
       </div>
       <div><label htmlFor="c-msg" className="label block mb-1">Message *</label><textarea id="c-msg" name="message" rows={5} required className="field resize-y" /></div>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-      <div className="flex items-center gap-6"><button className="btn btn-primary" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send"}</button>{state === "error" && <p role="alert" className="text-cranberry">That didn't send. Please email us instead.</p>}</div>
+      <div className="flex items-center gap-6"><button className="btn btn-primary" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send"}</button>{state === "error" && <p role="alert" className="text-sale">That didn't send. Please email us instead.</p>}</div>
     </form>
   );
 }

@@ -3,8 +3,8 @@ import AddOnList from "@/components/AddOnList";
 import CeilingFinder from "@/components/CeilingFinder";
 import Divider from "@/components/Divider";
 import Newsletter from "@/components/Newsletter";
-import Note from "@/components/Note";
 import OrderRequestForm from "@/components/OrderRequestForm";
+import Parallax from "@/components/Parallax";
 import Photo from "@/components/Photo";
 import ProductTile from "@/components/ProductTile";
 import PromoStamp from "@/components/PromoStamp";
@@ -45,11 +45,10 @@ export default function Home() {
               <Link href="/business" className="underline underline-offset-[6px] decoration-gold decoration-[3px] font-medium">Buying for a business?</Link>
             </div>
           </div>
-          <div className="md:col-span-5 relative">
+          <Parallax className="md:col-span-5 relative">
             <PromoStamp />
-            <Photo src="/images/delivered-netted-tree-lit.webp" alt="A netted fir tree standing on a porch in front of a door with a wreath, warm light from inside" sizes="(min-width:768px) 40vw, 100vw" priority plate className="aspect-[4/5]" />
-            <Note className="mt-4 md:absolute md:-bottom-5 md:left-6 md:mt-0 md:bg-paper md:px-3 md:py-1">Netted, wet at the trunk, ready to stand.</Note>
-          </div>
+            <Photo motion src="/images/delivered-netted-tree-lit.webp" alt="A netted fir tree standing on a porch in front of a door with a wreath, warm light from inside" sizes="(min-width:768px) 40vw, 100vw" priority plate className="aspect-[4/5]" />
+          </Parallax>
         </div>
       </section>
 
@@ -58,7 +57,7 @@ export default function Home() {
           {[["Cut to order", "Never cut before you order"], ["Ships", "Mon, Tue, Wed"], ["Arrives", "In 1 to 4 days"], ["Order by", BIZ.orderBy]].map(([k, v], i) => (
             <div key={k} className="px-4 py-5 text-center">
               <dt className="label text-bark">{k}</dt>
-              <dd className={`serif-text text-xl mt-1 ${i === 3 ? "text-cranberry font-semibold" : ""}`}>{v}</dd>
+              <dd className={`serif-text text-xl mt-1 ${i === 3 ? "text-sale font-semibold" : ""}`}>{v}</dd>
             </div>
           ))}
         </dl>
@@ -70,7 +69,6 @@ export default function Home() {
           <div className="md:col-span-4">
             <h2 id="prices" className="serif text-5xl">What a tree costs.</h2>
             <p className="mt-5 text-lg max-w-[34ch]">One price per height. It includes the cutting and the wrapping. Shipping is added at checkout.</p>
-            <Note className="mt-6">Not sure of your height? Measure the ceiling and take off a foot.</Note>
           </div>
           <div className="md:col-span-8"><SizePriceList /></div>
         </div>
@@ -131,11 +129,10 @@ export default function Home() {
 
       <section className="mx-auto max-w-[88rem] px-5 md:px-10 mt-24 md:mt-32 grid md:grid-cols-12 gap-x-12 gap-y-5 items-end">
         <figure className="md:col-span-8 md:col-start-5 md:order-2">
-          <Photo src="/images/farm-dawn-frost.webp" alt="A fir tree in a farm field at dawn, its needles white with frost, more trees and hills behind" sizes="(min-width:768px) 62vw, 100vw" plate className="aspect-[16/9]" />
+          <Photo motion src="/images/farm-dawn-frost.webp" alt="A fir tree in a farm field at dawn, its needles white with frost, more trees and hills behind" sizes="(min-width:768px) 62vw, 100vw" plate className="aspect-[16/9]" />
         </figure>
         <div className="md:col-span-4 md:order-1 pb-2">
           <p className="serif text-4xl max-w-[12ch]">Frost on the trees at dawn.</p>
-          <Note className="mt-4">The needles are the part we care about.</Note>
         </div>
       </section>
 
@@ -146,7 +143,7 @@ export default function Home() {
           <div className="md:col-span-8">
             {SHOW_SAMPLE_REVIEWS ? (
               <>
-                <p className="label text-cranberry mb-4">Sample text. Replace with real reviews before launch.</p>
+                <p className="label text-sale mb-4">Sample text. Replace with real reviews before launch.</p>
                 <div className="grid sm:grid-cols-3 gap-8">
                   {testimonials.map((t) => (
                     <figure key={t.name} className="border-t-[3px] border-double border-bark/60 pt-4">
@@ -167,11 +164,11 @@ export default function Home() {
       </section>
 
       {/* BUSINESS */}
-      <section className="bg-fir text-paper on-dark mt-24 md:mt-32">
+      <section className="bg-fir text-cream on-dark mt-24 md:mt-32">
         <div className="mx-auto max-w-[88rem] px-5 md:px-10 py-16 md:py-20 grid md:grid-cols-12 gap-x-12 gap-y-6 items-center">
           <h2 className="serif text-5xl md:col-span-7">Need a big one for a lobby, a shop or a square?</h2>
           <div className="md:col-span-5">
-            <p className="text-lg text-paper/90">Nine to thirty feet, live or artificial. We deliver it, set it up and take it down.</p>
+            <p className="text-lg text-cream/90">Nine to thirty feet, live or artificial. We deliver it, set it up and take it down.</p>
             <Link href="/business" className="btn btn-straw mt-6">Ask for a quote</Link>
           </div>
         </div>
@@ -199,7 +196,6 @@ export default function Home() {
           <div className="md:col-span-4">
             <h2 id="order" className="serif text-5xl">Rather write to us?</h2>
             <p className="mt-5 text-lg max-w-[34ch]">Tell us what you're after and we'll write back, usually the same day. Or call {BIZ.phone}.</p>
-            <Note className="mt-6">No account needed.</Note>
           </div>
           <div className="md:col-span-8"><OrderRequestForm /></div>
         </div>

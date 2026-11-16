@@ -24,7 +24,6 @@ None of these have been verified. The site says them in a plain voice, but they 
 - [ ] Which species grow on which farm; "high in the Blue Ridge mountains"; "cool, wet winters" [About page]
 - [ ] "We grow the trees, cut them to order, and pack them ourselves" [About page, home]
 - [ ] "Cold nights make a tighter tree" [home banner note]
-- [ ] Handwritten notes on products: "Our family's pick this year" (Fraser), "Buy it for the smell" (Balsam), "Forget to water? Buy this one" (Scotch pine) [`data/copy.ts`]
 - [ ] Anything the old version said that has been **removed** and must not come back unless true: "Est. 1987", "35 years of growing trees", founders' names, acreage, staff numbers, "we plant two for every one we cut"
 - [ ] There are **no awards** on the site. Add only real ones.
 
