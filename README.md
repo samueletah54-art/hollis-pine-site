@@ -27,7 +27,7 @@ npx vercel --prod            # deploy
 ## Design system
 - Palette: spruce `#1f3a2d` / `#12281d`, bark `#5a4130`, cream paper `#f4ecda`. Cranberry `#a32638` is for sale and urgency only (order-by strip, "few left", errors).
 - Type scale: seven sizes in `app/globals.css` (small, body, lead, h4, h3, h2, h1) plus one display size. Labels are real small caps. Prices use tabular numbers.
-- Hand-drawn pieces: `FarmMap`, `HeightChart`, `Note` (handwriting), `Divider`, `TreeMark`.
+- Small details: `Note` (handwriting), `Divider`, `TreeMark` (the logo mark). There are no illustrations. Every picture is a real photo.
 
 ## Go live checklist
 1. Deploy: import the repo in Vercel (Add New, Project) or run `npx vercel --prod`.

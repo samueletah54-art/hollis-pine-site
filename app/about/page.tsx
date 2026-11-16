@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Banner from "@/components/Banner";
 import Divider from "@/components/Divider";
-import FarmMap from "@/components/FarmMap";
 import Photo from "@/components/Photo";
 import { hasImage } from "@/lib/images";
 import Reveal from "@/components/Reveal";
@@ -39,7 +38,6 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[88rem] px-5 md:px-10 pt-20"><FarmMap /></section>
 
       <section className="mx-auto max-w-[88rem] px-5 md:px-10 pt-24 grid md:grid-cols-12 gap-10" aria-labelledby="how">
         <h2 id="how" className="label text-bark md:col-span-3">How we work</h2>
@@ -61,7 +59,7 @@ export default function About() {
           <Photo hideIfMissing src="/images/worker-carrying-tree.webp" alt="A worker in a canvas coat carrying a freshly cut fir across a frosty field, seen from behind" sizes="(min-width:768px) 40vw, 50vw" plate className="col-span-2 md:col-span-5 aspect-[16/9] md:mt-10" />
         </div>}
         <Divider className="mt-16" />
-        <p className="serif-text text-2xl mt-8">Want to talk to a person? <Link href="/contact" className="underline underline-offset-[6px] decoration-tan decoration-[3px]">Here is how.</Link></p>
+        <p className="serif-text text-2xl mt-8">Want to talk to a person? <Link href="/contact" className="underline underline-offset-[6px] decoration-gold decoration-[3px]">Here is how.</Link></p>
       </section>
     </>
   );

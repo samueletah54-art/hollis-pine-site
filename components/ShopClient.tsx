@@ -158,7 +158,7 @@ export default function ShopClient({ products }: { products: Product[] }) {
         <p className="text-xs text-muted mt-2">Live trees ship Mon–Wed. We'll hide anything that can't make it.</p>
       </Group>
       {activeCount > 0 && (
-        <button className="mt-2 underline underline-offset-4 decoration-tan" onClick={() => router.replace(path, { scroll: false })}>Clear all filters ({activeCount})</button>
+        <button className="mt-2 underline underline-offset-4 decoration-gold" onClick={() => router.replace(path, { scroll: false })}>Clear all filters ({activeCount})</button>
       )}
     </div>
   );

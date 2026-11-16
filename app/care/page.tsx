@@ -27,7 +27,7 @@ export default function Care() {
         <aside className="md:col-span-3 hidden md:block">
           <nav aria-label="On this page" className="sticky top-28">
             <ol className="space-y-2 border-l rule pl-4">
-              {toc.map(([id, l]) => (<li key={id}><a href={`#${id}`} className="hover:underline underline-offset-4 decoration-tan">{l}</a></li>))}
+              {toc.map(([id, l]) => (<li key={id}><a href={`#${id}`} className="hover:underline underline-offset-4 decoration-gold">{l}</a></li>))}
             </ol>
           </nav>
         </aside>

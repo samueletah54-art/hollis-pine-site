@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import DocPage from "@/components/DocPage";
-import HeightChart from "@/components/HeightChart";
 
 export const metadata: Metadata = {
   title: "Size guide: how tall a tree fits your room",
@@ -12,8 +11,6 @@ export const metadata: Metadata = {
 export default function Sizes() {
   return (
     <DocPage title="How tall a tree fits?" intro="Measure the ceiling, take off one foot, and that is your tree. The chart shows what 5, 7 and 9 feet look like next to a door and a person." wide>
-      <HeightChart className="mb-10" />
-
       <h2 className="!mt-6">Measure your ceiling</h2>
       <ol>
         <li><b>Pick the spot.</b> Stand where the tree will go. Keep it three feet from a radiator, a heating vent or a fireplace.</li>

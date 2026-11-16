@@ -58,7 +58,7 @@ export default function FAQ() {
             </div>
           </section>
         ))}
-        <p className="md:col-span-8 md:col-start-4">Not here? <Link href="/contact" className="underline underline-offset-4 decoration-tan decoration-2">Ask us.</Link></p>
+        <p className="md:col-span-8 md:col-start-4">Not here? <Link href="/contact" className="underline underline-offset-4 decoration-gold decoration-2">Ask us.</Link></p>
       </div>
     </div>
   );

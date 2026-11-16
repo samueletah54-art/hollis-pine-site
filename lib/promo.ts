@@ -1,8 +1,8 @@
 /*
   Black Friday offer. One place to change it.
-  Defaults: 15% off live and artificial trees from Black Friday to Cyber Monday, US Eastern time.
+  Defaults: 20% off every tree (live and artificial) on Black Friday only, Friday 27 November, US Eastern time.
   Override without code changes in the hosting dashboard:
-    NEXT_PUBLIC_PROMO_PERCENT   e.g. 20   (0 turns the offer off)
+    NEXT_PUBLIC_PROMO_PERCENT   e.g. 20   (0 switches the offer off)
     NEXT_PUBLIC_PROMO_START     e.g. 2026-11-27   (first day, Eastern)
     NEXT_PUBLIC_PROMO_END       e.g. 2026-11-30   (last day, Eastern, inclusive)
   Prices are always recalculated on the server at checkout, so the browser cannot change them.
@@ -16,9 +16,9 @@ const pick = (v: string | undefined, d: string) => (v || "").trim() || d;
 
 export const PROMO = {
   name: "Black Friday",
-  percent: Math.max(0, Math.min(90, Number(pick(process.env.NEXT_PUBLIC_PROMO_PERCENT, "15")) || 0)),
+  percent: Math.max(0, Math.min(90, Number(pick(process.env.NEXT_PUBLIC_PROMO_PERCENT, "20")) || 0)),
   startDate: pick(process.env.NEXT_PUBLIC_PROMO_START, "2026-11-27"),
-  endDate: pick(process.env.NEXT_PUBLIC_PROMO_END, "2026-11-30"),
+  endDate: pick(process.env.NEXT_PUBLIC_PROMO_END, "2026-11-27"),
   /** Add-ons are not discounted. Commercial trees are quote-only. */
   appliesTo: ["live", "artificial"] as Category[],
   /** The banner announces the sale this many days before it starts. */
@@ -29,12 +29,12 @@ export const PROMO = {
 const start = () => new Date(`${PROMO.startDate}T00:00:00-05:00`);
 const end = () => new Date(`${PROMO.endDate}T23:59:59-05:00`);
 
-export type PromoState = { state: "off" | "soon" | "live"; percent: number; startLabel: string; endLabel: string };
+export type PromoState = { state: "off" | "soon" | "live"; percent: number; startLabel: string; endLabel: string; singleDay: boolean };
 
 const label = (iso: string) => new Date(`${iso}T12:00:00-05:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", timeZone: "America/New_York" });
 
 export const promoState = (now: Date = new Date()): PromoState => {
-  const base = { percent: PROMO.percent, startLabel: label(PROMO.startDate), endLabel: label(PROMO.endDate) };
+  const base = { percent: PROMO.percent, startLabel: label(PROMO.startDate), endLabel: label(PROMO.endDate), singleDay: PROMO.startDate === PROMO.endDate };
   if (!PROMO.percent) return { state: "off", ...base };
   if (now >= start() && now <= end()) return { state: "live", ...base };
   const days = (start().getTime() - now.getTime()) / 86400000;

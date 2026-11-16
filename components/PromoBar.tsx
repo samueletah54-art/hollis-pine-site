@@ -12,12 +12,12 @@ export default function PromoBar() {
       <p className="mx-auto max-w-[88rem] px-5 md:px-10 py-2 text-sm leading-snug">
         {p.state === "live" ? (
           <>
-            <b className="font-semibold">{PROMO.name}: {p.percent}% off all live and artificial trees, through {p.endLabel}.</b>{" "}
+            <b className="font-semibold">{PROMO.name}: {p.percent}% off every tree, {p.singleDay ? "today only" : `through ${p.endLabel}`}.</b>{" "}
             Order by {BIZ.orderBy} for delivery before Christmas.
           </>
         ) : p.state === "soon" ? (
           <>
-            <b className="font-semibold">{PROMO.name} starts {p.startLabel}: {p.percent}% off all live and artificial trees.</b>{" "}
+            <b className="font-semibold">{PROMO.name}: {p.percent}% off every tree, {p.singleDay ? `${p.startLabel} only` : `from ${p.startLabel}`}.</b>{" "}
             Order by {BIZ.orderBy} for delivery before Christmas.
           </>
         ) : (

@@ -19,7 +19,7 @@ export default function Shop() {
       <header className="grid md:grid-cols-12 gap-4 pb-8">
         <div className="md:col-span-10">
           <h1 className="serif text-6xl">Every tree we sell.</h1>
-          <p className="mt-5 max-w-[54ch] text-lg text-ink/85">Twelve live trees, five artificial, and two sizes of commercial tree. Prices are for one tree. Not sure which height? The <a href="/sizes" className="underline underline-offset-4 decoration-tan decoration-2">size guide</a> shows you how to measure.</p>
+          <p className="mt-5 max-w-[54ch] text-lg text-ink/85">Twelve live trees, five artificial, and two sizes of commercial tree. Prices are for one tree. Not sure which height? The <a href="/sizes" className="underline underline-offset-4 decoration-gold decoration-2">size guide</a> shows you how to measure.</p>
         </div>
       </header>
       <Divider className="mb-10" />

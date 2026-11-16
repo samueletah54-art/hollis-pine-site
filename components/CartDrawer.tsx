@@ -52,7 +52,7 @@ export default function CartDrawer() {
       >
         <div className="flex items-baseline justify-between px-6 pt-6 pb-4 border-b rule">
           <h2 className="serif text-3xl">Your cart <span className="num text-muted text-xl">({count})</span></h2>
-          <button ref={closeBtn} onClick={() => setOpen(false)} className="label underline underline-offset-4 decoration-tan">Close</button>
+          <button ref={closeBtn} onClick={() => setOpen(false)} className="label underline underline-offset-4 decoration-gold">Close</button>
         </div>
 
         <div className="flex-1 overflow-y-auto px-6">
@@ -72,7 +72,7 @@ export default function CartDrawer() {
                   </div>
                   <p className="num font-medium text-right">{x.originalUnit > x.unit && <s className="block text-sm text-muted font-normal">{money(x.originalUnit * x.line.qty)}</s>}{money(x.total)}</p>
                   <QtyStepper value={x.line.qty} onChange={(q) => setQty(x.line.slug, x.line.sizeId, x.line.option, q)} label={x.name} />
-                  <button onClick={() => remove(x.line.slug, x.line.sizeId, x.line.option)} className="text-sm underline underline-offset-4 decoration-tan justify-self-end">Remove</button>
+                  <button onClick={() => remove(x.line.slug, x.line.sizeId, x.line.option)} className="text-sm underline underline-offset-4 decoration-gold justify-self-end">Remove</button>
                 </li>
               ))}
             </ul>

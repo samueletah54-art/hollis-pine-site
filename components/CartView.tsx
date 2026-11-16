@@ -26,7 +26,7 @@ export default function CartView() {
             <div>
               <Link href={x.category === "addon" ? `/extras/${x.line.slug}` : `/trees/${x.line.slug}`} className="serif-text text-2xl leading-tight underline-offset-4 hover:underline">{x.name}</Link>
               <p className="text-sm text-muted">{x.sizeLabel}{x.optionLabel ? `, ${x.optionLabel}` : ""}. <span className="num">{money(x.unit)}</span> each</p>
-              <button onClick={() => remove(x.line.slug, x.line.sizeId, x.line.option)} className="text-sm underline underline-offset-4 decoration-tan mt-2">Remove</button>
+              <button onClick={() => remove(x.line.slug, x.line.sizeId, x.line.option)} className="text-sm underline underline-offset-4 decoration-gold mt-2">Remove</button>
             </div>
             <QtyStepper value={x.line.qty} onChange={(q) => setQty(x.line.slug, x.line.sizeId, x.line.option, q)} label={x.name} />
             <p className="num text-right font-medium col-span-2 sm:col-span-1">{x.originalUnit > x.unit && <s className="block text-sm text-muted font-normal">{money(x.originalUnit * x.line.qty)}</s>}{money(x.total)}</p>

@@ -12,7 +12,8 @@
   --color-forest: #1f3a2d;
   --color-fir: #12281d;
   --color-bark: #5a4130;
-  --color-tan: #7e5f36;
+  --color-tan: #86671f;   /* antique gold: text-safe on cream */
+  --color-gold: #c9a55c;  /* soft gold: underlines, rules, stamps */
   --color-straw: #dcc48f;
   --color-muted: #665747;
   --color-cranberry: #a32638;
@@ -117,7 +118,3 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
 .prose-care a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; text-decoration-color: var(--color-tan); }
 .prose-care a:hover { text-decoration-color: var(--color-spruce); }
 .drop::first-letter { font-family: var(--font-fraunces), Georgia, serif; float: left; font-size: 4.4rem; line-height: .8; padding: .35rem .6rem 0 0; color: var(--color-spruce); }
-
-/* farm map: fields appear one after another once the map is on screen */
-.js [data-draw] [data-field] { opacity: 0; transition: opacity .9s ease; }
-.js [data-draw].in [data-field] { opacity: 1; }

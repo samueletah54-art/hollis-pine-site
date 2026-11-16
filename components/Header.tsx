@@ -7,12 +7,10 @@ import { useCart } from "./CartProvider";
 import TreeMark from "./TreeMark";
 
 const nav = [
-  { href: "/shop", label: "Trees" },
-  { href: "/sizes", label: "Size guide" },
-  { href: "/delivery", label: "Delivery" },
-  { href: "/business", label: "For business" },
-  { href: "/care", label: "Care guide" },
-  { href: "/about", label: "The farm" },
+  { href: "/shop", label: "Shop trees" },
+  { href: "/delivery", label: "How it works" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -44,7 +42,7 @@ export default function Header() {
         <nav aria-label="Main" className="hidden lg:flex items-center gap-7">
           {nav.map((n) => (
             <Link key={n.href} href={n.href} aria-current={path.startsWith(n.href) ? "page" : undefined}
-              className={`text-sm font-medium underline-offset-[10px] decoration-tan decoration-[3px] hover:underline ${path.startsWith(n.href) ? "underline" : ""}`}>
+              className={`text-sm font-medium underline-offset-[10px] decoration-gold decoration-[3px] hover:underline ${path.startsWith(n.href) ? "underline" : ""}`}>
               {n.label}
             </Link>
           ))}
@@ -63,7 +61,7 @@ export default function Header() {
       {menu && (
         <nav id="mobile-nav" aria-label="Mobile" className="lg:hidden border-t rule bg-paper px-5 py-4">
           <ul className="space-y-1">
-            {[...nav, { href: "/contact", label: "Contact" }].map((n) => (
+            {nav.map((n) => (
               <li key={n.href}><Link href={n.href} className="serif text-3xl block py-1">{n.label}</Link></li>
             ))}
           </ul>

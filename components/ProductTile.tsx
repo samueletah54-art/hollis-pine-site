@@ -20,7 +20,7 @@ export default function ProductTile({ p, feature = false, flip = false, priority
         </Link>
         <div>
           <p className="label text-bark">{tagFor(p)}{h ? `, ${h}` : ""}</p>
-          <h3 className="serif text-4xl mt-2"><Link href={urlFor(p)} className="hover:underline decoration-tan decoration-[3px] underline-offset-[6px]">{p.name}</Link></h3>
+          <h3 className="serif text-4xl mt-2"><Link href={urlFor(p)} className="hover:underline decoration-gold decoration-[3px] underline-offset-[6px]">{p.name}</Link></h3>
           <p className="serif-text italic text-lg mt-3 text-ink/85">{p.tagline}</p>
           <p className="mt-4 max-w-[46ch]">{p.description}</p>
           {p.note && <Note className="mt-4">{p.note}</Note>}

@@ -98,7 +98,7 @@ export default function ProductPage({ p }: { p: Product }) {
           <section className="lg:col-span-6 lg:col-start-7" aria-labelledby="care">
             <h2 id="care" className="label text-bark mb-4">Care</h2>
             <ol className="border-t-[3px] border-double border-bark/60">{p.care.map((x, i) => (<li key={x} className="py-3 border-b rule grid grid-cols-[2.5rem_1fr]"><span className="serif text-2xl text-tan num">{i + 1}</span><span>{x}</span></li>))}</ol>
-            <p className="mt-4 text-sm"><Link href="/care" className="underline underline-offset-4 decoration-tan">The full care guide</Link></p>
+            <p className="mt-4 text-sm"><Link href="/care" className="underline underline-offset-4 decoration-gold">The full care guide</Link></p>
           </section>
         )}
       </div>

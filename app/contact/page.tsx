@@ -25,8 +25,8 @@ export default function Contact() {
               <div key={k} className="grid grid-cols-[6.5rem_minmax(0,1fr)] sm:grid-cols-[8rem_minmax(0,1fr)] gap-4 py-4 border-b rule"><dt className="label text-bark pt-0.5">{k}</dt><dd>{v}</dd></div>
             ))}
           </dl>
-          <p className="mt-6 text-sm">Buying for a business? <Link href="/business#quote" className="underline underline-offset-4 decoration-tan decoration-2">Use the quote form</Link>.</p>
-          <p className="mt-2 text-sm">Something wrong with an order? See <Link href="/returns" className="underline underline-offset-4 decoration-tan decoration-2">returns and refunds</Link>.</p>
+          <p className="mt-6 text-sm">Buying for a business? <Link href="/business#quote" className="underline underline-offset-4 decoration-gold decoration-2">Use the quote form</Link>.</p>
+          <p className="mt-2 text-sm">Something wrong with an order? See <Link href="/returns" className="underline underline-offset-4 decoration-gold decoration-2">returns and refunds</Link>.</p>
         </div>
         <div className="md:col-span-6 md:col-start-7"><ContactForm /></div>
       </div>

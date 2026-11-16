@@ -61,9 +61,9 @@ export default function Purchase({ p }: { p: Product }) {
     <>
     <div ref={panel}>
       <p className="serif text-5xl leading-none"><Price value={size.price!} category={p.category} /></p>
-      {unitNow < size.price! && <p className="mt-2 text-sm font-semibold text-cranberry">{PROMO.name}: {promo.percent}% off through {promo.endLabel}</p>}
+      {unitNow < size.price! && <p className="mt-2 text-sm font-semibold text-cranberry">{PROMO.name}: {promo.percent}% off {promo.singleDay ? "today only" : `through ${promo.endLabel}`}</p>}
       <p className="text-sm text-muted mt-2">{size.dims ?? " "}</p>
-      {p.category !== "addon" && size.heightMax && <p className="text-sm mt-1">Needs a ceiling of at least <b className="num">{Math.ceil(size.heightMax + 1)} ft</b>. <Link href="/sizes" className="underline underline-offset-4 decoration-tan decoration-2">How to measure</Link></p>}
+      {p.category !== "addon" && size.heightMax && <p className="text-sm mt-1">Needs a ceiling of at least <b className="num">{Math.ceil(size.heightMax + 1)} ft</b>. <Link href="/sizes" className="underline underline-offset-4 decoration-gold decoration-2">How to measure</Link></p>}
 
       <fieldset className="mt-8">
         <legend className="label text-muted">{p.category === "addon" ? "Option" : "Height"}</legend>
