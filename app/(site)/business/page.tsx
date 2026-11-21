@@ -1,3 +1,4 @@
+import Snow from "@/components/Snow";
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -132,7 +133,7 @@ export default function Business() {
         </div>
       </section>
 
-      <section id="quote" className="bg-fir text-cream on-dark mt-28 scroll-mt-16">
+      <section id="quote" className="dusk text-cream on-dark mt-28 scroll-mt-16"><Snow />
         <div className="mx-auto max-w-[88rem] px-5 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
             <h2 className="serif text-5xl md:text-6xl leading-[.95]">Tell us about the space.</h2>

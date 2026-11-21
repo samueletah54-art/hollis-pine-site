@@ -7,7 +7,7 @@ export const contentType = "image/png";
 export default function OG() {
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", background: "#0e1712", color: "#efe6d2", fontFamily: "Georgia, serif", padding: 36 }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", background: "#0f0d28", color: "#efe6d2", fontFamily: "Georgia, serif", padding: 36 }}>
         <div style={{ display: "flex", flex: 1, border: "5px solid #c9a55c", padding: 64, flexDirection: "column", justifyContent: "space-between" }}>
           <div style={{ display: "flex", fontSize: 24, letterSpacing: 6, textTransform: "uppercase", color: "#d8b76a" }}>Christmas trees, shipped fresh</div>
           <div style={{ display: "flex", flexDirection: "column" }}>

@@ -2,10 +2,14 @@ import Link from "next/link";
 import { BIZ } from "@/data/business";
 import Divider from "./Divider";
 import Newsletter from "./Newsletter";
+import Snow from "./Snow";
+import Lights from "./Lights";
 
 export default function Footer() {
   return (
-    <footer className="bg-fir text-cream mt-28 on-dark">
+    <footer className="dusk text-cream mt-28 on-dark">
+      <Snow />
+      <Lights />
       <div className="mx-auto max-w-[88rem] px-5 md:px-10 pt-16 pb-10">
         <div className="grid md:grid-cols-12 gap-x-12 gap-y-12">
           <div className="md:col-span-4">

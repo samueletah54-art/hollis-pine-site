@@ -1,3 +1,4 @@
+import Snow from "@/components/Snow";
 import Link from "next/link";
 import AddOnList from "@/components/AddOnList";
 import CeilingFinder from "@/components/CeilingFinder";
@@ -164,7 +165,7 @@ export default function Home() {
       </section>
 
       {/* BUSINESS */}
-      <section className="bg-fir text-cream on-dark mt-24 md:mt-32">
+      <section className="dusk text-cream on-dark mt-24 md:mt-32"><Snow />
         <div className="mx-auto max-w-[88rem] px-5 md:px-10 py-16 md:py-20 grid md:grid-cols-12 gap-x-12 gap-y-6 items-center">
           <h2 className="serif text-5xl md:col-span-7">Need a big one for a lobby, a shop or a square?</h2>
           <div className="md:col-span-5">
