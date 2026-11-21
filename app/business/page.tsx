@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Snow from "@/components/Snow";
 import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
 import QuoteForm from "@/components/QuoteForm";
@@ -132,7 +133,7 @@ export default function Business() {
         </div>
       </section>
 
-      <section id="quote" className="bg-fir text-paper on-dark mt-28 scroll-mt-16">
+      <section id="quote" className="dusk text-paper on-dark mt-28 scroll-mt-16"><Snow />
         <div className="mx-auto max-w-[88rem] px-5 md:px-10 py-20 md:py-28 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
             <p className="label text-brass mb-4">Request a quote</p>

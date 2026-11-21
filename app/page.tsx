@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Photo from "@/components/Photo";
 import Reveal from "@/components/Reveal";
+import Snow from "@/components/Snow";
 import ProductTile from "@/components/ProductTile";
 import Newsletter from "@/components/Newsletter";
 import { all, bySlug } from "@/lib/catalog";
@@ -115,7 +116,7 @@ export default function Home() {
       </section>
 
       {/* BUSINESS */}
-      <section className="bg-fir text-paper on-dark">
+      <section className="dusk text-paper on-dark"><Snow />
         <div className="mx-auto max-w-[88rem] px-5 md:px-10 py-20 md:py-32 grid md:grid-cols-12 gap-10 items-center">
           <Reveal className="md:col-span-5 md:order-2">
             <Photo src="/images/commercial-lobby.jpg" alt="A 20-foot decorated tree in a hotel lobby atrium with guests walking by" sizes="(min-width:768px) 40vw, 100vw" className="aspect-[4/5]" />

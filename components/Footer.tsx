@@ -1,9 +1,13 @@
 import Link from "next/link";
 import Newsletter from "./Newsletter";
+import Snow from "./Snow";
+import Lights from "./Lights";
 
 export default function Footer() {
   return (
-    <footer className="bg-fir text-paper mt-24 on-dark">
+    <footer className="dusk text-paper mt-24 on-dark">
+      <Snow />
+      <Lights />
       <div className="mx-auto max-w-[88rem] px-5 md:px-10 pt-16 pb-10">
         <div className="grid md:grid-cols-12 gap-12 pb-14 border-b border-paper/20">
           <div className="md:col-span-5">
