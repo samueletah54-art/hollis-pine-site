@@ -19,7 +19,10 @@ export type Size = {
 };
 
 export type Facts = {
+  /** how long it holds needles, in plain words */
   needleRetention: string;
+  /** how long it lasts in a heated room, with care */
+  indoors?: string;
   fragrance: string;
   branchStrength: string;
   shape: string;
@@ -50,6 +53,10 @@ export type Product = {
   inTheBox: string[];
   care?: string[];
   featured?: boolean;
+  /** a handwritten aside shown on the tile and product page. Needs client sign-off, see CLIENT-TO-CONFIRM.md */
+  note?: string;
+  /** 16:9 close-up of the needles, shown as a band on the product page */
+  needlesImage?: { src: string; alt: string };
   /** for add-ons: which extras pair with which kind of tree */
   addonKind?: "stand" | "skirt" | "wreath" | "garland" | "ornaments" | "bags" | "care" | "bulbs";
 };
@@ -75,7 +82,7 @@ const ART_BOX = [
   "Fluffing guide and a storage-box recommendation",
 ];
 
-export const products: Product[] = [
+const base: Product[] = [
   // ───────────── LIVE-CUT ─────────────
   {
     slug: "fraser-fir",
@@ -92,11 +99,7 @@ export const products: Product[] = [
       { id: "8-9", label: "8–9 ft", price: 219, heightMin: 8, heightMax: 9, dims: "About 52 in wide at the base" },
     ],
     facts: { needleRetention: "Excellent, 5+ weeks", fragrance: "Medium, clean and sweet", branchStrength: "Very strong", shape: "Dense pyramid", bestFor: "Heavy ornaments, tall ceilings" },
-    images: [
-      { src: "/images/fraser-fir.jpg", alt: "A seven-foot Fraser fir standing in a corner against a plain plaster wall" },
-      { src: "/images/hero.jpg", alt: "A lit Fraser fir in a lived-in living room at dusk, a dog asleep at its base" },
-      { src: "/images/stand-watering.jpg", alt: "Water being poured into the stand of a freshly set up fir" },
-    ],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -121,10 +124,7 @@ export const products: Product[] = [
       { id: "7-8", label: "7–8 ft", price: 139, heightMin: 7, heightMax: 8, dims: "About 42 in wide at the base" },
     ],
     facts: { needleRetention: "Good, 4 weeks", fragrance: "Strong, resinous and sweet", branchStrength: "Medium", shape: "Narrow spire", bestFor: "Fragrance, smaller living rooms" },
-    images: [
-      { src: "/images/balsam-fir.jpg", alt: "A Balsam fir by a fireplace with a red tree skirt" },
-      { src: "/images/stand-watering.jpg", alt: "Pouring water into the stand at the base of a Balsam fir" },
-    ],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut", "Best scent"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -149,10 +149,7 @@ export const products: Product[] = [
       { id: "8-9", label: "8–9 ft", price: 229, heightMin: 8, heightMax: 9, dims: "About 52 in wide at the base" },
     ],
     facts: { needleRetention: "Excellent, 6 weeks", fragrance: "Mild, woodsy", branchStrength: "Very strong", shape: "Open, layered", bestFor: "Showing off ornaments, long seasons" },
-    images: [
-      { src: "/images/noble-fir-detail.jpg", alt: "Close-up of Noble fir needles with silver undersides and a little frost" },
-      { src: "/images/cutting.jpg", alt: "Gloved hands sawing the base of a Noble fir on a frosty morning" },
-    ],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut"],
     shipsFrom: "Oregon",
     stock: "in",
@@ -177,7 +174,7 @@ export const products: Product[] = [
       { id: "7-8", label: "7–8 ft", price: 119, heightMin: 7, heightMax: 8, dims: "About 46 in wide at the base" },
     ],
     facts: { needleRetention: "Fair, 3 weeks. Water daily", fragrance: "Medium, citrus", branchStrength: "Light to medium", shape: "Full, soft", bestFor: "First-time buyers, kids, budgets" },
-    images: [{ src: "/images/douglas-fir.jpg", alt: "A full Douglas fir in a family living room with a string of paper stars" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut", "Best value"],
     shipsFrom: "Oregon",
     stock: "in",
@@ -200,7 +197,7 @@ export const products: Product[] = [
       { id: "7-8", label: "7–8 ft", price: 179, heightMin: 7, heightMax: 8, dims: "About 48 in wide at the base" },
     ],
     facts: { needleRetention: "Outstanding, 6+ weeks", fragrance: "Very mild", branchStrength: "Strong", shape: "Broad cone", bestFor: "Low-scent homes, minimal needle mess" },
-    images: [{ src: "/images/nordmann-fir.jpg", alt: "A glossy Nordmann fir in a bright room with white string lights" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut", "Low scent"],
     shipsFrom: "Oregon",
     stock: "low",
@@ -223,7 +220,7 @@ export const products: Product[] = [
       { id: "7-8", label: "7–8 ft", price: 149, heightMin: 7, heightMax: 8, dims: "About 44 in wide at the base" },
     ],
     facts: { needleRetention: "Very good, 5 weeks", fragrance: "Medium-strong", branchStrength: "Strong", shape: "Dense pyramid", bestFor: "Warm houses, Fraser lovers" },
-    images: [{ src: "/images/canaan-fir.jpg", alt: "A Canaan fir with deep green needles in a hallway" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -246,7 +243,7 @@ export const products: Product[] = [
       { id: "7-8", label: "7–8 ft", price: 129, heightMin: 7, heightMax: 8, dims: "About 44 in wide at the base" },
     ],
     facts: { needleRetention: "Fair, 3–4 weeks", fragrance: "Very strong, citrus-pine", branchStrength: "Light", shape: "Shaggy, informal", bestFor: "Scent above all else" },
-    images: [{ src: "/images/grand-fir.jpg", alt: "A shaggy Grand fir with strings of popcorn in a farmhouse room" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut", "Best scent"],
     shipsFrom: "Oregon",
     stock: "in",
@@ -265,7 +262,7 @@ export const products: Product[] = [
       "Concolor, also called white fir, has needles twice as long as a Fraser and curved like fingers. The color runs from silver-green to blue. It gets full without being heavy and is a favorite of people who find regular firs too dark.",
     sizes: [{ id: "6-7", label: "6–7 ft", price: 109, heightMin: 6, heightMax: 7, dims: "About 40 in wide at the base" }],
     facts: { needleRetention: "Good, 4 weeks", fragrance: "Mild, citrus", branchStrength: "Medium", shape: "Full, soft cone", bestFor: "Pale, airy look" },
-    images: [{ src: "/images/concolor-fir.jpg", alt: "A Concolor fir with long pale needles by a window" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut"],
     shipsFrom: "Oregon",
     stock: "low",
@@ -288,7 +285,7 @@ export const products: Product[] = [
       { id: "6-7", label: "6–7 ft", price: 79, heightMin: 6, heightMax: 7, dims: "About 40 in wide at the base" },
     ],
     facts: { needleRetention: "Best of any tree we ship, 6+ weeks", fragrance: "Medium, classic pine", branchStrength: "Very strong", shape: "Dense, rounded", bestFor: "Forgetful waterers, long seasons" },
-    images: [{ src: "/images/scotch-pine.jpg", alt: "A Scotch pine in a rustic cabin corner with a plaid blanket" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut", "Best value"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -310,7 +307,7 @@ export const products: Product[] = [
       { id: "6-7", label: "6–7 ft", price: 124, heightMin: 6, heightMax: 7, dims: "About 42 in wide at the base" },
     ],
     facts: { needleRetention: "Good, 4 weeks", fragrance: "Mild, sharp", branchStrength: "Very strong", shape: "Tight cone", bestFor: "Color, heavy ornaments, no pets" },
-    images: [{ src: "/images/blue-spruce.jpg", alt: "A Colorado blue spruce hung with white string lights in a farmhouse entry" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut"],
     shipsFrom: "Oregon",
     stock: "in",
@@ -330,7 +327,7 @@ export const products: Product[] = [
       "Norway spruce is the classic European Christmas tree, graceful with drooping branches and a deep green shade. It does drop needles faster than a fir, so we recommend setting it up closer to Christmas. At this price it's also a good choice for porches and outdoor displays.",
     sizes: [{ id: "5-6", label: "5–6 ft", price: 64, heightMin: 5, heightMax: 6, dims: "About 34 in wide at the base" }],
     facts: { needleRetention: "Fair, 2–3 weeks", fragrance: "Mild, spruce", branchStrength: "Light", shape: "Graceful, drooping", bestFor: "Porches, short seasons, budgets" },
-    images: [{ src: "/images/norway-spruce.jpg", alt: "A Norway spruce on a porch with a string of lanterns" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut", "Best value"],
     shipsFrom: "Oregon",
     stock: "in",
@@ -352,7 +349,7 @@ export const products: Product[] = [
       { id: "3ft", label: "3 ft", price: 59, heightMin: 2.5, heightMax: 3, dims: "In an 8 in pot" },
     ],
     facts: { needleRetention: "Good if kept cool", fragrance: "Strong for its size", branchStrength: "Medium", shape: "Small spire", bestFor: "Counters, desks, apartments, planting later" },
-    images: [{ src: "/images/tabletop.jpg", alt: "A small potted live tree on a kitchen counter next to a coffee mug" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Plantable"],
     shipsFrom: "Oregon",
     stock: "in",
@@ -391,9 +388,7 @@ export const products: Product[] = [
       ],
     },
     facts: { needleRetention: "Permanent", fragrance: "None. Add a Balsam wreath", branchStrength: "Strong, hinged", shape: "Full cone", bestFor: "Rentals, allergies, big rooms, reuse" },
-    images: [
-      { src: "/images/artificial-prelit.jpg", alt: "A pre-lit artificial tree with warm white LEDs in a modern apartment, a storage box in the background" },
-    ],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Pre-lit"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -422,7 +417,7 @@ export const products: Product[] = [
       { id: "7.5", label: "7.5 ft", price: 259, heightMin: 7.5, heightMax: 7.5, dims: "About 30 in wide" },
     ],
     facts: { needleRetention: "Permanent", fragrance: "None", branchStrength: "Medium", shape: "Slim column", bestFor: "Hallways, apartments, narrow corners" },
-    images: [{ src: "/images/slim-tree.jpg", alt: "A slim pencil tree in a narrow hallway corner with a few ornaments" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Pre-lit"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -443,7 +438,7 @@ export const products: Product[] = [
       "A 7.5-foot hinged tree with a light flocking that leaves green showing through, so it looks like the morning after a snowfall rather than a cotton ball. Pre-lit with warm-white LEDs. Flocking can shed a little at first; set it up where you can vacuum once.",
     sizes: [{ id: "7.5", label: "7.5 ft", price: 389, heightMin: 7.5, heightMax: 7.5, dims: "About 50 in wide, 3 sections" }],
     facts: { needleRetention: "Permanent", fragrance: "None", branchStrength: "Strong", shape: "Full cone", bestFor: "Winter-white rooms" },
-    images: [{ src: "/images/flocked.jpg", alt: "A frosted flocked tree beside a tall window with snow outside" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Pre-lit", "Flocked"],
     shipsFrom: "North Carolina",
     stock: "low",
@@ -463,7 +458,7 @@ export const products: Product[] = [
       "A 6-foot flat-backed tree for small rooms, stair landings, and storefront windows. Lights are LED and wired on the visible side only, so the back stays clean against a wall. It stands on a stable steel base and ships assembled in two sections.",
     sizes: [{ id: "6", label: "6 ft", price: 149, heightMin: 6, heightMax: 6, dims: "About 40 in wide, 22 in deep" }],
     facts: { needleRetention: "Permanent", fragrance: "None", branchStrength: "Medium", shape: "Flat-back cone", bestFor: "Walls, windows, stair landings" },
-    images: [{ src: "/images/half-tree.jpg", alt: "A half tree standing flat against a wall in a small living room" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Pre-lit"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -483,7 +478,7 @@ export const products: Product[] = [
       "Wide at the top and narrow at the bottom, so the floor under it is yours again. Pets and toddlers have a harder time reaching it, and the ornaments sit at eye level. Comes with a ceiling hook and a floor stand so you can choose how to hang it.",
     sizes: [{ id: "7", label: "7 ft", price: 279, heightMin: 7, heightMax: 7, dims: "About 48 in wide at the top" }],
     facts: { needleRetention: "Permanent", fragrance: "None", branchStrength: "Strong", shape: "Inverted cone", bestFor: "Small floors, pets, conversation" },
-    images: [{ src: "/images/upside-down.jpg", alt: "An upside-down Christmas tree in a living room with a ceiling hook" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Pre-lit"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -512,10 +507,7 @@ export const products: Product[] = [
       { id: "30", label: "30 ft", price: null, heightMin: 30, heightMax: 30 },
     ],
     facts: { needleRetention: "Excellent when kept in water-fed base", fragrance: "Medium to strong", branchStrength: "Very strong", shape: "Full pyramid", bestFor: "Lobbies, mall courts, patios, town squares" },
-    images: [
-      { src: "/images/commercial-lobby.jpg", alt: "A 20-foot decorated tree in a hotel lobby atrium with guests walking by" },
-      { src: "/images/commercial-install.jpg", alt: "An install crew in hi-vis vests raising a 15-foot tree on a restaurant patio at night" },
-    ],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Commercial", "Quote only"],
     shipsFrom: "Oregon",
     stock: "quote",
@@ -546,7 +538,7 @@ export const products: Product[] = [
       { id: "30", label: "30 ft", price: null, heightMin: 30, heightMax: 30 },
     ],
     facts: { needleRetention: "Permanent", fragrance: "None", branchStrength: "Steel frame", shape: "Full cone", bestFor: "Malls, hotels, offices, repeat displays" },
-    images: [{ src: "/images/commercial-mall.jpg", alt: "A 25-foot tree in a shopping mall concourse with families gathering" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Commercial", "Quote only", "Flame-retardant"],
     shipsFrom: "North Carolina",
     stock: "quote",
@@ -575,7 +567,7 @@ export const products: Product[] = [
       { id: "up-to-7", label: "Trees up to 7 ft", price: 44, dims: "Fits trunks up to 6 in" },
       { id: "up-to-9", label: "Trees up to 9 ft", price: 59, dims: "Fits trunks up to 8 in" },
     ],
-    images: [{ src: "/images/stand-watering.jpg", alt: "A water-reservoir stand under a freshly set up fir" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Stand"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -593,7 +585,7 @@ export const products: Product[] = [
     description:
       "A powder-coated steel stand with a 1.5-quart bowl. Not fancy, but it stands for years. Pair it with a skirt to cover the legs.",
     sizes: [{ id: "up-to-7", label: "Trees up to 7 ft", price: 29, dims: "Fits trunks up to 5 in" }],
-    images: [{ src: "/images/classic-metal-stand.jpg", alt: "A black steel tree stand on a wood floor" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Stand"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -611,7 +603,7 @@ export const products: Product[] = [
     description:
       "A cast-iron base with a 3-gallon reservoir and a four-point trunk clamp, rated for trees up to 20 feet and 250 pounds. Used by our own install crews, and we'll quote you anchor cables if you're setting a tree in a public space.",
     sizes: [{ id: "12-20", label: "Trees 12–20 ft", price: 189, dims: "Fits trunks up to 10 in. 38 lb." }],
-    images: [{ src: "/images/heavy-duty-stand.jpg", alt: "A heavy cast-iron tree stand with a large water reservoir" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Stand"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -629,7 +621,7 @@ export const products: Product[] = [
     description:
       "A 48-inch skirt of cotton velvet in the red of old holiday cards, trimmed with a simple brass-tone snap closure. Heavy enough to lie flat and cover a stand and a water spill.",
     sizes: [{ id: "48", label: '48"', price: 36, dims: "48 in diameter" }],
-    images: [{ src: "/images/tree-skirt.jpg", alt: "A berry-red velvet tree skirt under a fir" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Skirt"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -647,7 +639,7 @@ export const products: Product[] = [
     description:
       "A woven willow collar lined with burlap that surrounds the stand and keeps pets away from the water. Fits most 18-inch stands.",
     sizes: [{ id: "22", label: '22"', price: 54, dims: "22 in wide, 12 in tall" }],
-    images: [{ src: "/images/tree-collar.jpg", alt: "A woven willow tree collar around a stand" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Skirt"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -669,7 +661,7 @@ export const products: Product[] = [
       { id: "36", label: '36"', price: 69, dims: "36 in across" },
       { id: "48", label: '48"', price: 119, dims: "48 in across" },
     ],
-    images: [{ src: "/images/wreath.jpg", alt: "A fresh fir wreath hanging on a weathered red door" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -690,7 +682,7 @@ export const products: Product[] = [
       { id: "9ft", label: "9 ft", price: 54, dims: "9 ft long, about 10 in wide" },
       { id: "18ft", label: "18 ft", price: 98, dims: "18 ft long, about 10 in wide" },
     ],
-    images: [{ src: "/images/garland.jpg", alt: "Fresh evergreen garland on a staircase banister with warm white lights" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Fresh cut"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -708,7 +700,7 @@ export const products: Product[] = [
     description:
       "A set of 30 mouth-blown glass ornaments in three colors that go with our palette: cranberry, brass, and ivory. Packed in a divided box that doubles as storage. Includes a bag of 50 brass hooks.",
     sizes: [{ id: "30", label: "Set of 30", price: 34, dims: "2.4 in each" }],
-    images: [{ src: "/images/ornaments.jpg", alt: "Cranberry, brass and ivory glass ornaments in a divided box" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Ornaments"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -726,7 +718,7 @@ export const products: Product[] = [
     description:
       "A heavy-duty bag that goes around the tree before you take it down. Fits trees up to 9 feet. Pull it up from the base and you've caught nearly every needle. Two in a pack.",
     sizes: [{ id: "2pk", label: "2-pack", price: 12, dims: "Fits up to 9 ft" }],
-    images: [{ src: "/images/removal-bags.jpg", alt: "A tree removal bag around a fir in a living room" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Cleanup"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -744,7 +736,7 @@ export const products: Product[] = [
     description:
       "A powder that mixes into the stand water to keep the cut sap from closing too fast. It won't keep a bad tree fresh, but it'll help a good one keep needles an extra week. One bag treats about five fills.",
     sizes: [{ id: "8oz", label: "8 oz bag", price: 9, dims: "Treats 5 gallons" }],
-    images: [{ src: "/images/preservative.jpg", alt: "A paper bag of tree preservative next to a tree stand" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Care"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -765,7 +757,7 @@ export const products: Product[] = [
       { id: "warm", label: "Warm white, 50", price: 8, dims: "50 bulbs, 10 fuses" },
       { id: "multi", label: "Multicolor, 50", price: 8, dims: "50 bulbs, 10 fuses" },
     ],
-    images: [{ src: "/images/bulbs.jpg", alt: "A small box of spare LED bulbs and fuses with a bulb puller" }],
+    images: [], // set in copy.ts: /images/<slug>.webp
     badges: ["Spare parts"],
     shipsFrom: "North Carolina",
     stock: "in",
@@ -774,3 +766,7 @@ export const products: Product[] = [
     inTheBox: ["50 bulbs", "10 fuses", "Bulb puller"],
   },
 ];
+
+import { applyCopy } from "./copy";
+
+export const products: Product[] = base.map(applyCopy);

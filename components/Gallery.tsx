@@ -14,7 +14,7 @@ export default function Gallery({ images }: { images: Img[] }) {
   return (
     <div>
       <div
-        className={`relative aspect-[4/5] overflow-hidden border border-ink/20 ${zoom ? "cursor-zoom-out" : "cursor-zoom-in"}`}
+        className={`relative aspect-[4/5] overflow-hidden plate ${zoom ? "cursor-zoom-out" : "cursor-zoom-in"}`}
         onMouseMove={(e) => {
           if (!zoom) return;
           const r = e.currentTarget.getBoundingClientRect();
@@ -32,8 +32,8 @@ export default function Gallery({ images }: { images: Img[] }) {
         <ul className="flex gap-3 mt-3" aria-label="Photos">
           {images.map((im, n) => (
             <li key={im.src} className="w-20 md:w-24">
-              <button onClick={() => { setI(n); setZoom(false); }} aria-label={`Show photo ${n + 1}`} aria-current={n === i} className={`block w-full border ${n === i ? "border-berry border-2" : "border-ink/25"}`}>
-                <Photo src={im.src} alt="" sizes="96px" grain={false} className="aspect-square" />
+              <button onClick={() => { setI(n); setZoom(false); }} aria-label={`Show photo ${n + 1}`} aria-current={n === i} className={`block w-full border ${n === i ? "border-spruce border-2" : "border-ink/25"}`}>
+                <Photo src={im.src} alt="" sizes="96px" className="aspect-square" />
               </button>
             </li>
           ))}

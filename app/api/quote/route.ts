@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
-import { sendMail } from "@/lib/mail";
+import { sendMail, sendReceipt } from "@/lib/mail";
+import { limited } from "@/lib/ratelimit";
 
 const s = (v: unknown, max = 500) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
 export async function POST(req: Request) {
+  if (limited(req)) return NextResponse.json({ error: "Too many requests. Please wait a minute." }, { status: 429 });
   let b: Record<string, unknown>;
   try { b = await req.json(); } catch { return NextResponse.json({ error: "Bad request" }, { status: 400 }); }
 
@@ -32,5 +34,6 @@ export async function POST(req: Request) {
     console.error("quote mail failed", e);
     return NextResponse.json({ error: "We couldn't send that. Please email us directly." }, { status: 502 });
   }
+  await sendReceipt(d.email, "We have your quote request", `Hello ${d.name},\n\nThanks for your request for ${d.quantity} tree(s) at ${d.height} ft in ${d.state}. A person will reply within one business day with pricing.\n\nYour details:\n${text}`);
   return NextResponse.json({ ok: true });
 }

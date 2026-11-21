@@ -1,81 +1,109 @@
 @import "tailwindcss";
-@import "@fontsource-variable/fraunces/opsz.css";
-@import "@fontsource-variable/fraunces/opsz-italic.css";
-@import "@fontsource-variable/instrument-sans/index.css";
 
+/*
+  Palette (Winter Dusk): midnight indigo, bark brown, cream paper. Cranberry is reserved for sale and urgency
+  (order-by dates, low stock, errors). Do not use it as a decoration colour.
+*/
 @theme {
-  --color-paper: #f4eee3;
-  --color-ink: #1d1b30;
-  --color-forest: #2b2a6b;
-  --color-fir: #1a1745;
-  --color-berry: #8c2f2b;
-  --color-brass: #b08a3e;
-  --color-muted: #6b6a7d;
-  --font-serif: "Fraunces Variable", Georgia, serif;
-  --font-sans: "Instrument Sans Variable", system-ui, sans-serif;
+  /* Dark theme: night spruce background, cream text, gold accent. Cranberry is for sale and urgency only. */
+  --color-paper: #0f0d28;       /* page background (midnight indigo) */
+  --color-paper-deep: #1b1844;  /* raised surfaces, empty photo slots */
+  --color-ink: #efe6d2;         /* body text */
+  --color-cream: #f4ecda;       /* light text on coloured bars */
+  --color-spruce: #d8b76a;      /* accent: buttons, links, focus (gold) */
+  --color-forest: #d8b76a;
+  --color-fir: #08071a;         /* footer and deep panels */
+  --color-bark: #b8a67e;        /* labels and rules */
+  --color-tan: #d8b76a;         /* gold text */
+  --color-gold: #c9a55c;        /* underlines, rules */
+  --color-straw: #dcc48f;
+  --color-muted: #a9a08a;
+  --color-cranberry: #a32638;   /* sale bar background */
+  --color-sale: #ff8d98;        /* sale and urgency text on dark */
+
   --breakpoint-xs: 30rem;
+
+  /* Type scale: seven sizes, used the same way everywhere.
+     body / small / lead / h4 / h3 / h2 / h1, plus one display size for the home masthead. */
+  --text-xs: 0.875rem;   --text-xs--line-height: 1.5;
+  --text-sm: 0.9375rem;  --text-sm--line-height: 1.55;
+  --text-base: 1.0625rem; --text-base--line-height: 1.65;
+  --text-lg: 1.25rem;    --text-lg--line-height: 1.55;
+  --text-xl: 1.5rem;     --text-xl--line-height: 1.3;
+  --text-2xl: 1.5rem;    --text-2xl--line-height: 1.3;
+  --text-3xl: 2rem;      --text-3xl--line-height: 1.15;
+  --text-4xl: 2rem;      --text-4xl--line-height: 1.15;
+  --text-5xl: clamp(2.25rem, 1.3rem + 3.2vw, 3.5rem);  --text-5xl--line-height: 1.04;
+  --text-6xl: clamp(2.75rem, 1.5rem + 4.6vw, 4.75rem); --text-6xl--line-height: 1;
+  --text-7xl: clamp(2.75rem, 1.5rem + 4.6vw, 4.75rem); --text-7xl--line-height: 1;
+  --text-8xl: clamp(3.25rem, 1.4rem + 6.6vw, 6.5rem);  --text-8xl--line-height: .96;
 }
 
 html {
   background: var(--color-paper);
   color: var(--color-ink);
+  color-scheme: dark;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-instrument), system-ui, sans-serif;
   font-size: 1.0625rem;
   line-height: 1.65;
-  font-feature-settings: "ss01";
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--color-paper);
 }
 main { flex: 1; }
-/* grid children may shrink below their content width (stops long words/tables stretching the page) */
 .grid > * { min-width: 0; }
+::selection { background: var(--color-straw); color: var(--color-fir); }
 
-::selection { background: var(--color-brass); color: var(--color-fir); }
-
-.serif { font-family: var(--font-serif); font-variation-settings: "opsz" 96; letter-spacing: -0.02em; }
-.serif-text { font-family: var(--font-serif); font-variation-settings: "opsz" 20; letter-spacing: -0.005em; }
+/* type */
+.serif { font-family: var(--font-fraunces), Georgia, serif; font-variation-settings: "opsz" 96; letter-spacing: -0.015em; }
+.serif-text { font-family: var(--font-fraunces), Georgia, serif; font-variation-settings: "opsz" 24; letter-spacing: 0; }
 .num { font-variant-numeric: tabular-nums lining-nums; }
+/* real small caps: lowercase letters set as capitals at small-cap size */
 .label {
-  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  font-variant-caps: all-small-caps; font-feature-settings: "smcp", "c2sc";
+  letter-spacing: 0.1em; font-size: 1.0625rem; font-weight: 600; line-height: 1.3;
 }
-.rule { border-color: color-mix(in srgb, var(--color-ink) 22%, transparent); }
+.rule { border-color: color-mix(in srgb, var(--color-bark) 35%, transparent); }
+.rule-double { border-top: 4px double var(--color-bark); }
 
-:focus-visible { outline: 2px solid var(--color-berry); outline-offset: 3px; border-radius: 2px; }
-.on-dark :focus-visible { outline-color: var(--color-brass); }
+:focus-visible { outline: 3px solid var(--color-spruce); outline-offset: 3px; border-radius: 2px; }
+.on-dark :focus-visible { outline-color: var(--color-straw); }
 
+/* buttons: flat, solid, square. No gradients, no shadows. */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-  padding: .85rem 1.5rem; font-weight: 600; font-size: .95rem; letter-spacing: .01em;
-  border: 1px solid var(--color-ink); transition: background .2s, color .2s, border-color .2s;
+  padding: .85rem 1.5rem; font-weight: 600; font-size: .9375rem; letter-spacing: .01em;
+  border: 2px solid var(--color-spruce); transition: background .2s, color .2s, border-color .2s;
   cursor: pointer; text-align: center;
 }
-.btn-primary { background: var(--color-berry); color: var(--color-paper); border-color: var(--color-berry); }
-.btn-primary:hover { background: var(--color-fir); border-color: var(--color-fir); }
-.btn-ghost:hover { background: var(--color-ink); color: var(--color-paper); }
-.btn-brass { background: var(--color-brass); border-color: var(--color-brass); color: var(--color-fir); }
-.btn-brass:hover { background: var(--color-paper); border-color: var(--color-paper); }
-.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.btn-primary { background: var(--color-spruce); color: var(--color-paper); }
+.btn-primary:hover { background: var(--color-straw); border-color: var(--color-straw); }
+.btn-ghost { color: var(--color-spruce); }
+.btn-ghost:hover { background: var(--color-spruce); color: var(--color-paper); }
+.btn-straw { background: var(--color-straw); border-color: var(--color-straw); color: var(--color-fir); }
+.btn-straw:hover { background: var(--color-cream); border-color: var(--color-cream); }
+.btn[disabled] { opacity: .55; cursor: not-allowed; }
 
 .field {
-  width: 100%; background: transparent; border: 0; border-bottom: 1px solid var(--color-ink);
+  min-height: 2.75rem;
+  width: 100%; background: transparent; border: 0; border-bottom: 2px solid color-mix(in srgb, var(--color-bark) 70%, transparent);
   padding: .55rem 0; font: inherit; color: inherit; border-radius: 0;
 }
-.field:focus { outline: none; border-bottom-width: 2px; padding-bottom: calc(.55rem - 1px); border-color: var(--color-berry); }
+.field:focus { outline: none; border-color: var(--color-spruce); box-shadow: 0 2px 0 var(--color-spruce); }
 select.field { appearance: none; background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: calc(100% - 14px) 55%, calc(100% - 9px) 55%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 1.6rem; }
-.on-dark .field { border-color: color-mix(in srgb, var(--color-paper) 60%, transparent); }
+.on-dark .field { border-color: color-mix(in srgb, var(--color-cream) 65%, transparent); }
+.on-dark .field:focus { border-color: var(--color-straw); box-shadow: 0 2px 0 var(--color-straw); }
 
-.grain::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .14; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
+/* a printed plate: photo with a thin keyline and a cream margin */
+.plate { background: var(--color-paper); padding: 6px; border: 1px solid color-mix(in srgb, var(--color-bark) 55%, transparent); }
 
-/* scroll reveal: only hidden once JS has marked the document */
-.js [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+/* scroll reveal: hidden only once JS has marked the document */
+.js [data-reveal] { opacity: 0; transform: translateY(12px); transition: opacity .7s ease, transform .7s ease; }
 .js [data-reveal].in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -83,36 +111,84 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
   * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
-.prose-care h2 { font-family: var(--font-serif); font-variation-settings: "opsz" 72; font-size: 2rem; line-height: 1.1; letter-spacing: -.02em; margin: 3.2rem 0 1rem; }
+.prose-care h2 { font-family: var(--font-fraunces), Georgia, serif; font-variation-settings: "opsz" 72; font-size: 2rem; line-height: 1.12; letter-spacing: -.015em; margin: 3rem 0 .9rem; }
 .prose-care h3 { font-weight: 600; margin: 2rem 0 .4rem; }
 .prose-care p { margin: 0 0 1.1rem; }
-.prose-care ul { margin: 0 0 1.2rem 1.1rem; list-style: square; }
+.prose-care ul { margin: 0 0 1.2rem 1.2rem; list-style: square; }
+.prose-care ol { margin: 0 0 1.2rem 1.4rem; list-style: decimal; }
 .prose-care li { margin-bottom: .4rem; }
-.prose-care a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--color-berry); }
+.prose-care a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; text-decoration-color: var(--color-tan); }
+.prose-care a:hover { text-decoration-color: var(--color-spruce); }
+.drop::first-letter { font-family: var(--font-fraunces), Georgia, serif; float: left; font-size: 4.4rem; line-height: .8; padding: .35rem .6rem 0 0; color: var(--color-spruce); }
 
-.drop::first-letter { font-family: var(--font-serif); float: left; font-size: 4.6rem; line-height: .8; padding: .35rem .6rem 0 0; color: var(--color-berry); }
+/* Hero photo: a slow push-in, a light drift, and the lights breathing. Off for people who ask for less motion. */
+@keyframes hero-push { from { transform: scale(1.02) translate3d(0, 0, 0); } to { transform: scale(1.09) translate3d(-1.2%, -1%, 0); } }
+@keyframes hero-lights { 0%, 100% { filter: brightness(1) saturate(1); } 50% { filter: brightness(1.09) saturate(1.1); } }
+.motion-photo { animation: hero-push 26s ease-in-out infinite alternate, hero-lights 5.5s ease-in-out infinite; will-change: transform, filter; }
+@media (prefers-reduced-motion: reduce) { .motion-photo { animation: none; will-change: auto; } }
 
-/* ---- Winter Dusk: midnight-indigo sections with drifting aurora, falling snow and twinkling lights ---- */
-.dusk {
-  position: relative; overflow: hidden; isolation: isolate;
+/* ---------- Alternate home-delivery page (app/(delivery)). Uses the shop's own fonts (Fraunces + Instrument Sans) on a warm paper palette. ---------- */
+.dl {
+  --dl-green: #1f3a2d; --dl-deep: #12281d; --dl-cream: #f4ecda; --dl-card: #e8ddc5;
+  --dl-gold: #dcc48f; --dl-bark: #5a4130; --dl-cran: #a32638; --dl-ink: #2b2118; --dl-muted: #665747;
+  background: var(--dl-cream); color: var(--dl-ink); color-scheme: light;
+  font-family: var(--font-instrument), system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.65;
+}
+.dl .serif-dl { font-family: var(--font-fraunces), Georgia, serif; font-variation-settings: "opsz" 96; font-weight: 400; letter-spacing: -0.015em; }
+.dl .num { font-variant-numeric: tabular-nums lining-nums; }
+.dl :focus-visible { outline: 3px solid var(--dl-green); outline-offset: 3px; }
+.dl .on-dark :focus-visible, .dl .dl-dark :focus-visible { outline-color: var(--dl-gold); }
+.dl .dl-wrap { max-width: 1200px; margin-inline: auto; padding-inline: 1.25rem; }
+@media (min-width: 768px) { .dl .dl-wrap { padding-inline: 2rem; } }
+.dl .dl-section { padding-block: 4rem; }
+@media (min-width: 768px) { .dl .dl-section { padding-block: 6rem; } }
+.dl .dl-eyebrow { font-variant-caps: all-small-caps; font-feature-settings: "smcp","c2sc"; letter-spacing: .12em; font-size: 1.0625rem; font-weight: 600; }
+.dl .dl-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 3rem; padding: .75rem 1.6rem;
+  font-weight: 600; font-size: .9375rem; letter-spacing: .02em; text-align: center; border: 2px solid transparent;
+  transition: background .2s, color .2s, border-color .2s; cursor: pointer;
+}
+.dl .dl-btn-gold { background: var(--dl-gold); border-color: var(--dl-gold); color: var(--dl-deep); }
+.dl .dl-btn-gold:hover { background: var(--dl-cream); border-color: var(--dl-cream); }
+.dl .dl-btn-green { background: var(--dl-green); border-color: var(--dl-green); color: var(--dl-cream); }
+.dl .dl-btn-green:hover { background: var(--dl-deep); border-color: var(--dl-deep); }
+.dl .dl-btn-ghost { border-color: var(--dl-green); color: var(--dl-green); }
+.dl .dl-btn-ghost:hover { background: var(--dl-green); color: var(--dl-cream); }
+.dl .dl-btn[disabled] { opacity: .6; cursor: not-allowed; }
+.dl .dl-field { width: 100%; min-height: 3rem; background: transparent; border: 0; border-bottom: 2px solid color-mix(in srgb, var(--dl-bark) 70%, transparent); padding: .55rem 0; font: inherit; color: inherit; border-radius: 0; }
+.dl .dl-field:focus { outline: none; border-color: var(--dl-green); box-shadow: 0 2px 0 var(--dl-green); }
+.dl select.dl-field { appearance: none; background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: calc(100% - 14px) 55%, calc(100% - 9px) 55%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 1.6rem; }
+.dl .dl-dark .dl-field { border-color: color-mix(in srgb, var(--dl-cream) 65%, transparent); }
+.dl .dl-dark .dl-field:focus { border-color: var(--dl-gold); box-shadow: 0 2px 0 var(--dl-gold); }
+.dl .dl-label { display: block; font-variant-caps: all-small-caps; font-feature-settings: "smcp","c2sc"; letter-spacing: .1em; font-size: 1rem; font-weight: 600; margin-bottom: .1rem; }
+.dl .dl-check { width: 1.5rem; height: 1.5rem; accent-color: var(--dl-green); flex: none; margin-top: .15rem; }
+.dl .dl-plate { background: var(--dl-cream); padding: 6px; border: 1px solid color-mix(in srgb, var(--dl-bark) 55%, transparent); }
+.dl .dl-range { width: 100%; height: 2rem; accent-color: var(--dl-green); cursor: pointer; }
+.dl .text-sale { color: var(--dl-cran); }
+.dl .text-muted { color: var(--dl-muted); }
+.dl details > summary::-webkit-details-marker { display: none; }
+
+/* ---- Winter Dusk: drifting aurora, falling snow and twinkling lights on dark sections ---- */
+.dusk { position: relative; overflow: hidden; isolation: isolate; background: var(--color-fir); }
+/* The aurora is a layer that only moves with transform, so the browser animates it on the GPU and the page never repaints. */
+.dusk::before {
+  content: ""; position: absolute; inset: -30%; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(60rem 30rem at 15% -10%, color-mix(in srgb, #7b5cff 38%, transparent), transparent 60%),
-    radial-gradient(50rem 28rem at 90% 10%, color-mix(in srgb, #ff6b8a 24%, transparent), transparent 62%),
-    radial-gradient(44rem 26rem at 50% 120%, color-mix(in srgb, #3ad1c4 20%, transparent), transparent 65%),
-    var(--color-fir);
-  background-size: 140% 140%, 140% 140%, 140% 140%, auto;
-  animation: aurora 22s ease-in-out infinite alternate;
+    radial-gradient(closest-side at 22% 18%, color-mix(in srgb, #7b5cff 38%, transparent), transparent),
+    radial-gradient(closest-side at 80% 24%, color-mix(in srgb, #ff6b8a 24%, transparent), transparent),
+    radial-gradient(closest-side at 50% 82%, color-mix(in srgb, #3ad1c4 20%, transparent), transparent);
+  animation: aurora 22s ease-in-out infinite alternate; will-change: transform;
 }
 @keyframes aurora {
-  0%   { background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; }
-  100% { background-position: 40% 30%, 60% 20%, 30% 80%, 0 0; }
+  from { transform: translate3d(-5%, -3%, 0) rotate(0deg); }
+  to   { transform: translate3d(5%, 3%, 0) rotate(6deg); }
 }
 .snow { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
 
 .lights { display: flex; justify-content: space-between; height: 22px; padding: 0 1rem; position: relative; }
-.lights::before { content: ""; position: absolute; left: 0; right: 0; top: 3px; height: 8px; border-bottom: 1.5px solid color-mix(in srgb, var(--color-paper) 35%, transparent); border-radius: 0 0 50% 50% / 0 0 100% 100%; }
+.lights::before { content: ""; position: absolute; left: 0; right: 0; top: 3px; height: 8px; border-bottom: 1.5px solid color-mix(in srgb, var(--color-cream) 35%, transparent); border-radius: 0 0 50% 50% / 0 0 100% 100%; }
 .lights i {
-  --c: var(--color-brass);
+  --c: var(--color-gold);
   position: relative; top: 8px; width: 7px; height: 11px; border-radius: 50% 50% 55% 55%;
   background: var(--c); box-shadow: 0 0 10px 2px var(--c);
   animation: twinkle 2.6s ease-in-out infinite;
@@ -122,4 +198,9 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
 .lights i:nth-child(4n+3) { --c: #5ee6d6; animation-delay: -1.8s; }
 .lights i:nth-child(4n)   { --c: #9d8cff; animation-delay: -2.3s; }
 @keyframes twinkle { 0%,100% { opacity: .35; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.1); } }
-@media (prefers-reduced-motion: reduce) { .dusk { animation: none; } .lights i { animation: none; opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .dusk::before { animation: none; will-change: auto; } .lights i { animation: none; opacity: .9; } }
+
+/* ---------- Tap targets: every link, button and field is at least 44px tall ---------- */
+p > a:only-child, li > a:only-child, dd > a:only-child { display: inline-flex; align-items: center; min-height: 2.75rem; min-width: 2.75rem; }
+summary { min-height: 2.75rem; align-items: center; }
+.tap { display: inline-flex; align-items: center; min-height: 2.75rem; min-width: 2.75rem; }

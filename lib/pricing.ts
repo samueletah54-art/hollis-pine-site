@@ -1,4 +1,5 @@
 import { bySlug, findSize } from "./catalog";
+import { salePrice } from "./promo";
 
 export type CartLine = { slug: string; sizeId: string; option?: string; qty: number };
 
@@ -8,6 +9,8 @@ export type Priced = {
   sizeLabel: string;
   optionLabel?: string;
   unit: number;
+  /** Price before the Black Friday offer, when one applies */
+  originalUnit: number;
   total: number;
   category: string;
   image?: string;
@@ -15,17 +18,21 @@ export type Priced = {
 
 export const FREE_SHIPPING_ARTIFICIAL = 250;
 
-export const priceLines = (lines: CartLine[]): Priced[] =>
+export const priceLines = (lines: CartLine[], now: Date = new Date()): Priced[] =>
   lines.flatMap((line) => {
     const p = bySlug(line.slug);
     const s = p && findSize(p, line.sizeId);
     if (!p || !s || s.price === null) return [];
     const qty = Math.max(1, Math.min(20, Math.floor(line.qty)));
     const opt = p.option?.values.find((v) => v.id === line.option);
-    return [{ line: { ...line, qty }, name: p.name, sizeLabel: s.label, optionLabel: opt?.label, unit: s.price, total: s.price * qty, category: p.category, image: p.images[0]?.src }];
+    const unit = salePrice(s.price, p.category, now);
+    return [{ line: { ...line, qty }, name: p.name, sizeLabel: s.label, optionLabel: opt?.label, unit, originalUnit: s.price, total: unit * qty, category: p.category, image: p.images[0]?.src }];
   });
 
 export const subtotal = (priced: Priced[]) => priced.reduce((n, x) => n + x.total, 0);
+
+/** Total saved by the offer, in dollars. */
+export const savings = (priced: Priced[]) => priced.reduce((n, x) => n + (x.originalUnit - x.unit) * x.line.qty, 0);
 
 /** Shipping estimate in dollars. Stripe Checkout charges exactly this. */
 export const shipping = (priced: Priced[]): number => {

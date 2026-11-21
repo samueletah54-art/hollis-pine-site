@@ -33,7 +33,7 @@ export async function POST(req: Request) {
         price_data: {
           currency: "usd",
           unit_amount: Math.round(x.unit * 100),
-          product_data: { name: x.name, description: [x.sizeLabel, x.optionLabel].filter(Boolean).join(" · ") },
+          product_data: { name: x.name, description: [x.sizeLabel, x.optionLabel, x.originalUnit > x.unit ? "Black Friday price" : ""].filter(Boolean).join(", ") },
         },
       })),
       shipping_address_collection: { allowed_countries: ["US"] },

@@ -1,19 +1,20 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Hollis & Pine Tree Co. Real trees, cut for the week you need them.";
+export const alt = "Hollis & Pine Tree Co. Real trees, cut the week they ship.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function OG() {
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#f4eee3", color: "#1d1b30", padding: 72, fontFamily: "Georgia, serif" }}>
-        <div style={{ display: "flex", fontSize: 26, letterSpacing: 4, textTransform: "uppercase", color: "#8c2f2b" }}>Tree Co. · Est. 1987</div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 120, lineHeight: 1, letterSpacing: -3 }}>Hollis &amp; Pine</div>
-          <div style={{ fontSize: 44, marginTop: 24, maxWidth: 900, lineHeight: 1.15 }}>Real trees, cut for the week you need them.</div>
+      <div style={{ width: "100%", height: "100%", display: "flex", background: "#0f0d28", color: "#efe6d2", fontFamily: "Georgia, serif", padding: 36 }}>
+        <div style={{ display: "flex", flex: 1, border: "5px solid #c9a55c", padding: 64, flexDirection: "column", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", fontSize: 24, letterSpacing: 6, textTransform: "uppercase", color: "#d8b76a" }}>Christmas trees, shipped fresh</div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ fontSize: 112, lineHeight: 1 }}>Hollis &amp; Pine</div>
+            <div style={{ fontSize: 44, marginTop: 24, lineHeight: 1.2, color: "#efe6d2" }}>Real trees, cut the week they ship.</div>
+          </div>
         </div>
-        <div style={{ display: "flex", height: 10, background: "#2b2a6b" }} />
       </div>
     ),
     size,

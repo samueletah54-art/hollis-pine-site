@@ -1,9 +1,12 @@
 import Link from "next/link";
 import type { Product } from "@/data/products";
 import { reviews } from "@/data/reviews";
+import Banner from "./Banner";
+import Divider from "./Divider";
 import { heightRange, money, priceFrom, related, urlFor } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
 import Gallery from "./Gallery";
+import Reviews from "./Reviews";
 import JsonLd from "./JsonLd";
 import ProductTile from "./ProductTile";
 import Purchase from "./Purchase";
@@ -40,7 +43,7 @@ export default function ProductPage({ p }: { p: Product }) {
     ...(revs.length
       ? {
           aggregateRating: { "@type": "AggregateRating", ratingValue: avg.toFixed(1), reviewCount: revs.length },
-          review: revs.map((r) => ({ "@type": "Review", author: { "@type": "Person", name: r.name }, datePublished: r.date, name: r.title, reviewBody: r.body, reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 } })),
+          review: revs.map((r) => ({ "@type": "Review", author: { "@type": "Person", name: r.name }, datePublished: r.date, ...(r.title ? { name: r.title } : {}), reviewBody: r.body, reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 } })),
         }
       : {}),
   };
@@ -59,22 +62,22 @@ export default function ProductPage({ p }: { p: Product }) {
           <div className="flex flex-wrap gap-2 mb-4">{p.badges.map((b) => (<span key={b} className="label border border-ink/60 px-2 py-1">{b}</span>))}</div>
           <h1 className="serif text-5xl md:text-6xl leading-[.95]">{p.name}</h1>
           <p className="serif-text italic text-xl mt-4 text-ink/85">{p.tagline}</p>
-          <p className="text-sm text-muted mt-3">Ships from {p.shipsFrom}{heightRange(p) ? ` · ${heightRange(p)}` : ""}{revs.length ? ` · ${avg.toFixed(1)} of 5 from ${revs.length} ${revs.length === 1 ? "review" : "reviews"}` : ""}</p>
-          <div className="mt-8 border-t border-ink pt-8"><Purchase p={p} /></div>
+          <p className="text-sm text-muted mt-3">Ships from {p.shipsFrom}{heightRange(p) ? `, ${heightRange(p)}` : ""}{revs.length ? `. ${avg.toFixed(1)} of 5 from ${revs.length} ${revs.length === 1 ? "review" : "reviews"}` : ""}</p>
+          <div className="mt-8 border-t-[3px] border-double border-bark/60 pt-8"><Purchase p={p} /></div>
         </div>
       </div>
 
       <div className="grid lg:grid-cols-12 gap-x-12 gap-y-16 mt-20 md:mt-28">
         <section className="lg:col-span-6" aria-labelledby="about">
-          <h2 id="about" className="label text-berry mb-4">About this {p.category === "addon" ? "item" : "tree"}</h2>
+          <h2 id="about" className="label text-bark mb-4">About this {p.category === "addon" ? "item" : "tree"}</h2>
           <p className="serif-text text-xl md:text-2xl leading-snug">{p.description}</p>
         </section>
 
         {p.facts && (
           <section className="lg:col-span-5 lg:col-start-8" aria-labelledby="facts">
-            <h2 id="facts" className="label text-berry mb-4">Species facts</h2>
-            <dl className="border-t border-ink">
-              {([["Needle retention", p.facts.needleRetention], ["Fragrance", p.facts.fragrance], ["Branch strength", p.facts.branchStrength], ["Shape", p.facts.shape], ["Best for", p.facts.bestFor]] as const).map(([k, v]) => (
+            <h2 id="facts" className="label text-bark mb-4">The facts</h2>
+            <dl className="border-t-[3px] border-double border-bark/60">
+              {([["Needles", p.facts.needleRetention], ...(p.facts.indoors ? [["Lasts indoors", p.facts.indoors] as const] : []), ["Scent", p.facts.fragrance], ["Branch strength", p.facts.branchStrength], ["Shape", p.facts.shape], ["Best for", p.facts.bestFor]] as const).map(([k, v]) => (
                 <div key={k} className="grid grid-cols-[7rem_minmax(0,1fr)] sm:grid-cols-[9rem_minmax(0,1fr)] gap-4 py-3 border-b rule">
                   <dt className="label text-muted pt-1">{k}</dt>
                   <dd>{v}</dd>
@@ -85,36 +88,27 @@ export default function ProductPage({ p }: { p: Product }) {
         )}
 
         <section className="lg:col-span-5" aria-labelledby="box">
-          <h2 id="box" className="label text-berry mb-4">What's in the box</h2>
-          <ul className="border-t border-ink">{p.inTheBox.map((x) => (<li key={x} className="py-3 border-b rule flex gap-4"><span className="text-brass label pt-1">+</span>{x}</li>))}</ul>
+          <h2 id="box" className="label text-bark mb-4">What's in the box</h2>
+          <ul className="border-t-[3px] border-double border-bark/60">{p.inTheBox.map((x) => (<li key={x} className="py-3 border-b rule flex gap-4"><span className="text-tan label pt-1">+</span>{x}</li>))}</ul>
         </section>
 
         {p.care && (
           <section className="lg:col-span-6 lg:col-start-7" aria-labelledby="care">
-            <h2 id="care" className="label text-berry mb-4">Care</h2>
-            <ol className="border-t border-ink">{p.care.map((x, i) => (<li key={x} className="py-3 border-b rule grid grid-cols-[2.5rem_1fr]"><span className="serif text-2xl text-brass num">{i + 1}</span><span>{x}</span></li>))}</ol>
-            <p className="mt-4 text-sm"><Link href="/care" className="underline underline-offset-4 decoration-berry">The full care guide</Link></p>
+            <h2 id="care" className="label text-bark mb-4">Care</h2>
+            <ol className="border-t-[3px] border-double border-bark/60">{p.care.map((x, i) => (<li key={x} className="py-3 border-b rule grid grid-cols-[2.5rem_1fr]"><span className="serif text-2xl text-tan num">{i + 1}</span><span>{x}</span></li>))}</ol>
+            <p className="mt-4 text-sm"><Link href="/care" className="underline underline-offset-4 decoration-gold">The full care guide</Link></p>
           </section>
         )}
       </div>
 
-      <section className="mt-24 border-t border-ink pt-8" aria-labelledby="reviews">
-        <h2 id="reviews" className="serif text-4xl md:text-5xl">Reviews</h2>
-        {revs.length === 0 ? (
-          <p className="mt-4 text-muted max-w-[52ch]">No reviews of this one yet. If you've had one, <a className="underline underline-offset-4" href={`mailto:${SITE.email}?subject=Review: ${p.name}`}>tell us how it went</a>.</p>
-        ) : (
-          <ul className="mt-8 grid md:grid-cols-2 gap-x-12 gap-y-10">
-            {revs.map((r) => (
-              <li key={r.name + r.date} className="border-t rule pt-4">
-                <p className="label text-brass" aria-label={`${r.rating} out of 5`}>{"★".repeat(r.rating)}<span className="text-ink/25">{"★".repeat(5 - r.rating)}</span></p>
-                <h3 className="serif-text text-xl mt-1">{r.title}</h3>
-                <p className="mt-2">{r.body}</p>
-                <p className="text-sm text-muted mt-3">{r.name}, {r.city}, {r.state}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      {p.needlesImage && (
+        <section className="mt-24 -mx-5 md:-mx-10" aria-label="Up close">
+          <Banner src={p.needlesImage.src} alt={p.needlesImage.alt} caption={`${p.species ?? p.name}, up close`} />
+        </section>
+      )}
+
+      <Reviews slug={p.slug} heading="Reviews" nested />
+
 
       {rel.length > 0 && (
         <section className="mt-24" aria-labelledby="related">

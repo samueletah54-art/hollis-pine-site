@@ -1,19 +1,51 @@
 # Hollis & Pine Tree Co.
 
-Next.js 16 (App Router) + TypeScript + Tailwind 4.
+Next.js 16 (App Router) · TypeScript · Tailwind 4.
 
 ```bash
 npm install
 cp .env.example .env.local   # optional: Stripe, Resend, site URL
 npm run dev                  # http://localhost:3000
 npm run build && npm start
+npx vercel --prod            # deploy
 ```
 
+## Read these first
+- `CLIENT-TO-CONFIRM.md`: every claim, address and policy that must be confirmed before the site goes public.
+- `IMAGE-PROMPTS.md`: the 52 images the site needs, with file names, ratios and prompts, and the order to make them in.
+
+## Routes
+- `app/(site)/…`: the shop (home, shop, trees, extras, cart, checkout, guide, care, delivery, business, legal). Has the dark header, footer, cart drawer and promo bar (`components/SiteChrome.tsx`).
+- `app/(delivery)/tree-delivery`: an alternate, light "home delivery" landing page with its own header and footer (`components/delivery/`). Prices and rules come from the same catalogue and `lib/pricing.ts`. Not linked from the main nav yet.
+- `/guide`: five-question "Find your tree" quiz (`components/TreeQuiz.tsx`). `/accessibility`: accessibility statement.
+- The shop has a search box (`?q=`). The cart suggests a stand and small add-ons (`components/CartUpsell.tsx`).
+
 ## Where things live
-- `data/products.ts`: the whole catalog (30 products). `lib/catalog.ts` is the only importer, so swapping in Shopify/Stripe Products means changing that layer.
-- `data/reviews.ts`: **placeholder reviews, replace with real ones before launch.**
-- `lib/pricing.ts`: shipping rules and price math. Checkout re-prices every cart on the server.
-- `lib/delivery.ts`: Mon–Wed live shipping windows, ZIP estimates, Dec 12 order-by.
-- `app/api/checkout`: Stripe Checkout. With no `STRIPE_SECRET_KEY` it runs in demo mode and takes no payment.
-- `app/api/quote`, `/contact`, `/newsletter`: email via Resend if `RESEND_API_KEY` is set, otherwise logged to the server console.
-- Photos: see `IMAGES.md`.
+- `data/products.ts`: the catalogue (30 products). `data/copy.ts`: product wording and the image slot for each product (`/images/<slug>.webp`).
+- `data/business.ts`: address, phone, email, hours, order-by date. Override any of them with the `NEXT_PUBLIC_*` variables in `.env.example`, no code change needed.
+- `data/reviews.ts`: **sample** reviews, hidden unless `NEXT_PUBLIC_SAMPLE_REVIEWS=1`.
+- `lib/pricing.ts`: shipping rules and price maths. Checkout re-prices every cart on the server.
+- `lib/delivery.ts`: Monday–Wednesday live shipping windows and ZIP estimates.
+- `app/api/checkout`: Stripe Checkout. With no `STRIPE_SECRET_KEY` it runs as a demo and takes no payment; the checkout page says so. `sk_test_` keys run in test mode.
+- `app/api/quote`, `/contact`, `/newsletter`: email through Resend (`lib/mail.ts`). Set `RESEND_API_KEY`, `QUOTE_TO_EMAIL`, `QUOTE_FROM_EMAIL` (and `RESEND_AUDIENCE_ID` for newsletter signups). Customers get a receipt email. Without a key, messages only appear in the server log. A small rate limit (`lib/ratelimit.ts`) protects the forms.
+- Images: drop `<name>.webp` into `public/images/` and rebuild. Product slots without a photo show a quiet paper block. Large photo bands and photo sections without a file are left out of the page entirely, so nothing looks broken.
+
+## Design system
+- Palette: spruce `#1f3a2d` / `#12281d`, bark `#5a4130`, cream paper `#f4ecda`. Cranberry `#a32638` is for sale and urgency only (order-by strip, "few left", errors).
+- Type scale: seven sizes in `app/globals.css` (small, body, lead, h4, h3, h2, h1) plus one display size. Labels are real small caps. Prices use tabular numbers.
+- Small details: `Divider`. There are no illustrations and no handwriting. Every picture is a real photo.
+
+## Go live checklist
+1. Deploy: import the repo in Vercel (Add New, Project) or run `npx vercel --prod`.
+2. In Vercel, Settings, Environment Variables: set the `NEXT_PUBLIC_*` business details, `NEXT_PUBLIC_SITE_URL`, and the Resend variables. Redeploy.
+3. Work through `CLIENT-TO-CONFIRM.md`. Until it is done, the contact details on the site are placeholders.
+4. Add photos from `IMAGE-PROMPTS.md` to `public/images/`.
+5. Add `STRIPE_SECRET_KEY` (test key first). Checkout says "Demo" until it is set.
+
+## Home page photo, offer and reviews
+
+- **Hero photo:** put a lifestyle photo at `public/hero.jpg` (4:5 works best). It is picked up at the next build. Until then the page uses `public/images/delivered-netted-tree-lit.webp`.
+- **Offer:** `lib/promo.ts` holds the name, percent, dates and the promo-bar wording. After the end date (end of day US Eastern) the bar and sale prices disappear on their own. Prices are always recalculated on the server at checkout.
+- **Reviews:** `data/reviews.ts` is empty. The reviews section renders nothing until you add real ones.
+- **TODO tags:** copy you must confirm shows a dashed TODO tag. See `CLIENT-TO-CONFIRM.md` section 12. Set `NEXT_PUBLIC_HIDE_TODO=1` to hide them once confirmed.
+- **Checks:** `npm run lint`, `npm run typecheck`, `npm run build`.

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useCart } from "./CartProvider";
 import { money } from "@/lib/catalog";
+import { savings as savingsOf } from "@/lib/pricing";
 import { FREE_SHIPPING_ARTIFICIAL } from "@/lib/pricing";
 import QtyStepper from "./QtyStepper";
 
@@ -51,7 +52,7 @@ export default function CartDrawer() {
       >
         <div className="flex items-baseline justify-between px-6 pt-6 pb-4 border-b rule">
           <h2 className="serif text-3xl">Your cart <span className="num text-muted text-xl">({count})</span></h2>
-          <button ref={closeBtn} onClick={() => setOpen(false)} className="label underline underline-offset-4 decoration-berry">Close</button>
+          <button ref={closeBtn} onClick={() => setOpen(false)} className="label underline underline-offset-4 decoration-gold">Close</button>
         </div>
 
         <div className="flex-1 overflow-y-auto px-6">
@@ -67,11 +68,11 @@ export default function CartDrawer() {
                 <li key={`${x.line.slug}-${x.line.sizeId}-${x.line.option ?? ""}`} className="py-5 grid grid-cols-[1fr_auto] gap-x-4 gap-y-2">
                   <div>
                     <p className="serif-text text-lg leading-tight">{x.name}</p>
-                    <p className="text-sm text-muted">{x.sizeLabel}{x.optionLabel ? ` · ${x.optionLabel}` : ""}</p>
+                    <p className="text-sm text-muted">{x.sizeLabel}{x.optionLabel ? `, ${x.optionLabel}` : ""}</p>
                   </div>
-                  <p className="num font-medium">{money(x.total)}</p>
+                  <p className="num font-medium text-right">{x.originalUnit > x.unit && <s className="block text-sm text-muted font-normal">{money(x.originalUnit * x.line.qty)}</s>}{money(x.total)}</p>
                   <QtyStepper value={x.line.qty} onChange={(q) => setQty(x.line.slug, x.line.sizeId, x.line.option, q)} label={x.name} />
-                  <button onClick={() => remove(x.line.slug, x.line.sizeId, x.line.option)} className="text-sm underline underline-offset-4 decoration-berry justify-self-end">Remove</button>
+                  <button onClick={() => remove(x.line.slug, x.line.sizeId, x.line.option)} className="text-sm underline underline-offset-4 decoration-gold justify-self-end">Remove</button>
                 </li>
               ))}
             </ul>
@@ -79,9 +80,10 @@ export default function CartDrawer() {
         </div>
 
         {priced.length > 0 && (
-          <div className="px-6 py-5 border-t border-ink bg-paper">
+          <div className="px-6 py-5 border-t-[3px] border-double border-bark/60 bg-paper">
             <dl className="text-sm space-y-1 num">
               <div className="flex justify-between"><dt>Subtotal</dt><dd>{money(subtotal)}</dd></div>
+              {savingsOf(priced) > 0 && <div className="flex justify-between text-sale font-semibold"><dt>Black Friday savings</dt><dd>−{money(savingsOf(priced))}</dd></div>}
               <div className="flex justify-between"><dt>Shipping (estimate)</dt><dd>{shipping === 0 ? "Free" : money(shipping)}</dd></div>
             </dl>
             {priced.some((x) => x.category === "artificial") && needsForFree > 0 && (
