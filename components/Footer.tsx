@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BIZ } from "@/data/business";
 import Divider from "./Divider";
 import Newsletter from "./Newsletter";
-import Snow from "./Snow";
+import Snow from "./SnowLazy";
 import Lights from "./Lights";
 
 export default function Footer() {
@@ -16,8 +16,8 @@ export default function Footer() {
             <p className="serif text-3xl">Hollis <i>&amp;</i> Pine</p>
             <address className="not-italic mt-6 text-cream/85 text-sm leading-relaxed">
               {BIZ.address.map((l) => (<span key={l} className="block">{l}</span>))}
-              <a href={`tel:${BIZ.phoneHref}`} className="block mt-3 underline underline-offset-4">{BIZ.phone}</a>
-              <a href={`mailto:${BIZ.email}`} className="block underline underline-offset-4">{BIZ.email}</a>
+              <span className="block mt-1"><a href={`tel:${BIZ.phoneHref}`} className="tap underline underline-offset-4">{BIZ.phone}</a></span>
+              <span className="block"><a href={`mailto:${BIZ.email}`} className="tap underline underline-offset-4">{BIZ.email}</a></span>
             </address>
             <dl className="mt-5 text-sm text-cream/85 space-y-1">
               {BIZ.hours.map(([k, v]) => (<div key={k}><dt className="label text-straw inline">{k}: </dt><dd className="inline">{v}</dd></div>))}
@@ -36,9 +36,9 @@ export default function Footer() {
             </ul>
             <ul className="space-y-2">
               <li className="label text-straw mb-3">Help</li>
-              <li><Link href="/delivery" className="hover:underline">Delivery</Link></li>
-              <li><Link href="/returns" className="hover:underline">Returns and refunds</Link></li>
-              <li><Link href="/faq" className="hover:underline">Questions</Link></li>
+              <li><Link href="/delivery" className="hover:underline">Shipping</Link></li>
+              <li><Link href="/returns" className="hover:underline">Returns and guarantee</Link></li>
+              <li><Link href="/faq" className="hover:underline">FAQ</Link></li>
               <li><Link href="/care" className="hover:underline">Care guide</Link></li>
               <li><Link href="/contact" className="hover:underline">Contact</Link></li>
             </ul>
@@ -50,7 +50,7 @@ export default function Footer() {
         <Divider dark className="mt-14 mb-6" />
         <div className="flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-sm text-cream/75">
           <p>© {new Date().getFullYear()} {BIZ.name}. We ship to the 48 contiguous states.</p>
-          <p className="flex gap-5"><Link href="/privacy" className="underline underline-offset-4">Privacy</Link><Link href="/terms" className="underline underline-offset-4">Terms</Link></p>
+          <p className="flex gap-5"><Link href="/privacy" className="tap underline underline-offset-4">Privacy</Link><Link href="/terms" className="tap underline underline-offset-4">Terms</Link></p>
         </div>
       </div>
     </footer>

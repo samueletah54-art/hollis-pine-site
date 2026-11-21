@@ -23,6 +23,18 @@ export const PROMO = {
   appliesTo: ["live", "artificial"] as Category[],
   /** The banner announces the sale this many days before it starts. */
   teaserDays: 14,
+  /**
+   * Promo bar copy. {name}, {percent}, {start}, {end} are filled in from the values above.
+   * The bar is hidden automatically once the end date has passed, so nothing needs removing by hand.
+   */
+  copy: {
+    live: "{name}: {percent}% off every tree, {when}.",
+    liveWhenSingleDay: "today only",
+    liveWhenRange: "through {end}",
+    soon: "{name}: {percent}% off every tree, {when}.",
+    soonWhenSingleDay: "{start} only",
+    soonWhenRange: "from {start}",
+  },
 };
 
 // Late November is Eastern Standard Time (UTC-5).
@@ -40,6 +52,17 @@ export const promoState = (now: Date = new Date()): PromoState => {
   const days = (start().getTime() - now.getTime()) / 86400000;
   if (days > 0 && days <= PROMO.teaserDays) return { state: "soon", ...base };
   return { state: "off", ...base };
+};
+
+const fill = (t: string, v: Record<string, string | number>) => t.replace(/\{(\w+)\}/g, (_, k) => String(v[k] ?? ""));
+
+/** The sentence shown in the promo bar, or null when there is no offer to announce. Driven entirely by PROMO. */
+export const promoMessage = (s: PromoState): string | null => {
+  if (s.state === "off") return null;
+  const c = PROMO.copy;
+  const v = { name: PROMO.name, percent: s.percent, start: s.startLabel, end: s.endLabel };
+  const when = s.state === "live" ? (s.singleDay ? c.liveWhenSingleDay : c.liveWhenRange) : s.singleDay ? c.soonWhenSingleDay : c.soonWhenRange;
+  return fill(s.state === "live" ? c.live : c.soon, { ...v, when: fill(when, v) });
 };
 
 export const promoLive = (now: Date = new Date()) => promoState(now).state === "live";

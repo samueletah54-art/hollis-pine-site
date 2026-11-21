@@ -29,7 +29,7 @@ None of these have been verified. The site says them in a plain voice, but they 
 
 ## 3. Reviews and testimonials
 
-- [ ] The sample reviews and testimonials in `data/reviews.ts` are **invented**. They are hidden by default. They only show if `NEXT_PUBLIC_SAMPLE_REVIEWS=1` (use that only for a private preview). Replace them with real customer reviews, then remove the flag. Publishing invented reviews can break consumer-protection rules.
+- [ ] `data/reviews.ts` is **empty on purpose**. The `<Reviews />` component shows nothing until you add real reviews from real customers (with their permission). Never add sample text: publishing invented reviews can break consumer-protection rules. No star ratings or `aggregateRating` markup are added until real reviews exist.
 
 ## 4. Operations: what we promise customers
 
@@ -98,3 +98,17 @@ Built from the reference screenshots in `design-reference/`, with the real U.S. 
 - [ ] There is no trees-planted counter, no review stars and no press logos, because those would have to be real.
 - [ ] **Order form** emails the shop through `/api/contact` (needs `RESEND_API_KEY`) and takes no payment. Prices in the dropdown are before any sale.
 - [ ] **Photos** are the existing supplied photos. Do not copy photos from the reference screenshots.
+
+## 12. Trust-store pass: every `TODO` tag on the site
+
+Visible dashed **TODO** tags mark copy you must confirm. When everything below is confirmed and edited, set `NEXT_PUBLIC_HIDE_TODO=1` in the hosting dashboard to hide any tag that is left. (Tags come from `components/Todo.tsx`.)
+
+- [ ] **Hero photo.** Add `public/hero.jpg` (decorated tree in a warm living room). Until then the page shows the existing porch photo. Confirm the alt text "A decorated Christmas tree in a warm living room" describes your photo [`components/HeroPhoto.tsx`].
+- [ ] **Our guarantee** block on the home page: write the real terms (what is covered, how long customers have to report a problem, replace or refund). The text on `/returns` is still a draft [`components/TrustSection.tsx`, `app/(site)/returns/page.tsx`].
+- [ ] **Where we deliver** block: confirm the 48 contiguous states, and any state that restricts live evergreens [`components/TrustSection.tsx`, `app/(site)/delivery/page.tsx`].
+- [ ] **How it works** (3 steps): confirm you really cut after the order, wrap with the trunk kept wet, ship Monday to Wednesday, and arrive in one to four days [`components/TrustSection.tsx`].
+- [ ] **Fact strip** values: "Never before you order", "Mon, Tue, Wed", "In 1 to 4 days", order-by "December 12" [`components/FactStrip.tsx`, `data/business.ts`].
+- [ ] **Black Friday offer:** 20% off live and artificial trees on 27 Nov, end of day US Eastern. Change the amount, dates and wording in `lib/promo.ts` (one file). The bar and sale prices switch themselves off after the end date.
+- [ ] **Policy pages** carry a TODO banner and need real content and a lawyer's review: Shipping (`/delivery`), Returns and guarantee (`/returns`), Privacy (`/privacy`), Terms (`/terms`).
+- [ ] **Business identity** still placeholder in the footer and policies (section 1): address "1 Orchard Lane", phone "(555) 010-0142", email "hello@hollisandpine.example". Set the `NEXT_PUBLIC_*` variables.
+- [ ] **Real domain:** set `NEXT_PUBLIC_SITE_URL` so the Open Graph image, sitemap and structured data use it.

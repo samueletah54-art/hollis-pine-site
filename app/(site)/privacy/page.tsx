@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 export default function Privacy() {
   return (
     <DocPage title="Your information, plainly." intro="We collect what we need to ship your order and answer your questions. We do not sell it.">
-      <p className="text-sm text-muted">Draft text. Have it reviewed before launch. See CLIENT-TO-CONFIRM.md.</p>
 
       <h2>What we collect</h2>
       <ul>

@@ -1,13 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { promoState, type PromoState } from "@/lib/promo";
+import type { PromoState } from "@/lib/promo";
+import { usePromoState } from "./PromoProvider";
 
-const OFF: PromoState = { state: "off", percent: 0, startLabel: "", endLabel: "", singleDay: false };
-
-/** The offer depends on today's date, so it is worked out in the browser after the page loads. */
+/** The current offer state (off, soon or live). Comes from <PromoProvider>, which is seeded by the server. */
 export function usePromo(): PromoState {
-  const [s, setS] = useState<PromoState>(OFF);
-  useEffect(() => { setS(promoState(new Date())); }, []);
-  return s;
+  return usePromoState();
 }

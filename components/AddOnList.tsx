@@ -24,7 +24,7 @@ export default function AddOnList() {
         return (
           <li key={slug} className="grid grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 py-5 border-b rule">
             <div>
-              <h3 className="serif-text text-2xl"><Link href={urlFor(p)} className="hover:underline decoration-gold decoration-[3px] underline-offset-[6px]">{p.name}</Link></h3>
+              <h3 className="serif-text text-2xl"><Link href={urlFor(p)} className="inline-block py-2 hover:underline decoration-gold decoration-[3px] underline-offset-[6px]">{p.name}</Link></h3>
               <p className="text-muted">{line}</p>
             </div>
             <div className="flex items-baseline gap-5 justify-self-end">

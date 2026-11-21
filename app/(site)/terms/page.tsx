@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 export default function Terms() {
   return (
     <DocPage title="Terms of sale." intro="The short version of how buying from us works.">
-      <p className="text-sm text-muted">Draft text. Have it reviewed before launch. See CLIENT-TO-CONFIRM.md.</p>
 
       <h2>Orders and prices</h2>
       <p>Prices are in U.S. dollars, per item, and do not include shipping or sales tax. Both are added at checkout. We may cancel an order if a price is wrong or a tree is no longer available, and we will refund you in full.</p>

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 
 export default function Newsletter({ dark = false }: { dark?: boolean }) {
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const id = useId();
   return (
     <form
       className={`flex flex-col sm:flex-row sm:items-end gap-4 ${dark ? "on-dark" : ""}`}
@@ -18,8 +19,8 @@ export default function Newsletter({ dark = false }: { dark?: boolean }) {
       }}
     >
       <div className="flex-1">
-        <label htmlFor="nl-email" className="label block mb-1">A short email once a month. Order dates and care tips, nothing else.</label>
-        <input id="nl-email" name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="field" disabled={state === "done"} />
+        <label htmlFor={id} className="label block mb-1">A short email once a month. Order dates and care tips, nothing else.</label>
+        <input id={id} name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="field" disabled={state === "done"} />
       </div>
       <button className={`btn ${dark ? "btn-straw" : "btn-ghost"}`} disabled={state === "sending" || state === "done"}>
         {state === "done" ? "Got it. Thanks." : state === "sending" ? "Sending…" : "Sign up"}

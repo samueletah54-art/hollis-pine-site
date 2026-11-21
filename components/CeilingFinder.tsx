@@ -35,7 +35,7 @@ export default function CeilingFinder({ products }: { products: Product[] }) {
             id={id} type="range" min={7} max={14} step={0.5} value={ceiling}
             onChange={(e) => setCeiling(Number(e.target.value))}
             aria-valuetext={`${ceiling} feet`}
-            className="w-full mt-3 accent-[#d8b76a] h-8 cursor-pointer"
+            className="w-full mt-3 accent-[#d8b76a] h-11 cursor-pointer"
           />
           <div className="flex justify-between text-sm text-muted num"><span>7 ft</span><span>14 ft</span></div>
         </div>

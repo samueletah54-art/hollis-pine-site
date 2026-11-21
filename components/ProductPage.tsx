@@ -1,18 +1,18 @@
 import Link from "next/link";
 import type { Product } from "@/data/products";
 import { reviews } from "@/data/reviews";
-import { SHOW_SAMPLE_REVIEWS } from "@/lib/flags";
 import Banner from "./Banner";
 import Divider from "./Divider";
 import { heightRange, money, priceFrom, related, urlFor } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
 import Gallery from "./Gallery";
+import Reviews from "./Reviews";
 import JsonLd from "./JsonLd";
 import ProductTile from "./ProductTile";
 import Purchase from "./Purchase";
 
 export default function ProductPage({ p }: { p: Product }) {
-  const revs = SHOW_SAMPLE_REVIEWS ? reviews.filter((r) => r.slug === p.slug) : [];
+  const revs = reviews.filter((r) => r.slug === p.slug);
   const avg = revs.length ? revs.reduce((n, r) => n + r.rating, 0) / revs.length : 0;
   const prices = p.sizes.map((s) => s.price).filter((x): x is number => x !== null);
   const rel = related(p);
@@ -43,7 +43,7 @@ export default function ProductPage({ p }: { p: Product }) {
     ...(revs.length
       ? {
           aggregateRating: { "@type": "AggregateRating", ratingValue: avg.toFixed(1), reviewCount: revs.length },
-          review: revs.map((r) => ({ "@type": "Review", author: { "@type": "Person", name: r.name }, datePublished: r.date, name: r.title, reviewBody: r.body, reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 } })),
+          review: revs.map((r) => ({ "@type": "Review", author: { "@type": "Person", name: r.name }, datePublished: r.date, ...(r.title ? { name: r.title } : {}), reviewBody: r.body, reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 } })),
         }
       : {}),
   };
@@ -107,24 +107,8 @@ export default function ProductPage({ p }: { p: Product }) {
         </section>
       )}
 
-      <Divider className="mt-24" />
-      <section className="mt-10" aria-labelledby="reviews">
-        <h2 id="reviews" className="serif text-4xl md:text-5xl">Reviews</h2>
-        {revs.length === 0 ? (
-          <p className="mt-4 text-muted max-w-[52ch]">No reviews of this one yet. If you've bought one, <a className="underline underline-offset-4" href={`mailto:${SITE.email}?subject=Review: ${p.name}`}>tell us how it went</a>.</p>
-        ) : (
-          <ul className="mt-8 grid md:grid-cols-2 gap-x-12 gap-y-10">
-            {revs.map((r) => (
-              <li key={r.name + r.date} className="border-t rule pt-4">
-                <p className="label text-tan" aria-label={`${r.rating} out of 5`}>{"★".repeat(r.rating)}<span className="text-ink/25">{"★".repeat(5 - r.rating)}</span></p>
-                <h3 className="serif-text text-xl mt-1">{r.title}</h3>
-                <p className="mt-2">{r.body}</p>
-                <p className="text-sm text-muted mt-3">{r.name}, {r.city}, {r.state}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <Reviews slug={p.slug} heading="Reviews" nested />
+
 
       {rel.length > 0 && (
         <section className="mt-24" aria-labelledby="related">

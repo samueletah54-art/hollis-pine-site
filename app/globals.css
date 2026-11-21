@@ -54,8 +54,6 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--color-paper);
-  /* a faint grain so the dark is not flat */
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .9  0 0 0 0 .85  0 0 0 0 .7  0 0 0 .035 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
 }
 main { flex: 1; }
 .grid > * { min-width: 0; }
@@ -84,7 +82,7 @@ main { flex: 1; }
   cursor: pointer; text-align: center;
 }
 .btn-primary { background: var(--color-spruce); color: var(--color-paper); }
-.btn-primary:hover { background: var(--color-fir); border-color: var(--color-fir); }
+.btn-primary:hover { background: var(--color-straw); border-color: var(--color-straw); }
 .btn-ghost { color: var(--color-spruce); }
 .btn-ghost:hover { background: var(--color-spruce); color: var(--color-paper); }
 .btn-straw { background: var(--color-straw); border-color: var(--color-straw); color: var(--color-fir); }
@@ -92,6 +90,7 @@ main { flex: 1; }
 .btn[disabled] { opacity: .55; cursor: not-allowed; }
 
 .field {
+  min-height: 2.75rem;
   width: 100%; background: transparent; border: 0; border-bottom: 2px solid color-mix(in srgb, var(--color-bark) 70%, transparent);
   padding: .55rem 0; font: inherit; color: inherit; border-radius: 0;
 }
@@ -170,19 +169,19 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
 .dl details > summary::-webkit-details-marker { display: none; }
 
 /* ---- Winter Dusk: drifting aurora, falling snow and twinkling lights on dark sections ---- */
-.dusk {
-  position: relative; overflow: hidden; isolation: isolate;
+.dusk { position: relative; overflow: hidden; isolation: isolate; background: var(--color-fir); }
+/* The aurora is a layer that only moves with transform, so the browser animates it on the GPU and the page never repaints. */
+.dusk::before {
+  content: ""; position: absolute; inset: -30%; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(60rem 30rem at 15% -10%, color-mix(in srgb, #7b5cff 38%, transparent), transparent 60%),
-    radial-gradient(50rem 28rem at 90% 10%, color-mix(in srgb, #ff6b8a 24%, transparent), transparent 62%),
-    radial-gradient(44rem 26rem at 50% 120%, color-mix(in srgb, #3ad1c4 20%, transparent), transparent 65%),
-    var(--color-fir);
-  background-size: 140% 140%, 140% 140%, 140% 140%, auto;
-  animation: aurora 22s ease-in-out infinite alternate;
+    radial-gradient(closest-side at 22% 18%, color-mix(in srgb, #7b5cff 38%, transparent), transparent),
+    radial-gradient(closest-side at 80% 24%, color-mix(in srgb, #ff6b8a 24%, transparent), transparent),
+    radial-gradient(closest-side at 50% 82%, color-mix(in srgb, #3ad1c4 20%, transparent), transparent);
+  animation: aurora 22s ease-in-out infinite alternate; will-change: transform;
 }
 @keyframes aurora {
-  0%   { background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; }
-  100% { background-position: 40% 30%, 60% 20%, 30% 80%, 0 0; }
+  from { transform: translate3d(-5%, -3%, 0) rotate(0deg); }
+  to   { transform: translate3d(5%, 3%, 0) rotate(6deg); }
 }
 .snow { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
 
@@ -199,4 +198,9 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
 .lights i:nth-child(4n+3) { --c: #5ee6d6; animation-delay: -1.8s; }
 .lights i:nth-child(4n)   { --c: #9d8cff; animation-delay: -2.3s; }
 @keyframes twinkle { 0%,100% { opacity: .35; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.1); } }
-@media (prefers-reduced-motion: reduce) { .dusk { animation: none; } .lights i { animation: none; opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .dusk::before { animation: none; will-change: auto; } .lights i { animation: none; opacity: .9; } }
+
+/* ---------- Tap targets: every link, button and field is at least 44px tall ---------- */
+p > a:only-child, li > a:only-child, dd > a:only-child { display: inline-flex; align-items: center; min-height: 2.75rem; min-width: 2.75rem; }
+summary { min-height: 2.75rem; align-items: center; }
+.tap { display: inline-flex; align-items: center; min-height: 2.75rem; min-width: 2.75rem; }

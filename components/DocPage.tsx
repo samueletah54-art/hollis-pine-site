@@ -1,7 +1,8 @@
 import Divider from "./Divider";
+import Todo from "./Todo";
 
 /** Shared layout for prose pages: label, big title, short intro, then a readable column. */
-export default function DocPage({ title, intro, children, wide }: { label?: string; title: string; intro?: string; children: React.ReactNode; wide?: boolean }) {
+export default function DocPage({ title, intro, children, wide, draft = true }: { label?: string; title: string; intro?: string; children: React.ReactNode; wide?: boolean; draft?: boolean }) {
   return (
     <div className="mx-auto max-w-[88rem] px-5 md:px-10 pt-14 md:pt-20">
       <header className="grid md:grid-cols-12 gap-6">
@@ -12,7 +13,10 @@ export default function DocPage({ title, intro, children, wide }: { label?: stri
       </header>
       <Divider className="my-10" />
       <div className="grid md:grid-cols-12 gap-x-12">
-        <div className={`${wide ? "md:col-span-9 md:col-start-4" : "md:col-span-7 md:col-start-4"} prose-care`}>{children}</div>
+        <div className={`${wide ? "md:col-span-9 md:col-start-4" : "md:col-span-7 md:col-start-4"} prose-care`}>
+          {draft && <p className="!mb-6"><Todo>placeholder text. Check every line against how the business really works (and have a lawyer review it) before launch.</Todo></p>}
+          {children}
+        </div>
       </div>
     </div>
   );

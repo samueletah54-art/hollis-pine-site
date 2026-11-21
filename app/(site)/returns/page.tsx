@@ -4,7 +4,7 @@ import DocPage from "@/components/DocPage";
 import { BIZ } from "@/data/business";
 
 export const metadata: Metadata = {
-  title: "Returns and refunds",
+  title: "Returns and guarantee",
   description: "What we do if a live tree arrives damaged, and how to return an artificial tree or an extra within 30 days.",
   alternates: { canonical: "/returns" },
 };

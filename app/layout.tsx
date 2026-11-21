@@ -2,13 +2,20 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { SITE } from "@/lib/site";
+import { PromoProvider } from "@/components/PromoProvider";
+import { promoState } from "@/lib/promo";
+
+/** Rebuild the static pages hourly so the date-driven offer state (promo bar, sale prices) is never more than an hour stale. */
+export const revalidate = 3600;
 
 const fraunces = localFont({
   src: [
-    { path: "./fonts/fraunces-latin-opsz-normal.woff2", style: "normal" },
-    { path: "./fonts/fraunces-latin-opsz-italic.woff2", style: "italic" },
+    // Weight is pinned to 400 (the only weight the serif is used at); the optical-size axis is kept. 35 KB instead of 67 KB.
+    // Declared as "100 900" so the browser never fakes a bold on top of it.
+    { path: "./fonts/fraunces-latin-opsz-400-normal.woff2", style: "normal", weight: "100 900" },
+    // The italic is only used for the logo ampersand and product taglines at regular weight, so it is a 23 KB static cut instead of the 80 KB variable font.
+    { path: "./fonts/fraunces-latin-400-italic.woff2", style: "italic", weight: "400" },
   ],
-  weight: "100 900",
   variable: "--font-fraunces",
   display: "swap",
   adjustFontFallback: "Times New Roman",
@@ -31,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
-        {children}
+        <PromoProvider initial={promoState()}>{children}</PromoProvider>
       </body>
     </html>
   );

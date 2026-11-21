@@ -41,3 +41,11 @@ npx vercel --prod            # deploy
 3. Work through `CLIENT-TO-CONFIRM.md`. Until it is done, the contact details on the site are placeholders.
 4. Add photos from `IMAGE-PROMPTS.md` to `public/images/`.
 5. Add `STRIPE_SECRET_KEY` (test key first). Checkout says "Demo" until it is set.
+
+## Home page photo, offer and reviews
+
+- **Hero photo:** put a lifestyle photo at `public/hero.jpg` (4:5 works best). It is picked up at the next build. Until then the page uses `public/images/delivered-netted-tree-lit.webp`.
+- **Offer:** `lib/promo.ts` holds the name, percent, dates and the promo-bar wording. After the end date (end of day US Eastern) the bar and sale prices disappear on their own. Prices are always recalculated on the server at checkout.
+- **Reviews:** `data/reviews.ts` is empty. The reviews section renders nothing until you add real ones.
+- **TODO tags:** copy you must confirm shows a dashed TODO tag. See `CLIENT-TO-CONFIRM.md` section 12. Set `NEXT_PUBLIC_HIDE_TODO=1` to hide them once confirmed.
+- **Checks:** `npm run lint`, `npm run typecheck`, `npm run build`.

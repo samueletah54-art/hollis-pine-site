@@ -31,27 +31,27 @@ export default function Header() {
   return (
     <header className="bg-paper sticky top-0 z-40 border-b-4 border-double border-bark/60">
       <div className="mx-auto max-w-[88rem] px-5 md:px-10 h-16 md:h-[4.5rem] flex items-center justify-between gap-6">
-        <Link href="/" className="flex items-center gap-3 text-spruce" aria-label="Hollis & Pine Tree Company, home">
+        <Link href="/" className="flex items-center gap-3 text-spruce" >
           <span className="leading-none">
             <span className="serif text-xl md:text-2xl block">Hollis <i>&amp;</i> Pine</span>
-            <span className="label text-bark block mt-1 text-sm">Tree Company</span>
+            <span className="label text-bark block mt-1 text-sm">Tree Company<span className="sr-only"> home page</span></span>
           </span>
         </Link>
 
         <nav aria-label="Main" className="hidden lg:flex items-center gap-7">
           {nav.map((n) => (
             <Link key={n.href} href={n.href} aria-current={path.startsWith(n.href) ? "page" : undefined}
-              className={`text-sm font-medium underline-offset-[10px] decoration-gold decoration-[3px] hover:underline ${path.startsWith(n.href) ? "underline" : ""}`}>
+              className={`inline-flex items-center justify-center min-h-11 min-w-11 text-sm font-medium underline-offset-[10px] decoration-gold decoration-[3px] hover:underline ${path.startsWith(n.href) ? "underline" : ""}`}>
               {n.label}
             </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-4">
-          <button onClick={() => setOpen(true)} className={`text-sm font-semibold border-2 border-spruce px-3 py-1.5 num transition-colors duration-300 hover:bg-spruce hover:text-paper ${bump ? "bg-spruce text-paper" : "text-spruce"}`} aria-label={`Open cart, ${ready ? count : 0} items`}>
+          <button onClick={() => setOpen(true)} className={`text-sm font-semibold border-2 border-spruce px-3 min-h-11 num transition-colors duration-300 hover:bg-spruce hover:text-paper ${bump ? "bg-spruce text-paper" : "text-spruce"}`} aria-label={`Open cart, ${ready ? count : 0} items`}>
             Cart <span aria-hidden>({ready ? count : 0})</span>
           </button>
-          <button className="lg:hidden label" aria-expanded={menu} aria-controls="mobile-nav" onClick={() => setMenu((m) => !m)}>
+          <button className="lg:hidden label min-h-11 min-w-11 px-2" aria-expanded={menu} aria-controls="mobile-nav" onClick={() => setMenu((m) => !m)}>
             {menu ? "Close" : "Menu"}
           </button>
         </div>
@@ -61,7 +61,7 @@ export default function Header() {
         <nav id="mobile-nav" aria-label="Mobile" className="lg:hidden border-t rule bg-paper px-5 py-4">
           <ul className="space-y-1">
             {nav.map((n) => (
-              <li key={n.href}><Link href={n.href} className="serif text-3xl block py-1">{n.label}</Link></li>
+              <li key={n.href}><Link href={n.href} className="serif text-3xl block py-2">{n.label}</Link></li>
             ))}
           </ul>
         </nav>

@@ -51,7 +51,7 @@ export default function FAQ() {
             <div className="border-t-[3px] border-double border-bark/60">
               {g.items.map(([q, a]) => (
                 <details key={q} className="group border-b rule py-4">
-                  <summary className="cursor-pointer serif-text text-xl list-none flex justify-between gap-6">{q}<span aria-hidden className="label text-tan group-open:rotate-45 transition-transform">+</span></summary>
+                  <summary className="cursor-pointer serif-text text-xl list-none flex items-center justify-between gap-6 min-h-11">{q}<span aria-hidden className="label text-tan group-open:rotate-45 transition-transform">+</span></summary>
                   <div className="mt-3 max-w-[60ch] text-ink/90">{a}</div>
                 </details>
               ))}
